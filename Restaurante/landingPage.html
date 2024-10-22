@@ -15,7 +15,8 @@
             --accent-color: #00A41D;
         }
         body {
-            font-family: 'Lora', serif; /* Fuente Lora aplicada a todo el documento */
+            font-family: 'Lora', serif; 
+            background-color: #f0f0f0;
         }
         .navbar {
             background-color: var(--primary-color);
@@ -58,13 +59,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Inicio</a>
+                        <a class="nav-link active" href="landingPage.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Menús</a>
+                        <a class="nav-link" href="menu.html">Menús</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Reservas</a>
+                        <a class="nav-link" href="reservas.html">Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
                     </li>
                 </ul>
             </div>
@@ -103,7 +107,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Comida Auténtica</h5>
                         <p class="card-text">Disfruta de los sabores más auténticos de la comida mexicana, con ingredientes frescos y recetas tradicionales.</p>
-                        <a href="#" class="btn btn-accent">Ver Menú</a>
+                        <a href="menu.html" class="btn btn-accent">Ver Menú</a>
                     </div>
                 </div>
             </div>
@@ -113,7 +117,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Cervezas Artesanales</h5>
                         <p class="card-text">Explora nuestra selección de cervezas artesanales locales y de importación, perfectas para cualquier ocasión.</p>
-                        <a href="#" class="btn btn-accent">Explorar</a>
+                        <a href="#cervezas" class="btn btn-accent">Explorar</a>
                     </div>
                 </div>
             </div>
@@ -123,14 +127,59 @@
                     <div class="card-body">
                         <h5 class="card-title">Reservas Fáciles</h5>
                         <p class="card-text">Reserva tu mesa en línea de manera rápida y sencilla. ¡Te esperamos para una experiencia inolvidable!</p>
-                        <a href="#" class="btn btn-accent">Reservar Ahora</a>
+                        <a href="reservas.html" class="btn btn-accent">Reservar Ahora</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <footer class="text-center text-lg-start bg-dark text-muted">
+    <!-- About Us Section -->
+<section class="text-center py-5">
+    <div class="container">
+        <h2 class="mb-4">Sobre Nosotros</h2>
+        <p class="lead">En <strong>Albuquerque Beer & Grill</strong>, nos enorgullecemos de ofrecer una experiencia gastronómica única, donde la auténtica comida mexicana y las cervezas artesanales se unen para crear momentos inolvidables. Con ingredientes frescos y un ambiente acogedor, somos el lugar perfecto para disfrutar con amigos y familiares.</p>
+        <p class="mb-5">¡Te esperamos con los brazos abiertos para que vivas esta experiencia con nosotros!</p>
+        
+        <!-- Flecha animada hacia abajo -->
+        <div class="arrow-down mt-4">
+            <a href="#footer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-down bounce" viewBox="0 0 16 16" style="color: var(--secondary-color);">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Cervezas Artesanales y Platos Especiales Section -->
+<section class="text-center py-5">
+    <div class="container">
+        <h2 class="mb-4">Cervezas Artesanales y Platos Especiales</h2>
+        <p class="lead">En <strong>Albuquerque Beer & Grill</strong>, no solo ofrecemos las mejores cervezas artesanales locales e internacionales, sino también una selección de platos increíbles que elevan tu experiencia gastronómica a otro nivel.</p>
+        <p class="mb-5">Nuestra carta incluye una variedad de cervezas artesanales que van desde suaves y ligeras hasta las más robustas y llenas de sabor. Estas bebidas acompañan perfectamente a nuestros platillos, desde tacos tradicionales hasta especialidades como estos nachos con salsas.</p>
+
+        <!-- Imagenes decorativas de cervezas y platos -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <img src="../imagenes/cervezas.jpg" class="img-fluid rounded" alt="Cervezas Artesanales" style="object-fit: cover; height: 350px; width: 100%;">
+            </div>
+            <div class="col-md-6 mb-4">
+                <img src="../imagenes/platoespecial.jpg" class="img-fluid rounded" alt="Plato Mexicano Artesanal" style="object-fit: cover; height: 350px; width: 100%;">
+            </div>
+        </div>
+        
+        <p class="mb-0">¡Te invitamos a venir y disfrutar de una experiencia culinaria sin igual, donde nuestras cervezas y platos especiales se combinan para hacerte vivir una explosión de sabores!</p>
+    </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer id="footer" class="text-center text-lg-start bg-dark text-white">
+
+
+    <footer class="text-center text-lg-start bg-dark text-white">
         <!-- Section: Social media -->
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <!-- Left -->
