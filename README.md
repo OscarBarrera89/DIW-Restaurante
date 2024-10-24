@@ -1,9 +1,20 @@
-# DIW-Restaurante
-Trabajo para la asignatura de DIW en la que se creará una página web de un restaurante  
-Oscar Barrera | Javier Castillo | Adrian Juan 
-Comandos:
-git init
-git add <Ruta del archivo modificado>
-git commit -m "Comentario"
-git push origin <branch> //Se sube lo modificado
-git pull origin <branch> //Se baja lo modificado
+# DIW Restaurante
+
+Este es un proyecto realizado para la asignatura **Desarrollo de Interfaces Web (DIW)**, en el cual se desarrollará una página web para un restaurante.
+
+### Integrantes del equipo:
+- **Oscar Barrera**
+- **Javier Castillo**
+- **Adrián Juan**
+
+---
+
+### Comandos de Git usados:
+
+- Inicializar el repositorio local:
+  ```bash
+  git init
+  git add <ruta-del-archivo>
+  git commit -m "Comentario"
+  git push origin <rama>
+  git pull origin <rama>
