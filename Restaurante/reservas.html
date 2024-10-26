@@ -86,7 +86,7 @@
                         <a class="nav-link" href="landingPage.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="menu.html">Menús</a>
+                        <a class="nav-link" href="menu.html">Menus</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#inicio">Reservas</a>
@@ -103,9 +103,19 @@
     <div class="d-flex flex-column align-items-center mt-5 pt-5">
         <!-- Nuevo texto en H3 -->
         <h3 class="mb-4">¿Has visto nuestros menús antes de reservar mesa?</h3>
-        
-        <!-- Botón con borde verde -->
-        <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <a href="menu.html" class="btn btn-custom">Nuestra Carta</a>
+
+
+        <h3 class="mt-4">Reservas</h3>
+        <div class="arrow-down">
+            <a>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-down bounce" viewBox="0 0 16 16" style="color: var(--secondary-color);">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </a>
+        </div>
+        <h3></h3>
+        <button type="button" class="btn btn-custom mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Haz tu reserva aquí
         </button>
     </div>
@@ -148,8 +158,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary">Guardar cambios</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
