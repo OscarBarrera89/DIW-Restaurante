@@ -90,6 +90,11 @@
             height: auto; /* Mantiene la relación de aspecto */
             margin: 20px 0;
         }
+        .modal-bg {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
     </style>
 </head>
 <body id="inicio">
@@ -168,7 +173,7 @@
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modalReserva" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content modal-bg">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalReserva">Haz tu Reserva</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -180,36 +185,36 @@
                             <form>
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre y Apellido</label>
-                                    <input type="text" class="form-control" id="nombre" required>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Javier Mancera" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" id="telefono" required>
+                                    <input type="tel" class="form-control" id="telefono" placeholder="722543698" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Correo electrónico</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <input type="email" class="form-control" id="email" placeholder="ejemplo@gmail.com" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="mesa" class="form-label">Mesa</label>
-                                    <input type="number" class="form-control" id="mesa" name="mesa" min="1" max="40" required>
+                                    <input type="number" class="form-control" id="mesa" name="mesa" min="1" max="40" placeholder="4" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="personas" class="form-label">Personas</label>
-                                    <input type="number" class="form-control" id="personas" name="personas" min="1" max="10" required>
+                                    <input type="number" class="form-control" id="personas" name="personas" min="1" max="10" placeholder="2" required>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Guardar cambios</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a href="reservas.html"><input type="submit" class="btn btn-primary" value="Guardar Reserva"></input></a>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
-
+    
     
 
     <footer class="text-white text-center text-lg-start" id="footer">
