@@ -80,12 +80,16 @@
             object-fit: cover;
         }
         .progress-container {
-            height: 80px;
+            height: auto;
             padding: 10px;
             background-color: var(--secondary-color); 
             border-radius: 8px;
         }
-
+        .restaurant-image {
+            max-width: 50%; /* Ajusta el porcentaje al tamaño deseado */
+            height: auto; /* Mantiene la relación de aspecto */
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body id="inicio">
@@ -117,12 +121,31 @@
         </div>
     </nav>
 
-    <!-- Botón y Modal -->
-    <div class="d-flex flex-column align-items-center mt-5 pt-5">
-        <!-- Nuevo texto en H3 -->
-        <h3 class="mb-4">¿Has visto nuestros menús antes de reservar mesa?</h3>
-        <a href="menu.html" class="btn btn-custom">Nuestra Carta</a>
-        
+    <div class="d-flex flex-column align-items-center mt-4 pt-5 mx-3">
+            <div id="carouselExample" class="carousel slide restaurant-image">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="../imagenes/reserva.webp" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="../imagenes/fotoMesasRestaurante.jpg" alt="fotoMesasRestaurante" class="d-block w-100">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            <h3 class="mb-2">¿Has visto nuestros menús antes de reservar mesa?</h3>
+            <div class="d-flex">
+                <a href="menu.html" class="btn btn-custom mx-5">Nuestra Carta</a>
+                <a href="landingPage.html" class="btn btn-custom mx-5">Ir a página principal</a>
+            </div>
+
         <h3 class="mt-4">Reservar</h3>
         <div class="arrow-down">
             <a>
