@@ -1,15 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Albuquerque Beer & Grill</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
-</head>
-<body>
-    <div class="container fluid">
-        
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Links iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Para usar Animate.css -->
+    <style>
+        /* Colores personalizados */
+        :root {
+            --primary-color: #D6CD00;
+            --secondary-color: #D67800;
+            --accent-color: #00A41D;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: #f0f0f0;
+        }
+
+        .navbar {
+            background-color: var(--secondary-color);
+            /* Fondo de la navbar */
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            /* Color de los enlaces en la navbar */
+            font-weight: bold;
+            /* Texto en negrita */
+        }
+
+        .carousel-inner img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            /* Ajusta la imagen en el contenedor */
+        }
+
+        .card {
+            border: none;
+            /* Sin borde en las tarjetas */
+            transition: transform 0.3s;
+            /* Transición suave */
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            /* Efecto de zoom al pasar el cursor */
+        }
+
+        .card-body {
+            background-color: var(--secondary-color);
+            /* Fondo de la tarjeta */
+            color: white;
+            /* Color del texto en la tarjeta */
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            /* Fondo del botón de acento */
+            color: white;
+            /* Color del texto del botón */
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            /* Fondo del footer */
+            color: white;
+            /* Color del texto del footer */
+        }
+
+        .table {
+            border-radius: 15px;
+            /* Bordes redondeados */
+            overflow: hidden;
+            /* Asegura que las esquinas se recorten */
+            border: 1px solid #ddd;
+            /* Borde para mostrar el efecto */
+            background-color: var(--accent-color);
+            /* Color de fondo de la tabla */
+            color: white;
+            /* Color del texto de la tabla */
+        }
+
+        .table thead th:first-child {
+            border-top-left-radius: 15px;
+        }
+
+        .table thead th:last-child {
+            border-top-right-radius: 15px;
+        }
+
+        .table tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 15px;
+        }
+
+        .table tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 15px;
+        }
+
+        .cursor {
+            cursor: default;
+        }
+    </style>
+
+<body id="inicio">
+
+    <!-- Navbar editable -->
+    <nav class="navbar navbar-expand-lg mx-3 fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="landingPage.html">
+                <img src="../imagenes/AGB_Sinfondo_Sinletras.png" width="50px"></a>
+            <div class="navbar-brand text-white d-flex cursor">
+                <h3>Albuquerque Beer & Grill</h3>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="landingPage.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Menus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservas.html">Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar sin fixed para el margen -->
+    <nav class="navbar navbar-expand-lg mx-3">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="landingPage.html">
+                <img src="../imagenes/AGB_Sinfondo_Sinletras.png" width="50px"></a>
+            <div class="navbar-brand text-white d-flex">
+                <h3>Albuquerque Beer & Grill</h3>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="landingPage.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Menús</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservas.html">Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cartas -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-0s">
+                    <img src="../imagenes/guacamole.jpeg" class="card-img-top" alt="Comida Auténtica">
+                    <div class="card-body">
+                        <h5 class="card-title">Comida Auténtica</h5>
+                        <p class="card-text">Disfruta de los sabores más auténticos de la comida mexicana.</p>
+                        <a href="menu.html" class="btn btn-accent">Ver Menú</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-1s">
+                    <img src="../imagenes/botellines.jpeg" class="card-img-top" alt="Cervezas Artesanales">
+                    <div class="card-body">
+                        <h5 class="card-title">Cervezas Artesanales</h5>
+                        <p class="card-text">Explora nuestra selección de cervezas artesanales locales y de importación.
+                        </p>
+                        <a href="#brcervezas" class="btn btn-accent">Explorar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-2s">
+                    <img src="../imagenes/reserva.webp" class="card-img-top" alt="Reservas Fáciles">
+                    <div class="card-body">
+                        <h5 class="card-title">Reservas Fáciles</h5>
+                        <p class="card-text">Reserva tu mesa en línea de manera rápida y sencilla.</p>
+                        <a href="reservas.html" class="btn btn-accent">Reservar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-3s">
+                    <img src="../imagenes/guacamole.jpeg" class="card-img-top" alt="Comida Auténtica">
+                    <div class="card-body">
+                        <h5 class="card-title">Comida Auténtica</h5>
+                        <p class="card-text">Disfruta de los sabores más auténticos de la comida mexicana.</p>
+                        <a href="menu.html" class="btn btn-accent">Ver Menú</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-4s">
+                    <img src="../imagenes/botellines.jpeg" class="card-img-top" alt="Cervezas Artesanales">
+                    <div class="card-body">
+                        <h5 class="card-title">Cervezas Artesanales</h5>
+                        <p class="card-text">Explora nuestra selección de cervezas artesanales locales y de importación.
+                        </p>
+                        <a href="#brcervezas" class="btn btn-accent">Explorar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-5s">
+                    <img src="../imagenes/reserva.webp" class="card-img-top" alt="Reservas Fáciles">
+                    <div class="card-body">
+                        <h5 class="card-title">Reservas Fáciles</h5>
+                        <p class="card-text">Reserva tu mesa en línea de manera rápida y sencilla.</p>
+                        <a href="reservas.html" class="btn btn-accent">Reservar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-5s">
+                    <img src="../imagenes/guacamole.jpeg" class="card-img-top" alt="Comida Auténtica">
+                    <div class="card-body">
+                        <h5 class="card-title">Comida Auténtica</h5>
+                        <p class="card-text">Disfruta de los sabores más auténticos de la comida mexicana.</p>
+                        <a href="menu.html" class="btn btn-accent">Ver Menú</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-5s">
+                    <img src="../imagenes/botellines.jpeg" class="card-img-top" alt="Cervezas Artesanales">
+                    <div class="card-body">
+                        <h5 class="card-title">Cervezas Artesanales</h5>
+                        <p class="card-text">Explora nuestra selección de cervezas artesanales locales y de importación.
+                        </p>
+                        <a href="#brcervezas" class="btn btn-accent">Explorar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-5s">
+                    <img src="../imagenes/reserva.webp" class="card-img-top" alt="Reservas Fáciles">
+                    <div class="card-body">
+                        <h5 class="card-title">Reservas Fáciles</h5>
+                        <p class="card-text">Reserva tu mesa en línea de manera rápida y sencilla.</p>
+                        <a href="reservas.html" class="btn btn-accent">Reservar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-white text-center text-lg-start" id="footer">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!--Grid row-->
+            <div class="row mt-4">
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">De Nuevo México a tu mesa</h5>
+
+                    <p>
+                        Todos nuestros productos provienen de granjas locales y nuestra cerveza es elaborada
+                        artesanalmente, garantizando prácticas de comercio justo que apoyan a las comunidades y
+                        promueven la sostenibilidad.
+                    </p>
+
+                    <div class="mt-4">
+                        <!-- Facebook -->
+                        <a type="button" class="btn btn-floating btn-accent btn-lg m-1"
+                            href="https://www.facebook.com/albuquerquebeergrill"><i class="bi bi-facebook"></i></a>
+                        <!-- Instagram -->
+                        <a type="button" class="btn btn-floating btn-accent btn-lg m-1"
+                            href="https://www.instagram.com/albuquerquebeergrill"><i class="bi bi-instagram"></i></a>
+                        <!-- Twitter -->
+                        <a type="button" class="btn btn-floating btn-accent btn-lg m-1"
+                            href="https://x.com/albuquerquebeergrill"><i class="bi bi-twitter-x"></i></a>
+                        <!-- Linkedin -->
+                        <a type="button" class="btn btn-floating btn-accent btn-lg m-1"
+                            href="https://www.linkedin.com/albuquerquebeergrill"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4 pb-1 ps-5">Encuéntranos</h5>
+
+                    <ul class="fa-ul mb-4" style="margin-left: 1.65em;">
+                        <li class="mb-3">
+                            <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">C/ Arroyo Negro,
+                                308, 41011 Sevilla</span>
+                        </li>
+                        <li class="mb-3">
+                            <span class="fa-li"><i class="fas fa-envelope"></i></span><span
+                                class="ms-2">info@albuquerquebeergrill.com</span>
+                        </li>
+                        <li class="mb-3">
+                            <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">+ 34 234 567
+                                88</span>
+                        </li>
+                        <li class="mb-3">
+                            <span class="fa-li"><i class="fas fa-print"></i></span><span class="ms-2">+ 01 234 567
+                                89</span>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4 ">Nuestros horarios</h5>
+
+                    <table class="table table-striped table-hover text-center">
+                        <tbody class="font-weight-normal">
+                            <tr>
+                                <td>Lunes - Jueves:</td>
+                                <td>14h - 23h</td>
+                            </tr>
+                            <tr>
+                                <td>Viernes - Sábado:</td>
+                                <td>12h - 1h </td>
+                            </tr>
+                            <tr>
+                                <td>Domingos y Festivos:</td>
+                                <td>12h - 23h</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+        <!-- Grid container -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2024 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">albuquerquebeergrill.com</a>
+        </div>
+    </footer>
 </body>
+
 </html>
