@@ -185,21 +185,126 @@
         </div>
     </nav>
 
+    <nav class="navbar navbar-expand-lg mx-3">
+        <div class="container">
+          <div class="row w-100">
+            <!-- Acordeón columna 1 -->
+            <div class="col">
+              <div class="accordion" id="accordionEntrantes">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingEntrantes">
+                    <button class="accordion-button collapsed btn-accent" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEntrantes" aria-expanded="false" aria-controls="collapseEntrantes">
+                      Entrantes
+                    </button>
+                  </h2>
+                  <div id="collapseEntrantes" class="accordion-collapse collapse" aria-labelledby="headingEntrantes" data-bs-parent="#accordionEntrantes">
+                    <div class="accordion-body">
+                      <ul class="list-unstyled">
+                        <li>Huevos con bacon</li>
+                        <li>Patatas Gust-o</li>
+                        <li>Nachos "Say my name"</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Acordeón columna 2 -->
+            <div class="col">
+              <div class="accordion" id="accordionPlatosPrincipales">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingPlatosPrincipales">
+                    <button class="accordion-button collapsed btn-accent" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlatosPrincipales" aria-expanded="false" aria-controls="collapsePlatosPrincipales">
+                      Platos Principales
+                    </button>
+                  </h2>
+                  <div id="collapsePlatosPrincipales" class="accordion-collapse collapse" aria-labelledby="headingPlatosPrincipales" data-bs-parent="#accordionPlatosPrincipales">
+                    <div class="accordion-body">
+                      <ul class="list-unstyled">
+                        <li><a class="btn btn-accent m-1" href="">Heisen-BBQ Ribs</a></li>
+                        <li><a class="btn btn-accent m-1" href="">Los Hermanos Pollos Burger</a></li>
+                        <li><a class="btn btn-accent m-1" href="#principales">Pizza a la teja</a></li>
+                        <li><a class="btn btn-accent m-1" href="">Menu alitas hermanos de pollo</a></li>
+                        <li><a class="btn btn-accent m-1" href="">Lalo-Taco</a></li>
+                        <li><a class="btn btn-accent m-1" href="#pizza">Chili con Carne</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Acordeón columna 3 -->
+            <div class="col">
+              <div class="accordion" id="accordionPostres">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingPostres">
+                    <button class="accordion-button collapsed btn-accent" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePostres" aria-expanded="false" aria-controls="collapsePostres">
+                      Postres
+                    </button>
+                  </h2>
+                  <div id="collapsePostres" class="accordion-collapse collapse" aria-labelledby="headingPostres" data-bs-parent="#accordionPostres">
+                    <div class="accordion-body">
+                      <ul class="list-unstyled">
+                        <li>Tiramisú</li>
+                        <li>Cheesecake</li>
+                        <li>Helado artesanal</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+
     <!-- Cartas -->
+    <h1 class="text-center m-1">Entrantes</h1>
+    <hr>
     <div class="container my-5">
         <div class="row">
             <div class="col-md-4">
                 <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-0s">
-                    <img src="../imagenes/hamburguesa-pollos.jpg" class="card-img-top" alt="Comida Auténtica">
+                    <img src="../imagenes/huevos.png" class="card-img-top" alt="Cervezas Artesanales">
                     <div class="card-body">
-                        <h5 class="card-title">Los Hermanos Pollos Burger</h5>
-                        <p class="card-text">Una jugosa hamburguesa de pollo con queso cheddar, lechuga fresca y salsa secreta de Los Pollos Hermanos.</p>
-                        <div class="col-4 rounded btn-accent p-2">Precio: 10,99€</div>
+                        <h5 class="card-title">Huevos con bacon</h5>
+                        <p class="card-text">Pide nuestro plato estrella clásico y que a todos les gusta, huevos fritos con bacon. Por tu cumpleaños sale gratis.
+                        </p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 7,50€</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-1s">
+                    <img src="../imagenes/patatas.jpg" class="card-img-top" alt="patatas">
+                    <div class="card-body">
+                        <h5 class="card-title">Patatas Gust-o</h5>
+                        <p class="card-text">Patatas con salsa barbacoa especial de la casa como si de una explosión de sabores se tratase. Elegantes y fritas.</p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 5,50€</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-2s">
+                    <img src="../imagenes/guacamole.jpeg" class="card-img-top" alt="Nachos">
+                    <div class="card-body">
+                        <h5 class="card-title">Nachos "Say my name"</h5>
+                        <p class="card-text">Nachos de maiz acompañados con salsa guacamole, cheddar y pico de gallo. Pregunta por la palabra secreta.</p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 8,45€</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="text-center m-1" id="principales">Platos principales</h1>
+    <hr>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-3s">
                     <img src="../imagenes/costillas.png" class="card-img-top" alt="Costillas">
                     <div class="card-body">
                         <h5 class="card-title">Heisen-BBQ Ribs</h5>
@@ -209,12 +314,22 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-2s">
-                    <img src="../imagenes/guacamole.jpeg" class="card-img-top" alt="Reservas Fáciles">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-4s">
+                    <img src="../imagenes/hamburguesa-pollos.jpg" class="card-img-top" alt="hamburguesa">
                     <div class="card-body">
-                        <h5 class="card-title">Nachos "Say my name"</h5>
-                        <p class="card-text">Nachos de maiz acompañados con salsa guacamole, cheddar y pico de gallo. Pregunta por la palabra secreta</p>
-                        <div class="col-4 rounded btn-accent p-2">Precio: 8,45€</div>
+                        <h5 class="card-title">Los Hermanos Pollos Burger</h5>
+                        <p class="card-text">Una jugosa hamburguesa de pollo con queso cheddar, lechuga fresca y salsa secreta de Los Pollos Hermanos.</p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 10,99€</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-5s" id="pizza">
+                    <img src="../imagenes/pizza-de-peperoni.webp" class="card-img-top" alt="pizza">
+                    <div class="card-body">
+                        <h5 class="card-title">Pizza a la teja</h5>
+                        <p class="card-text">Pide tu pizza más clásica, la pizza peperoni. Contiene queso y tomate en la base, adornado con rodajas de peperoni.</p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 11,99€</div>
                     </div>
                 </div>
             </div>
@@ -224,63 +339,63 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-3s">
-                    <img src="../imagenes/guacamole.jpeg" class="card-img-top" alt="Comida Auténtica">
+                    <img src="../imagenes/alitas.jpg" class="card-img-top" alt="alitas">
                     <div class="card-body">
-                        <h5 class="card-title">Comida Auténtica</h5>
-                        <p class="card-text">Disfruta de los sabores más auténticos de la comida mexicana.</p>
-                        <a href="menu.html" class="btn btn-accent">Ver Menú</a>
+                        <h5 class="card-title">Menu alitas hermanos de pollo</h5>
+                        <p class="card-text">Pide tu menu de alitas de pollo con patatas y refresco para poder disfrutar de las mejores alitas estilo kentucky.</p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 9,50€</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-4s">
-                    <img src="../imagenes/botellines.jpeg" class="card-img-top" alt="Cervezas Artesanales">
+                    <img src="../imagenes/tacos2.jpg" class="card-img-top" alt="tacos">
                     <div class="card-body">
-                        <h5 class="card-title">Cervezas Artesanales</h5>
-                        <p class="card-text">Explora nuestra selección de cervezas artesanales locales y de importación.
-                        </p>
-                        <a href="#brcervezas" class="btn btn-accent">Explorar</a>
+                        <h5 class="card-title">Lalo-Taco</h5>
+                        <p class="card-text">Deliciosos tacos al estilo más mexicano posible. Tacos con nuestra mejor carne acompañada de arroz y salsa especial.</p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 8,50€</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-5s">
-                    <img src="../imagenes/reserva.webp" class="card-img-top" alt="Reservas Fáciles">
+                    <img src="../imagenes/chili-con-carne.jpg" class="card-img-top" alt="Chili con Carne">
                     <div class="card-body">
-                        <h5 class="card-title">Reservas Fáciles</h5>
-                        <p class="card-text">Reserva tu mesa en línea de manera rápida y sencilla.</p>
-                        <a href="reservas.html" class="btn btn-accent">Reservar Ahora</a>
+                        <h5 class="card-title">Chili con Carne</h5>
+                        <p class="card-text">Un clásico tex-mex hecho con carne de res, frijoles y especias. Servido con arroz y tortillas caseras al toque de la casa.</p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 12,00€</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <h1 class="text-center m-1">Postres</h1>
+    <hr>
     <div class="container my-5">
         <div class="row">
             <div class="col-md-4">
                 <div class="card animate__animated animate__zoomIn animate__slow  delay-6s">
-                    <img src="../imagenes/guacamole.jpeg" class="card-img-top" alt="Comida Auténtica">
+                    <img src="../imagenes/tarta_de_queso_frutos_rojos.jpg" class="card-img-top" alt="Tarta de Queso">
                     <div class="card-body">
-                        <h5 class="card-title">Comida Auténtica</h5>
-                        <p class="card-text">Disfruta de los sabores más auténticos de la comida mexicana.</p>
-                        <a href="menu.html" class="btn btn-accent">Ver Menú</a>
+                        <h5 class="card-title">Tarta de Queso con Frutos Rojos</h5>
+                        <p class="card-text">Tarta cremosa de queso casera con una base de galleta, coronada con una compota de frutos rojos frescos delicioso para terminar.</p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 5,50€</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card animate__animated animate__zoomIn animate__slow  delay-7s">
-                    <img src="../imagenes/botellines.jpeg" class="card-img-top" alt="Cervezas Artesanales">
+                    <img src="../imagenes/churros_con_chocolate.jpg" class="card-img-top" alt="Churros con Chocolate">
                     <div class="card-body">
-                        <h5 class="card-title">Cervezas Artesanales</h5>
-                        <p class="card-text">Explora nuestra selección de cervezas artesanales locales y de importación.
-                        </p>
-                        <a href="#brcervezas" class="btn btn-accent">Explorar</a>
+                        <h5 class="card-title">Churros con Chocolate</h5>
+                        <p class="card-text">Crujientes churros servidos con una taza de chocolate caliente para mojar. Ideal para cerrar la comida.</p>
+                        <div class="col-4 rounded btn-accent p-2">Precio: 4,00€</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card animate__animated animate__zoomIn animate__slow  delay-8s">
-                    <img src="../imagenes/blue-shake.jpg" class="card-img-top" alt="Reservas Fáciles">
+                    <img src="../imagenes/blue-shake.jpg" class="card-img-top" alt="blue shake">
                     <div class="card-body">
                         <h5 class="card-title">Blue Milkshake</h5>
                         <p class="card-text">Batido de vainilla con trozos de menta y un toque de "cristales azules" de caramelo para darle un look único.</p>
