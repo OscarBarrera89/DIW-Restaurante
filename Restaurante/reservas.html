@@ -35,7 +35,13 @@
             font-weight: bold; 
         }
 
-        
+        .btn-verde{
+            background-color: var(--accent-color);
+            color: white;
+        }
+        .btn-verde:hover {
+        opacity: 0.8; 
+        }
         .btn-custom {
             border: 2px solid var(--accent-color); 
             color: var(--accent-color); 
@@ -212,7 +218,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="reservas.html"><input type="submit" class="btn btn-primary" value="Guardar Reserva"></input></a>
+                    <a class="btn-verde rounded" href="reservas.html"><input type="submit" class="btn btn-verde" value="Guardar Reserva"></input></a>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
