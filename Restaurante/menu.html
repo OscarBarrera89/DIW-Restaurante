@@ -200,9 +200,9 @@
                   <div id="collapseEntrantes" class="accordion-collapse collapse" aria-labelledby="headingEntrantes" data-bs-parent="#accordionEntrantes">
                     <div class="accordion-body">
                       <ul class="list-unstyled">
-                        <li>Huevos con bacon</li>
-                        <li>Patatas Gust-o</li>
-                        <li>Nachos "Say my name"</li>
+                        <li><a class="btn btn-accent m-1" href="#entrantes">Huevos con bacon</a></li>
+                        <li><a class="btn btn-accent m-1" href="#entrantes">Patatas Gust-o</a></li>
+                        <li><a class="btn btn-accent m-1" href="#entrantes">Nachos "Say my name"</a></li>
                       </ul>
                     </div>
                   </div>
@@ -222,11 +222,11 @@
                   <div id="collapsePlatosPrincipales" class="accordion-collapse collapse" aria-labelledby="headingPlatosPrincipales" data-bs-parent="#accordionPlatosPrincipales">
                     <div class="accordion-body">
                       <ul class="list-unstyled">
-                        <li><a class="btn btn-accent m-1" href="">Heisen-BBQ Ribs</a></li>
-                        <li><a class="btn btn-accent m-1" href="">Los Hermanos Pollos Burger</a></li>
-                        <li><a class="btn btn-accent m-1" href="#principales">Pizza a la teja</a></li>
-                        <li><a class="btn btn-accent m-1" href="">Menu alitas hermanos de pollo</a></li>
-                        <li><a class="btn btn-accent m-1" href="">Lalo-Taco</a></li>
+                        <li><a class="btn btn-accent m-1" href="#principales">Heisen-BBQ Ribs</a></li>
+                        <li><a class="btn btn-accent m-1" href="#principales">Los Hermanos Pollos Burger</a></li>
+                        <li><a class="btn btn-accent m-1" href="#pizza">Pizza a la teja</a></li>
+                        <li><a class="btn btn-accent m-1" href="#pizza">Menu alitas hermanos de pollo</a></li>
+                        <li><a class="btn btn-accent m-1" href="#pizza">Lalo-Taco</a></li>
                         <li><a class="btn btn-accent m-1" href="#pizza">Chili con Carne</a></li>
                       </ul>
                     </div>
@@ -247,9 +247,9 @@
                   <div id="collapsePostres" class="accordion-collapse collapse" aria-labelledby="headingPostres" data-bs-parent="#accordionPostres">
                     <div class="accordion-body">
                       <ul class="list-unstyled">
-                        <li>Tiramisú</li>
-                        <li>Cheesecake</li>
-                        <li>Helado artesanal</li>
+                        <li><a class="btn btn-accent m-1" href="#postres">Tarta de Queso con Frutos Rojos</a></li>
+                        <li><a class="btn btn-accent m-1" href="#postres">Churros con Chocolate</a></li>
+                        <li><a class="btn btn-accent m-1" href="#postres">Blue Milkshake</a></li>
                       </ul>
                     </div>
                   </div>
@@ -262,7 +262,7 @@
       
 
     <!-- Cartas -->
-    <h1 class="text-center m-1">Entrantes</h1>
+    <h1 class="text-center m-1" id="entrantes">Entrantes</h1>
     <hr>
     <div class="container my-5">
         <div class="row">
@@ -318,13 +318,13 @@
                     <img src="../imagenes/hamburguesa-pollos.jpg" class="card-img-top" alt="hamburguesa">
                     <div class="card-body">
                         <h5 class="card-title">Los Hermanos Pollos Burger</h5>
-                        <p class="card-text">Una jugosa hamburguesa de pollo con queso cheddar, lechuga fresca y salsa secreta de Los Pollos Hermanos.</p>
+                        <p class="card-text" id="pizza">Una jugosa hamburguesa de pollo con queso cheddar, lechuga fresca y salsa secreta de Los Pollos Hermanos.</p>
                         <div class="col-4 rounded btn-accent p-2">Precio: 10,99€</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-5s" id="pizza">
+                <div class="card animate__animated animate__zoomIn animate__slow  animate__delay-5s">
                     <img src="../imagenes/pizza-de-peperoni.webp" class="card-img-top" alt="pizza">
                     <div class="card-body">
                         <h5 class="card-title">Pizza a la teja</h5>
@@ -369,7 +369,7 @@
             </div>
         </div>
     </div>
-    <h1 class="text-center m-1">Postres</h1>
+    <h1 class="text-center m-1" id="postres">Postres</h1>
     <hr>
     <div class="container my-5">
         <div class="row">
