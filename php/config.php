@@ -12,7 +12,7 @@ $basedatos = array(
     "basedatos" => "restaurante",
     "usuario" => "root",
     "password" => "test",
-    "servidor" => "localhost",
+    "servidor" => "db",
     "puerto" => 8000
 );
 
@@ -42,6 +42,7 @@ function obtenerConexion()
 
     mysqli_set_charset($conexion, "utf8");
     //Si no se produjo un error devolvemos el objeto de la conexión
+    echo "<p>hola</p>";
     return $conexion;
 }
 
