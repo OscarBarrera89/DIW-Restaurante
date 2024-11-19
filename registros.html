@@ -2,160 +2,347 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <!-- Bootstrap CSS -->
-    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
-    <!-- Estilos propios -->
-    <link href="css/estilos.css" rel="stylesheet">
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<!-- Enlaces a bootstrap-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+		<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<style type="text/css">
+		body {
+			margin-left: 10px;
+		}
 
-    <!-- <a href="https://www.flaticon.es/iconos-gratis/emparedado" title="emparedado iconos">Emparedado iconos creados por Creaticca Creative Agency - Flaticon</a> -->
+		form, 
+		#resultadoBusqueda {
+			display: none;
+		}
 
-    <title>Bar</title>
+		#formularios {
+			margin-top: 60px;
+		}
+	</style>
+	<title>Restaurante DIW</title>
 </head>
 
 <body>
-    <div class="container">
-        <!-- Barra de navegación -->
-        <nav class="navbar navbar-expand-lg bg-gradient bg-light bg-gradient-directional">
-            <div class=" container-fluid">
-                <a class="navbar-brand">Restaurante <img src="Restaurante/imagenes/AGB_Sinfondo_Sinletras.png" width="25" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="mnuAltaPedido">Alta de pedido</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="mnuListadoPedidosCliente">Listado de pedidos de un
-                                cliente</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Formularios -->
-        <form name="frmAltaPedido" id="frmAltaPedido" class="d-none">
-            <!-- Incluir aquí los campos necesarios -->
-            <fieldset>
-                <!-- Form Name -->
-                <legend>Alta de pedido</legend>
-                <div class="row mb-1">
-                    <label class="col-3 control-label" for="txtNombreCliente">Nombre del cliente</label>
-                    <div class="col-4">
-                        <input id="txtNombreCliente" name="txtNombreCliente" placeholder="Nombre del cliente"
-                            class="form-control input-md" type="text" step="1">
-                    </div>
-                </div>
-                <div class="row mb-1">
-                    <label class="col-3 control-label" for="lstPlatos">Platos</label>
-                    <div class="col-4">
-                        <select class="form-select" name="lstPlatos" id="lstPlatos">
-                            
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-1">
-                    <label class="col-1 control-label" for="rbtUnidades">Unidades</label>
-                    <div class="col-11">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-1"
-                                value="1">
-                            <label class="form-check-label" for="rbtUnidades-1">1</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-2"
-                                value="2">
-                            <label class="form-check-label" for="rbtUnidades-2">2</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-3"
-                                value="3">
-                            <label class="form-check-label" for="rbtUnidades-3">3</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-4"
-                                value="4">
-                            <label class="form-check-label" for="rbtUnidades-4">4</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-5"
-                                value="5">
-                            <label class="form-check-label" for="rbtUnidades-5">5</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-6"
-                                value="6">
-                            <label class="form-check-label" for="rbtUnidades-6">6</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-7"
-                                value="7">
-                            <label class="form-check-label" for="rbtUnidades-7">7</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-8"
-                                value="8">
-                            <label class="form-check-label" for="rbtUnidades-8">8</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-9"
-                                value="9">
-                            <label class="form-check-label" for="rbtUnidades-9">9</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Button -->
-                <div class="row mt-3">
-                    <div class="offset-3 col-4">
-                        <input type="button" id="btnAltaPedido" name="btnAltaPedido"
-                            class="btn btn-primary" value="Aceptar" />
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-        <form name="frmListadoPedidosCliente" id="frmListadoPedidosCliente" class="d-none">
-            <fieldset>
-                <!-- Form Name -->
-                <legend>Listado de pedidos de un cliente</legend>
-                <!-- Text input-->
-                <div class="row mb-1">
-                    <label class="col-3 control-label" for="txtNombreClienteListado">Nombre del cliente</label>
-                    <div class="col-4">
-                        <input id="txtNombreClienteListado" name="txtNombreClienteListado"
-                            placeholder="Nombre del cliente" class="form-control input-md" type="text" step="1">
-                    </div>
-                </div>
-                <!-- Button -->
-                <div class="row mt-3">
-                    <div class="offset-3 col-4">
-                        <input type="button" id="btnListadoPedidosCliente" name="btnListadoPedidosCliente"
-                            class="btn btn-primary" value="Aceptar" />
-                    </div>
-                </div>
-            </fieldset>
-        </form>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+            <a class="navbar-brand">Restaurante <img src="Restaurante/imagenes/AGB_Sinfondo_Sinletras.png" width="25" /></a>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+						aria-expanded="false">
+						Cliente
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#" id="mnuAltaCLiente">Alta de cliente</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
 
-        <!-- Listado -->
-        <div id="listado" class="d-none">
-            <!-- Mostrar aquí la tabla del listado solicitado -->
+						<li><a class="dropdown-item" href="#" id="mnuBuscarCliente">Buscar un cliente</a></li>
+						<li><a class="dropdown-item" href="#" id="mnuListadoCliente">Listado de clientes</a></li>
+						<li><a class="dropdown-item" href="#" id="mnuListadoClientePorNombre">Listado de clientes por nombre</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuModificarCliente">Modificar cliente</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuBorrarCliente">Borrar un cliente</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+						aria-expanded="false">
+						Menu
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#" id="mnuAltaMenu">Alta menu</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item" href="#" id="mnuListadoMenu">Listado del menu</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuListadoMenuPorNombre">Listado de menu por nombre</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuBuscarMenu">Buscar menu</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuModificarMenu">Modificar menu</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuBorrarMenu">Borrar menu</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+						aria-expanded="false">
+						Pedido
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#" id="mnuAltaPedido">Alta pedido</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item" href="#" id="mnuListadoPedido">Listado de los pedidos</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuListadoPedidoPorNombre">Listado de pedido por nombre</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuBuscarPedido">Buscar pedido</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuModificarPedido">Modificar pedido</a></li>
+                        <li><a class="dropdown-item" href="#" id="mnuBorrarPedido">Borrar pedido</a></li>
+					</ul>
+				</li>
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+	
+	<div class="container" id="formularios">
+		<div class="row">
+			<form name="frmAltaPedido" id="frmAltaPedido" class="d-none">
+                <!-- Incluir aquí los campos necesarios -->
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>Alta de pedido</legend>
+                    <div class="row mb-1">
+                        <label class="col-3 control-label" for="txtNombreCliente">Nombre del cliente</label>
+                        <div class="col-4">
+                            <input id="txtNombreCliente" name="txtNombreCliente" placeholder="Nombre del cliente"
+                                class="form-control input-md" type="text" step="1">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <label class="col-3 control-label" for="lstPlatos">Platos</label>
+                        <div class="col-4">
+                            <select class="form-select" name="lstPlatos" id="lstPlatos">
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <label class="col-1 control-label" for="rbtUnidades">Unidades</label>
+                        <div class="col-11">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-1"
+                                    value="1">
+                                <label class="form-check-label" for="rbtUnidades-1">1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-2"
+                                    value="2">
+                                <label class="form-check-label" for="rbtUnidades-2">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-3"
+                                    value="3">
+                                <label class="form-check-label" for="rbtUnidades-3">3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-4"
+                                    value="4">
+                                <label class="form-check-label" for="rbtUnidades-4">4</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-5"
+                                    value="5">
+                                <label class="form-check-label" for="rbtUnidades-5">5</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-6"
+                                    value="6">
+                                <label class="form-check-label" for="rbtUnidades-6">6</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-7"
+                                    value="7">
+                                <label class="form-check-label" for="rbtUnidades-7">7</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-8"
+                                    value="8">
+                                <label class="form-check-label" for="rbtUnidades-8">8</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-9"
+                                    value="9">
+                                <label class="form-check-label" for="rbtUnidades-9">9</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Button -->
+                    <div class="row mt-3">
+                        <div class="offset-3 col-4">
+                            <input type="button" id="btnAltaPedido" name="btnAltaPedido"
+                                class="btn btn-primary" value="Aceptar" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+			<form class="form-horizontal" name="frmAltaTipo" id="frmAltaTipo">
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Alta de tipo de componente</legend>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtTipo">Tipo</label>
+						<div class="col-xs-4">
+							<input id="txtTipo" name="txtTipo" placeholder="Nombre del tipo"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtDescripcion">Descripcion</label>
+						<div class="col-xs-4">
+							<input id="txtDescripcion" name="txtDescripcion" placeholder="Descripción del tipo" class="form-control input-md"
+								type="text">
+						</div>
+					</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnAceptarAltaTipo"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnAceptarAltaTipo" name="btnAceptarAltaTipo"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<form class="form-horizontal" name="frmBuscarComponente" id="frmBuscarComponente">
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Buscar un componente</legend>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtIdComponente">Id Componente</label>
+						<div class="col-xs-4">
+							<input id="txtIdComponente" name="txtIdComponente" placeholder="Id del componente"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+	
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnBuscarComponente"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnBuscarComponente" name="btnBuscarComponente"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+				</fieldset>
+			</form>			
+			<form class="form-horizontal" name="frmModificarComponente" id="frmModificarComponente">
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Modificar componente</legend>
+					
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModIdComponente">IdComponente</label>
+						<div class="col-xs-4">
+							<input disabled id="txtModIdComponente" name="txtModIdComponente" 
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModNombre">Nombre del componente</label>
+						<div class="col-xs-4">
+							<input id="txtModNombre" name="txtModNombre"
+								class="form-control input-md" type="text">
 
-        </div>
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModDescripcion">Descripción</label>
+						<div class="col-xs-4">
+							<input id="txtModDescripcion" name="txtModDescripcion"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+					<!-- Number input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModPrecio">Precio</label>
+						<div class="col-xs-4">
+							<input id="txtModPrecio" name="txtModPrecio" 
+								class="form-control input-md" type="number">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="lstModTipo">Tipo</label>
+						<div class="col-xs-4">
+							<select  class="form-select" name="lstModTipo" id="lstModTipo">
 
-    </div>
-    <!-- Bootstrap JS -->
-    <script src="bootstrap/bootstrap.min.js"></script>
-    <!-- Scripts propios -->
-    <script src="js/ajax.js"></script>
-    <script src="js/objetos.js"></script>
-    <script src="js/codigo.js"></script>
+							</select>
+						</div>
+					</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnAceptarModComponente"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnAceptarModComponente" name="btnAceptarModComponente"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+
+			<form class="form-horizontal" name="frmAltaComponente" id="frmAltaComponente">
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Alta de componente</legend>
+					
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtAltaNombre">Nombre del componente</label>
+						<div class="col-xs-4">
+							<input id="txtAltaNombre" name="txtAltaNombre"
+								class="form-control input-md" type="text">
+
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtAltaDescripcion">Descripción</label>
+						<div class="col-xs-4">
+							<input id="txtAltaDescripcion" name="txtAltaDescripcion"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+					<!-- Number input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtAltaPrecio">Precio</label>
+						<div class="col-xs-4">
+							<input id="txtAltaPrecio" name="txtAltaPrecio" 
+								class="form-control input-md" type="number">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="lstAltaTipo">Tipo</label>
+						<div class="col-xs-4">
+							<select  class="form-select" name="lstAltaTipo" id="lstAltaTipo">
+
+							</select>
+						</div>
+					</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnAceptarAltaComponente"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnAceptarAltaComponente" name="btnAceptarAltaComponente"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div class="container" id="resultadoBusqueda"></div>
+	<div class="container" id="listados"></div>
+	
+	<script type="text/javascript" src="js/ajax.js"></script>
+	<script type="text/javascript" src="js/objetos.js"></script>
+	<script type="text/javascript" src="js/codigo.js"></script>
 </body>
 
 </html>
