@@ -2,6 +2,7 @@
 
 const rutaBackend = "http://localhost/DIW-Restaurante/php/";
 
+
 /**
  * Realiza peticiones AJAX de tipo GET
  * @param {string} url 
@@ -26,13 +27,13 @@ async function peticionGET(url, parametros) {
 
     if (respuestaServidor.ok) {  // Si es una respuesta http OK (200)
 
-         // JSON.parse de los datos recibidos
-         response = await respuestaServidor.json();
+        // JSON.parse de los datos recibidos
+        response = await respuestaServidor.json();
 
     } else { // Respuesta distinta de http OK (200)
         console.error("Error al acceder al acceder al servidor (STATUS != 200..299) Status: " + respuestaServidor.status);
         response = {
-            ok : false,
+            error: true,
             mensaje: "Error al acceder al acceder al servidor (STATUS != 200..299) Status: " + respuestaServidor.status,
             datos: null
         };
@@ -47,31 +48,37 @@ async function peticionGET(url, parametros) {
  * @param {FormData} parametros - Objeto FormData con los parámetros de la llamada 
  * @returns 
  */
-async function peticionPOST(url, parametros){
+async function peticionPOST(url, parametros) {
     // Creamos el objeto URL que contiene la dirección url de la petición
     // y los datos que enviamos con la petición
     let oURL = new URL(rutaBackend);
-    oURL.pathname += url; // por ejemplo "alta_tipo.php"
+    oURL.pathname += url; // por ejemplo "alta_tipo.php"    
 
     let respuestaServidor = await fetch(oURL, {
-        body: parametros,  // objeto FormData
-        method: "POST"
+        method: 'POST',
+        body: parametros  // objeto FormData
     });
     let response;
 
     if (respuestaServidor.ok) {  // Si es una respuesta http OK (200)
 
-        // JSON.parse de los datos recibidos
+        //! NO RECOGE LOS DATOS
         response = await respuestaServidor.json();
+        
+        console.log(response);
+        
 
-   } else { // Respuesta distinta de http OK (200)
-       console.error("Error al acceder al acceder al servidor (STATUS != 200..299).Status: " + respuestaServidor.status);
-       response = {
-           ok: false,
-           mensaje: "Error al acceder al acceder al servidor (STATUS != 200..299). Status: " + respuestaServidor.status,
-           datos: null
-       };
-   }
+    } else { // Respuesta distinta de http OK (200)
+        console.error("Error al acceder al acceder al servidor (STATUS != 200..299).Status: " + respuestaServidor.status);
+        response = {
+            error: true,
+            mensaje: "Error al acceder al acceder al servidor (STATUS != 200..299). Status: " + respuestaServidor.status,
+            datos: null
+        };
+    }
 
-   return response;
+    console.log(response.datos);
+    
+
+    return response;
 }

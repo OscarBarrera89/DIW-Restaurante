@@ -13,7 +13,7 @@ $basedatos = array(
     "usuario" => "root",
     "password" => "test",
     "servidor" => "db",
-    "puerto" => 8000
+    "puerto" => 3306 //Cambiar a 8000?
 );
 
 
@@ -42,15 +42,14 @@ function obtenerConexion()
 
     mysqli_set_charset($conexion, "utf8");
     //Si no se produjo un error devolvemos el objeto de la conexión
-    echo "<p>hola</p>";
     return $conexion;
 }
 
 
-function responder($datos, $ok, $mensaje, $conexion)
+function responder($datos, $error, $mensaje, $conexion)
 {
     // Formatear array asociativo con los campos de la respuesta
-    $respuesta["ok"] = $ok; // Boolean true si OK -- false si error
+    $respuesta["error"] = $error; // Boolean true si error -- false si OK
     $respuesta["datos"] = $datos;  // Datos devueltos
     $respuesta["mensaje"] = $mensaje; // Información sobre la operación
 
@@ -60,7 +59,7 @@ function responder($datos, $ok, $mensaje, $conexion)
     // Cerramos la conexión
     mysqli_close($conexion);
 
-    if ($ok == false) {
+    if ($error == true) {
         // Finalizar el proceso el servidor con indicador de error
         exit(1);
     } else {
