@@ -13,7 +13,7 @@ $basedatos = array(
     "usuario" => "root",
     "password" => "test",
     "servidor" => "db",
-    "puerto" => 3306 //Cambiar a 8000?
+    "puerto" => 3306
 );
 
 
@@ -46,10 +46,10 @@ function obtenerConexion()
 }
 
 
-function responder($datos, $error, $mensaje, $conexion)
+function responder($datos, $ok, $mensaje, $conexion)
 {
     // Formatear array asociativo con los campos de la respuesta
-    $respuesta["error"] = $error; // Boolean true si error -- false si OK
+    $respuesta["ok"] = $ok; // Boolean true si error -- false si OK
     $respuesta["datos"] = $datos;  // Datos devueltos
     $respuesta["mensaje"] = $mensaje; // Información sobre la operación
 
@@ -59,7 +59,7 @@ function responder($datos, $error, $mensaje, $conexion)
     // Cerramos la conexión
     mysqli_close($conexion);
 
-    if ($error == true) {
+    if ($ok == false) {
         // Finalizar el proceso el servidor con indicador de error
         exit(1);
     } else {

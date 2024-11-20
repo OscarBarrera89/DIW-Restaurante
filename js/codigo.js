@@ -3,24 +3,26 @@
 // Codificar aquí el programa principal
 var oRestaurante = new Restaurante();
 
+registrarEventos();
+
 function registrarEventos() {
-    ocultarFormulario();
+    ocultarFormularios();
 
     //Parte de Cliente
     document.querySelector("#mnuAltaCliente").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuListadoCliente").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuBuscarCliente").addEventListener("click", mostrarFormulario);
 
-    frmAltaCliente.AltaClienteBoton.addEventListener("click", procesarAltaCliente);
-    frmModCliente.ModClienteBoton.addEventListener("click", procesarModificarCliente);
-    frmBuscarCliente.ModClienteBoton.addEventListener("click", procesarBuscarCliente);
+    frmAltaCliente.btnAceptarAltaCliente.addEventListener("click", procesarAltaCliente);
+    // frmModCliente.ModClienteBoton.addEventListener("click", procesarModificarCliente);
+    // frmBuscarCliente.ModClienteBoton.addEventListener("click", procesarBuscarCliente);
 
-    //Parte de Pedido SIN TERMINAR
-    document.querySelector("#mnuAltaPedido").addEventListener("click",mostrarFormulario);
-    document.querySelector("#mnuListadoPedidosCliente").addEventListener("click",mostrarFormulario);
+    // //Parte de Pedido SIN TERMINAR
+    // document.querySelector("#mnuAltaPedido").addEventListener("click",mostrarFormulario);
+    // document.querySelector("#mnuListadoPedidosCliente").addEventListener("click",mostrarFormulario);
 
-    frmAltaPedido.btnAltaPedido.addEventListener("click",procesarAltaPedido);
-    frmListadoPedidosCliente.btnListadoPedidosCliente.addEventListener("click",procesarListadoPedidos)
+    // frmAltaPedido.btnAltaPedido.addEventListener("click",procesarAltaPedido);
+    // frmListadoPedidosCliente.btnListadoPedidosCliente.addEventListener("click",procesarListadoPedidos)
 }
 
 function mostrarFormulario(oEvento){
@@ -47,22 +49,23 @@ function mostrarFormulario(oEvento){
 
 function ocultarFormularios(){
     frmAltaCliente.style.display = "none";
-    listadoCliente.style.display = "none";
-    frmModCliente.style.display = "none";
+    //listadoCliente.style.display = "none";
+    //frmModCliente.style.display = "none";
     
-    resultadoBusquedaCliente.innerHTML = "";
+    //resultadoBusquedaCliente.innerHTML = "";
 }
 
 async function procesarAltaCliente() {
-    let nombre = frmAltaCliente.AltaClienteNombre.value.trim(); //Trim o no?
-    let email = frmAltaCliente.AltaClienteEmail.value.trim();   
-    let telefono = frmAltaCliente.AltaClienteTelefono.value;
+    let nombre = frmAltaCliente.txtNombre.value.trim();
+    let email = frmAltaCliente.txtEmail.value.trim();   
+    let telefono = parseInt(frmAltaCliente.txtNumero.value.trim());
     
     if (validarAltaCliente()) {
         let respuesta = await oRestaurante.altaCliente(new Cliente(null, nombre, email, telefono));
-
-        if (!respuesta.error) {
+        alert(respuesta.mensaje);
+        if (respuesta.ok) {
             frmAltaCliente.reset();
+            ocultarFormularios();
         }
     }
 
@@ -71,7 +74,45 @@ async function procesarAltaCliente() {
 
 function validarAltaCliente() {
 
-    //NO SE QUE HACER AQUI
+    let nombre = frmAltaCliente.txtNombre.value.trim();
+    let email = frmAltaCliente.txtEmail.value.trim();   
+    let telefono = parseInt(frmAltaCliente.txtNumero.value.trim());
+    let errores = "";
+    let valido = true;
+
+    if (nombre.length == 0){
+        errores+= "Se requiere rellenar el nombre\n";
+        valido = false;
+        frmAltaCliente.txtNombre.classList.add("error")
+    
+    } else{
+        frmAltaCliente.txtNombre.classList.remove("error")
+        
+    }
+
+    if (email.length == 0){
+        errores+= "Se requiere rellenar el email\n";
+        valido = false;
+        frmAltaCliente.txtEmail.classList.add("error")
+    
+    } else{
+        frmAltaCliente.txtEmail.classList.remove("error")
+        
+    }
+
+    if (isNaN(telefono)){
+        errores+= "El telefono debe ser un numero\n";
+        valido = false;
+        frmAltaCliente.txtNumero.classList.add("error")
+    
+    } else{
+        frmAltaCliente.txtNumero.classList.remove("error")
+        
+    }
+
+    if (!valido) {
+        alert(errores);
+    }
 
     return valido;
 }

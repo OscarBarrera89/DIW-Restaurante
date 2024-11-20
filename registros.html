@@ -23,6 +23,9 @@
 		#formularios {
 			margin-top: 60px;
 		}
+		.error{
+			background-color: yellow;
+		}
 	</style>
 	<title>Restaurante DIW</title>
 </head>
@@ -42,7 +45,7 @@
 						Cliente
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#" id="mnuAltaCLiente">Alta de cliente</a></li>
+						<li><a class="dropdown-item" href="#" id="mnuAltaCliente">Alta de cliente</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
@@ -174,31 +177,39 @@
                     </div>
                 </fieldset>
             </form>
-			<form class="form-horizontal" name="frmAltaTipo" id="frmAltaTipo">
+			<form class="form-horizontal" name="frmAltaCliente" id="frmAltaCliente">
 				<fieldset>
 					<!-- Form Name -->
-					<legend>Alta de tipo de componente</legend>
+					<legend>Alta de Cliente</legend>
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtTipo">Tipo</label>
+						<label class="col-xs-4 control-label" for="txtNombre">Nombre del Cliente</label>
 						<div class="col-xs-4">
-							<input id="txtTipo" name="txtTipo" placeholder="Nombre del tipo"
+							<input id="txtNombre" name="txtNombre" placeholder="Nombre del Cliente"
 								class="form-control input-md" type="text">
 						</div>
 					</div>
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtDescripcion">Descripcion</label>
+						<label class="col-xs-4 control-label" for="txtEmail">eMail</label>
 						<div class="col-xs-4">
-							<input id="txtDescripcion" name="txtDescripcion" placeholder="Descripción del tipo" class="form-control input-md"
-								type="text">
+							<input id="txtEmail" name="txtEmail" placeholder="Correo del Cliente" class="form-control input-md"
+								type="email">
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtNumero">Telefono</label>
+						<div class="col-xs-4">
+							<input id="txtNumero" name="txtNumero" placeholder="Telefono" class="form-control input-md"
+								type="number">
 						</div>
 					</div>
 					<!-- Button -->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="btnAceptarAltaTipo"></label>
+						<label class="col-xs-4 control-label" for="btnAceptarAltaCliente"></label>
 						<div class="col-xs-4">
-							<input type="button" id="btnAceptarAltaTipo" name="btnAceptarAltaTipo"
+							<input type="button" id="btnAceptarAltaCliente" name="btnAceptarAltaCliente"
 								class="btn btn-primary" value="Aceptar" />
 						</div>
 					</div>

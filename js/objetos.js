@@ -52,8 +52,6 @@ class Restaurante{
 
         let respuesta = await peticionPOST("alta_cliente.php", datos);
 
-        alert("Se ha dado de alta a el cliente")
-
         return respuesta;
 
     }
