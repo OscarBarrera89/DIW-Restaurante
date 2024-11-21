@@ -103,7 +103,30 @@ class Restaurante{
 
     //Termina parte de clientes
 
+    //Parte de Menu
 
+    async altaMenu(oMenu) {
+        let datos = new FormData();
+
+        datos.append("menu", JSON.stringify(oMenu));
+
+        let respuesta = await peticionPOST("alta_menu.php", datos);
+
+        return respuesta;
+
+    }
+
+    async listadoMenu(){
+        let datos = new FormData();
+
+        let respuesta = await peticionGET("get_menu.php", datos);
+
+        if (respuesta.datos == null) {
+            alert("No existe ningun menu");
+        }
+
+        return respuesta;
+    }
 
 
 

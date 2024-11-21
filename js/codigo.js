@@ -23,6 +23,11 @@ function registrarEventos() {
 
     // frmAltaPedido.btnAltaPedido.addEventListener("click",procesarAltaPedido);
     // frmListadoPedidosCliente.btnListadoPedidosCliente.addEventListener("click",procesarListadoPedidos)
+
+    //Parte de Menu
+    document.querySelector("#mnuAltaMenu").addEventListener("click", mostrarFormulario);
+    document.querySelector("#mnuListadoMenu").addEventListener("click", mostrarFormulario);
+    frmAltaMenu.btnAceptarAltaMenu.addEventListener("click", procesarAltaMenu);
 }
 
 function mostrarFormulario(oEvento){
@@ -42,6 +47,14 @@ function mostrarFormulario(oEvento){
         case "mnuBuscarCliente":
             frmBuscarCliente.style.display = "block";
             break;
+        case "mnuAltaMenu":
+            frmAltaMenu.style.display = "block";
+            break;
+        case "mnuListadoMenu":
+            frmListadoMenu.style.display = "block";
+            frmListadoMenu.innerHTML = "";
+            procesarListadoMenu();
+            break;
         default:
             break;
     }
@@ -49,6 +62,8 @@ function mostrarFormulario(oEvento){
 
 function ocultarFormularios(){
     frmAltaCliente.style.display = "none";
+    frmAltaMenu.style.display = "none";
+    frmListadoMenu.style.display = "none";
     //listadoCliente.style.display = "none";
     //frmModCliente.style.display = "none";
     
@@ -247,8 +262,102 @@ async function procesarBuscarCliente() {
     }
 }
 
+// Parte de Menu
+async function procesarAltaMenu() {
+    let nombre = frmAltaMenu.txtNombrePlato.value.trim();
+    let descripcion = frmAltaMenu.txtDescripcion.value.trim();   
+    let precio = parseFloat(frmAltaMenu.txtPrecio.value.trim());
+    let alergenos = frmAltaMenu.selectAlergenos.value.trim();
+    
+    if (validarAltaMenu()) {
+        console.log(oRestaurante);
+        let respuesta = await oRestaurante.altaMenu(new Menu(null, nombre, descripcion, precio, alergenos));
+        console.log(respuesta);
+        alert(respuesta.mensaje);
+        if (respuesta.ok) {
+            frmAltaMenu.reset();
+            ocultarFormularios();
+        }
+    }
+
+}
+
+function validarAltaMenu() {
+
+    let nombre = frmAltaMenu.txtNombrePlato.value.trim();
+    let descripcion = frmAltaMenu.txtDescripcion.value.trim();   
+    let precio = parseFloat(frmAltaMenu.txtPrecio.value.trim());
+    let errores = "";
+    let valido = true;
+
+    if (nombre.length == 0){
+        errores+= "Se requiere rellenar el nombre\n";
+        valido = false;
+        frmAltaMenu.txtNombrePlato.classList.add("error")
+    
+    } else{
+        frmAltaMenu.txtNombrePlato.classList.remove("error")
+        
+    }
+
+    if (descripcion.length == 0){
+        errores+= "Se requiere rellenar la descripcion del plato\n";
+        valido = false;
+        frmAltaMenu.txtDescripcion.classList.add("error")
+    
+    } else{
+        frmAltaMenu.txtDescripcion.classList.remove("error")
+        
+    }
+
+    if (isNaN(precio)){
+        errores+= "El precio debe ser un numero\n";
+        valido = false;
+        frmAltaMenu.txtPrecio.classList.add("error")
+    
+    } else{
+        frmAltaMenu.txtPrecio.classList.remove("error")
+        
+    }
+
+    if (!valido) {
+        alert(errores);
+    }
+
+    return valido;
+}
 
 
+async function procesarListadoMenu() {
+    // Solicitar datos del menú al backend
+    let respuesta = await oRestaurante.listadoMenu();
+
+    if (respuesta.ok) {
+        let tabla = "<h2>Listado de Menú</h2>";
+        tabla += "<table class='table table-striped'>";
+        tabla += "<thead><tr><th>ID Plato</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Alérgenos</th></tr></thead><tbody>";
+
+        for (let plato of respuesta.datos) {
+            tabla += "<tr>";
+            tabla += `<td>${plato.idplato}</td>`;
+            tabla += `<td>${plato.nombre}</td>`;
+            tabla += `<td>${plato.descripcion}</td>`;
+            tabla += `<td>${plato.precio}</td>`;
+            tabla += `<td>${plato.alergenos}</td>`;
+            tabla += "</tr>";
+        }
+
+        tabla += "</tbody></table>";
+
+        // Insertar la tabla en el formulario
+        frmListadoMenu.innerHTML = tabla;
+    } else {
+        // Mostrar mensaje de error si la solicitud falla
+        frmListadoMenu.innerHTML = `
+            <div class="alert alert-danger">Error al cargar el menú: ${respuesta.mensaje}</div>
+        `;
+    }
+}
 
   //A PARTIR DE AQUI TERMINA LA PARTE DE CLIENTES
 async function procesarListadoPedidos(){
