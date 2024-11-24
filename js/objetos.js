@@ -128,8 +128,17 @@ class Restaurante{
         return respuesta;
     }
 
+    async elimiarPlato(idplato){
+        let datos = new FormData();
 
+        datos.append("idplato", idplato);
 
+        let respuesta = await peticionPOST("borrar_menu.php", datos);
+
+        return respuesta;
+    }
+
+    //Fin de MENU
     async altaPedido(oPedido) {
         let datos = new FormData();
 

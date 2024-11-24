@@ -52,7 +52,6 @@ function mostrarFormulario(oEvento){
             break;
         case "mnuListadoMenu":
             frmListadoMenu.style.display = "block";
-            frmListadoMenu.innerHTML = "";
             procesarListadoMenu();
             break;
         default:
@@ -261,6 +260,7 @@ async function procesarBuscarCliente() {
         alert(respuesta.mensaje);
     }
 }
+ //A PARTIR DE AQUI TERMINA LA PARTE DE CLIENTES
 
 // Parte de Menu
 async function procesarAltaMenu() {
@@ -333,9 +333,9 @@ async function procesarListadoMenu() {
     let respuesta = await oRestaurante.listadoMenu();
 
     if (respuesta.ok) {
-        let tabla = "<h2>Listado de Menú</h2>";
+        let tabla = "<h2>Listado</h2>";
         tabla += "<table class='table table-striped'>";
-        tabla += "<thead><tr><th>ID Plato</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Alérgenos</th></tr></thead><tbody>";
+        tabla += "<thead><tr><th>ID Plato</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Alérgenos</th><th>Acciones</th></tr></thead><tbody>";
 
         for (let plato of respuesta.datos) {
             tabla += "<tr>";
@@ -359,7 +359,24 @@ async function procesarListadoMenu() {
     }
 }
 
-  //A PARTIR DE AQUI TERMINA LA PARTE DE CLIENTES
+
+// Función para eliminar un plato del menú
+async function eliminarMenu(idPlato) {
+    if (confirm("¿Estás seguro de que deseas eliminar este plato?")) {
+        let respuesta = await oRestaurante.eliminarPlato(idPlato);
+
+        if (respuesta.ok) {
+            alert("Plato eliminado exitosamente.");
+            // Recargar la lista del menú
+            procesarListadoMenu();
+        } else {
+            alert(`Error al eliminar el plato: ${respuesta.mensaje}`);
+        }
+    }
+}
+
+
+  //A PARTIR DE AQUI TERMINA LA PARTE DE MENU
 async function procesarListadoPedidos(){
     let nombreCliente = frmListadoPedidosCliente.txtNombreClienteListado.value.trim();
 
