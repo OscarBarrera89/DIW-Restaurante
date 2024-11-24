@@ -333,9 +333,9 @@ async function procesarListadoMenu() {
     let respuesta = await oRestaurante.listadoMenu();
 
     if (respuesta.ok) {
-        let tabla = "<h2>Listado</h2>";
+        let tabla = "<h2>Listado de Menú</h2>";
         tabla += "<table class='table table-striped'>";
-        tabla += "<thead><tr><th>ID Plato</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Alérgenos</th><th>Acciones</th></tr></thead><tbody>";
+        tabla += "<thead><tr><th>ID Plato</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Alérgenos</th><th>Acciones</th><th>Editar</th></tr></thead><tbody>";
 
         for (let plato of respuesta.datos) {
             tabla += "<tr>";
@@ -344,28 +344,126 @@ async function procesarListadoMenu() {
             tabla += `<td>${plato.descripcion}</td>`;
             tabla += `<td>${plato.precio}</td>`;
             tabla += `<td>${plato.alergenos}</td>`;
+            tabla += `<td><button class="btn btn-danger btn-sm" onclick="eliminarMenu(${plato.idplato})">Eliminar</button></td>`;
+            tabla += `<td><button class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicion(${plato.idplato}, '${plato.nombre}', '${plato.descripcion}', ${plato.precio}, '${plato.alergenos}')">Editar</button></td>`;
             tabla += "</tr>";
         }
 
         tabla += "</tbody></table>";
 
-        // Insertar la tabla en el formulario
-        frmListadoMenu.innerHTML = tabla;
+        // Insertar la tabla en el contenedor correcto
+        document.querySelector("#listadoMenu").innerHTML = tabla;
+
+        // Asegúrate de que el formulario de edición está oculto inicialmente
     } else {
         // Mostrar mensaje de error si la solicitud falla
-        frmListadoMenu.innerHTML = `
+        document.querySelector("#listadoMenu").innerHTML = `
             <div class="alert alert-danger">Error al cargar el menú: ${respuesta.mensaje}</div>
         `;
     }
 }
+
+// Función para mostrar el formulario de edición
+function mostrarFormularioEdicion(idplato, nombre, descripcion, precio, alergenos) {
+    const formulario = `
+        <h3>Editar Plato</h3>
+        <form id="formEditarPlato">
+            <div class="mb-3">
+                <label for="editNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="editNombre" value="${nombre}">
+            </div>
+            <div class="mb-3">
+                <label for="editDescripcion" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="editDescripcion" value="${descripcion}">
+            </div>
+            <div class="mb-3">
+                <label for="editPrecio" class="form-label">Precio</label>
+                <input type="number" step="0.01" class="form-control" id="editPrecio" value="${precio}">
+            </div>
+            <div class="mb-3">
+                <label for="editAlergenos">Alérgenos:</label>
+						<select id="editAlergenos" name="editAlergenos" class="form-select" multiple>
+							<option value="gluten">Gluten</option>
+							<option value="crustaceos">Crustáceos</option>
+							<option value="huevos">Huevos</option>
+							<option value="pescado">Pescado</option>
+							<option value="cacahuetes">Cacahuetes</option>
+							<option value="soja">Soja</option>
+							<option value="lacteos">Leche y derivados (incluyendo lactosa)</option>
+							<option value="frutos_cascara">Frutos de cáscara (almendras, avellanas, nueces, etc.)</option>
+							<option value="apio">Apio</option>
+							<option value="mostaza">Mostaza</option>
+							<option value="sesamo">Sésamo</option>
+							<option value="sulfitos">Sulfitos</option>
+							<option value="altramuces">Altramuces</option>
+							<option value="moluscos">Moluscos</option>
+						</select>
+						<small class="form-text text-muted">Mantén presionada la tecla <strong>Ctrl</strong> (Cmd en Mac) para seleccionar múltiples alérgenos.</small>
+            </div>
+            <button type="button" class="btn btn-success" onclick="guardarCambiosPlato(${idplato})">Guardar Cambios</button>
+        </form>
+    `;
+    console.log(formulario)
+    document.querySelector("#formularioEdicion").innerHTML = formulario;
+}
+
+// Función para guardar los cambios del plato
+async function guardarCambiosPlato(idplato) {
+    const nombre = document.querySelector("#editNombre").value.trim();
+    const descripcion = document.querySelector("#editDescripcion").value.trim();
+    const precio = parseFloat(document.querySelector("#editPrecio").value.trim());
+    const alergenos = document.querySelector("#editAlergenos").value.trim();
+
+    // Validar los datos
+    const errores = validarDatosPlato(nombre, descripcion, precio, alergenos);
+    if (errores.length > 0) {
+        alert(`Errores encontrados:\n${errores.join("\n")}`);
+        return; // Salir si hay errores
+    }
+
+    const platoActualizado = new Menu(idplato, nombre, descripcion, precio, alergenos);
+
+    const respuesta = await oRestaurante.modificarMenu(platoActualizado);
+
+    if (!respuesta.ok) {
+        alert("Plato actualizado correctamente.");
+        // Recargar el listado del menú
+        procesarListadoMenu();
+    } else {
+        alert(`Error al actualizar el plato: ${respuesta.mensaje}`);
+    }
+}
+
+// Función para validar los datos del plato
+function validarDatosPlato(nombre, descripcion, precio, alergenos) {
+    const errores = [];
+
+    if (!nombre) {
+        errores.push("El nombre no puede estar vacío.");
+    }
+
+    if (!descripcion) {
+        errores.push("La descripción no puede estar vacía.");
+    }
+
+    if (isNaN(precio) || precio <= 0) {
+        errores.push("El precio debe ser un número mayor que 0.");
+    }
+
+    if (!alergenos) {
+        errores.push("Los alérgenos no pueden estar vacíos.");
+    }
+
+    return errores; // Retorna un array con los mensajes de error
+}
+
 
 
 // Función para eliminar un plato del menú
 async function eliminarMenu(idPlato) {
     if (confirm("¿Estás seguro de que deseas eliminar este plato?")) {
         let respuesta = await oRestaurante.eliminarPlato(idPlato);
-
-        if (respuesta.ok) {
+        if (!respuesta.ok) {
             alert("Plato eliminado exitosamente.");
             // Recargar la lista del menú
             procesarListadoMenu();

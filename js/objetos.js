@@ -128,16 +128,28 @@ class Restaurante{
         return respuesta;
     }
 
-    async elimiarPlato(idplato){
+    async eliminarPlato(idplato) {
+        let datos = new FormData();
+    
+        datos.append("idplato", idplato);
+    
+        let respuesta = await peticionPOST("borrar_menu.php", datos);
+    
+        return respuesta;
+    }
+    
+    async modificarMenu(oMenu) {
         let datos = new FormData();
 
-        datos.append("idplato", idplato);
-
-        let respuesta = await peticionPOST("borrar_menu.php", datos);
+        // Se podría pasar campo a campo al servidor
+        // pero en esta ocasión vamos a pasar todos los datos 
+        // en un solo parámetro cuyos datos van en formato JSON
+        datos.append("menu",JSON.stringify(oMenu));
+       
+        let respuesta = await peticionPOST("modificar_menu.php", datos);
 
         return respuesta;
     }
-
     //Fin de MENU
     async altaPedido(oPedido) {
         let datos = new FormData();
