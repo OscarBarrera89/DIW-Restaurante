@@ -27,7 +27,11 @@ function registrarEventos() {
     //Parte de Menu
     document.querySelector("#mnuAltaMenu").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuListadoMenu").addEventListener("click", mostrarFormulario);
+    document.querySelector("#mnuListadoMenuPorNombre").addEventListener("click", mostrarFormulario);
+    document.querySelector("#mnuBuscarMenu").addEventListener("click", mostrarFormulario);
     frmAltaMenu.btnAceptarAltaMenu.addEventListener("click", procesarAltaMenu);
+    frmListadoMenuPorNombre.btnBuscarNombrePLato.addEventListener("click", buscarPlatoPorNombre);
+    frmParametrizado.btnBuscarParametrizado.addEventListener("click", buscarParametrizado);
 }
 
 function mostrarFormulario(oEvento){
@@ -54,6 +58,12 @@ function mostrarFormulario(oEvento){
             frmListadoMenu.style.display = "block";
             procesarListadoMenu();
             break;
+        case "mnuListadoMenuPorNombre":
+            frmListadoMenuPorNombre.style.display = "block";
+            break;
+        case "mnuBuscarMenu":
+            frmParametrizado.style.display = "block";
+
         default:
             break;
     }
@@ -63,6 +73,8 @@ function ocultarFormularios(){
     frmAltaCliente.style.display = "none";
     frmAltaMenu.style.display = "none";
     frmListadoMenu.style.display = "none";
+    frmListadoMenuPorNombre.style.display = "none";
+    frmParametrizado.style.display = "none";
     //listadoCliente.style.display = "none";
     //frmModCliente.style.display = "none";
     
@@ -335,7 +347,7 @@ async function procesarListadoMenu() {
     if (respuesta.ok) {
         let tabla = "<h2>Listado de Menú</h2>";
         tabla += "<table class='table table-striped'>";
-        tabla += "<thead><tr><th>ID Plato</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Alérgenos</th><th>Acciones</th><th>Editar</th></tr></thead><tbody>";
+        tabla += "<thead><tr><th>ID Plato</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Alérgenos</th><th>Eliminar</th><th>Editar</th></tr></thead><tbody>";
 
         for (let plato of respuesta.datos) {
             tabla += "<tr>";
@@ -403,8 +415,8 @@ function mostrarFormularioEdicion(idplato, nombre, descripcion, precio, alergeno
             <button type="button" class="btn btn-success" onclick="guardarCambiosPlato(${idplato})">Guardar Cambios</button>
         </form>
     `;
-    console.log(formulario)
-    document.querySelector("#formularioEdicion").innerHTML = formulario;
+    document.querySelector("#formularioEdicion").innerHTML = formulario;    
+
 }
 
 // Función para guardar los cambios del plato
@@ -431,6 +443,33 @@ async function guardarCambiosPlato(idplato) {
         procesarListadoMenu();
     } else {
         alert(`Error al actualizar el plato: ${respuesta.mensaje}`);
+    }
+}
+
+async function buscarPlatoPorNombre() {
+    let nombrePlato = frmListadoMenuPorNombre.txtBusquedaPlato.value.trim(); //Trim o no?
+
+    let respuesta = await oRestaurante.buscarMenu(nombrePlato);
+
+    if (!respuesta.error) { // Si NO hay error
+        let resultadoBusqueda = document.querySelector("#resultadoBusquedaPlato");
+        resultadoBusqueda.style.display = 'none';
+        // Escribimos resultado
+        let tablaSalida = "<table class='table'>";
+        tablaSalida += "<thead><tr><th>ID</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Alergenos</th></tr></thead>";
+        tablaSalida += "<tbody><tr>";
+        tablaSalida += "<td>" + respuesta.datos.idplato + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.nombre + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.descripcion + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.precio + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.alergenos + "</td>"
+        tablaSalida += "</tr></tbody></table>";
+
+        resultadoBusqueda.innerHTML = tablaSalida;
+        resultadoBusqueda.style.display = 'block';
+
+    } else { // Si hay error
+        alert(respuesta.mensaje);
     }
 }
 
@@ -470,6 +509,43 @@ async function eliminarMenu(idPlato) {
         } else {
             alert(`Error al eliminar el plato: ${respuesta.mensaje}`);
         }
+    }
+}
+
+async function buscarParametrizado(){
+    let nombre = frmParametrizado.txtNombrePlato1.value.trim();
+    let descripcion = frmParametrizado.txtDescripcion1.value.trim();   
+    let precio = parseFloat(frmParametrizado.txtPrecio1.value.trim());
+    let alergenos = frmParametrizado.selectAlergenos1.value.trim();
+
+    // Validar los datos
+    const errores = validarDatosPlato(nombre, descripcion, precio, alergenos);
+    if (errores.length > 0) {
+        alert(`Errores encontrados:\n${errores.join("\n")}`);
+        return; // Salir si hay errores
+    }
+
+    let respuesta = await oRestaurante.BuscarMenuParam(nombre, descripcion, precio, alergenos);
+
+    if (!respuesta.error) { // Si NO hay error
+        let resultadoBusqueda = document.querySelector("#resultadoBusquedaPlato2");
+        resultadoBusqueda.style.display = 'none';
+        // Escribimos resultado
+        let tablaSalida = "<table class='table'>";
+        tablaSalida += "<thead><tr><th>ID</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Alergenos</th></tr></thead>";
+        tablaSalida += "<tbody><tr>";
+        tablaSalida += "<td>" + respuesta.datos.idplato + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.nombre + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.descripcion + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.precio + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.alergenos + "</td>"
+        tablaSalida += "</tr></tbody></table>";
+
+        resultadoBusqueda.innerHTML = tablaSalida;
+        resultadoBusqueda.style.display = 'block';
+
+    } else { // Si hay error
+        alert(respuesta.mensaje);
     }
 }
 
