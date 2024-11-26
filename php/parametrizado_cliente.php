@@ -3,36 +3,31 @@ require_once('config.php');
 $conexion = obtenerConexion();
 
     $nombre = $_POST["nombre"] ?? null;
-    $descripcion = $_POST["descripcion"] ?? null;
-    $precio = $_POST["precio"] ?? null;
-    $alergenos = $_POST["alergenos"] ?? null;
+    $email = $_POST["email"] ?? null;
+    $telefono = $_POST["telefono"] ?? null;
 
     // Validar que los datos no estén vacíos
-    if (!$nombre && !$descripcion && !$precio && !$alergenos) {
+    if (!$nombre && !$email && !$telefono) {
         echo json_encode(value: ["ok" => false, "mensaje" => "No se enviaron criterios para buscar."]);
         exit;
     }
 
     try {
         // Construir la consulta dinámica
-        $sql = "SELECT * FROM menu WHERE 1=1";
+        $sql = "SELECT * FROM cliente WHERE 1=1";
         $params = [];
 
         if ($nombre) {
             $sql .= " AND nombre LIKE :nombre";
             $params[":nombre"] = "%" . $nombre . "%";
         }
-        if ($descripcion) {
-            $sql .= " AND descripcion LIKE :descripcion";
-            $params[":descripcion"] = "%" . $descripcion . "%";
+        if ($email) {
+            $sql .= " AND email LIKE :email";
+            $params[":email"] = "%" . $email . "%";
         }
-        if ($precio) {
-            $sql .= " AND precio = :precio";
-            $params[":precio"] = $precio;
-        }
-        if ($alergenos) {
-            $sql .= " AND alergenos LIKE :alergenos";
-            $params[":alergenos"] = "%" . $alergenos . "%";
+        if ($telefono) {
+            $sql .= " AND telefono = :telefono";
+            $params[":telefono"] = $telefono;
         }
 
         // Preparar y ejecutar la consulta

@@ -11,11 +11,11 @@ function registrarEventos() {
     //Parte de Cliente
     document.querySelector("#mnuAltaCliente").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuListadoCliente").addEventListener("click", mostrarFormulario);
+    document.querySelector("#mnuListadoClientePorNombre").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuBuscarCliente").addEventListener("click", mostrarFormulario);
-
     frmAltaCliente.btnAceptarAltaCliente.addEventListener("click", procesarAltaCliente);
-    // frmModCliente.ModClienteBoton.addEventListener("click", procesarModificarCliente);
-    // frmBuscarCliente.ModClienteBoton.addEventListener("click", procesarBuscarCliente);
+    frmListadoClientePorNombre.btnBuscarNombreCliente.addEventListener("click", buscarClientePorNombre);
+    frmParametrizado.btnBuscarParametrizado.addEventListener("click", buscarClienteParametrizado);
 
     // //Parte de Pedido SIN TERMINAR
     // document.querySelector("#mnuAltaPedido").addEventListener("click",mostrarFormulario);
@@ -48,6 +48,9 @@ function mostrarFormulario(oEvento){
             listadoCliente.style.display = "block";
             procesarListadoPorCliente();
             break;
+        case "mnuListadoClientePorNombre":
+            frmListadoClientePorNombre.style.display = "block";
+            break;
         case "mnuBuscarCliente":
             frmBuscarCliente.style.display = "block";
             break;
@@ -71,15 +74,16 @@ function mostrarFormulario(oEvento){
 
 function ocultarFormularios(){
     frmAltaCliente.style.display = "none";
+    frmListadoCliente.style.display = "none";
+    frmListadoMenuPorNombre.style.display = "none";
+    frmParametrizadoCliente.style.display = "none";
     frmAltaMenu.style.display = "none";
     frmListadoMenu.style.display = "none";
     frmListadoMenuPorNombre.style.display = "none";
     frmParametrizado.style.display = "none";
-    //listadoCliente.style.display = "none";
-    //frmModCliente.style.display = "none";
-    
-    //resultadoBusquedaCliente.innerHTML = "";
 }
+
+//PARTE CLIENTE
 
 async function procesarAltaCliente() {
     let nombre = frmAltaCliente.txtNombre.value.trim();
@@ -87,14 +91,15 @@ async function procesarAltaCliente() {
     let telefono = parseInt(frmAltaCliente.txtNumero.value.trim());
     
     if (validarAltaCliente()) {
+        console.log(oRestaurante);
         let respuesta = await oRestaurante.altaCliente(new Cliente(null, nombre, email, telefono));
+        console.log(respuesta)
         alert(respuesta.mensaje);
         if (respuesta.ok) {
             frmAltaCliente.reset();
             ocultarFormularios();
         }
     }
-
 }
 
 
@@ -144,32 +149,185 @@ function validarAltaCliente() {
 }
 
 async function procesarListadoPorCliente() {
-
+    // Solicitar datos del menú al backend
     let respuesta = await oRestaurante.listadoCliente();
 
-    let tabla = "<h2>Listado de clientes</h2>";
+    if (respuesta.ok) {
+        let tabla = "<h2>Listado de Clientes</h2>";
+        tabla += "<table class='table table-striped'>";
+        tabla += "<thead><tr><th>ID Plato</th><th>Nombre</th><th>Email</th><th>Telefono</th><th>Eliminar</th><th>Editar</th></tr></thead><tbody>";
 
-    tabla += "<table class='table table-striped' id='listadoPorCliente'>";
-    tabla += "<thead><tr><th>ID</th><th>NOMBRE</th><th>EMAIL</th><th>TELEFONO</th><th colspan='2'>ACCION</th></tr></thead><tbody>";
+        for (let cliente of respuesta.datos) {
+            tabla += "<tr>";
+            tabla += `<td>${cliente.idcliente}</td>`;
+            tabla += `<td>${cliente.nombre}</td>`;
+            tabla += `<td>${cliente.email}</td>`;
+            tabla += `<td>${cliente.telefono}</td>`;
+            tabla += `<td><button class="btn btn-danger btn-sm" onclick="eliminarCliente(${cliente.idcliente})">Eliminar</button></td>`;
+            tabla += `<td><button class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicion(${cliente.idcliente}, '${cliente.nombre}', '${cliente.email}', ${cliente.telefono})">Editar</button></td>`;
+            tabla += "</tr>";
+        }
 
-    for (let cliente of respuesta.datos) {
-        tabla += "<tr><td>" + cliente.idcliente + "</td>";
-        tabla += "<td>" + cliente.nombre + "</td>";
-        tabla += "<td>" + cliente.email + "</td>";
-        tabla += "<td>" + cliente.telefono + "</td>";
+        tabla += "</tbody></table>";
 
-        tabla += "<td><button class='btn btn-primary modificarCliente' data-cliente='" + JSON.stringify(cliente) + "'><i class='bi bi-pencil-square'></i></button><button class='btn btn-danger ms-3 eliminarCliente' data-cliente='" + JSON.stringify(cliente) + "'><i class='bi bi-trash'></i></button></td></tr>";
+        // Insertar la tabla en el contenedor correcto
+        document.querySelector("#listadoCliente").innerHTML = tabla;
+
+        // Asegúrate de que el formulario de edición está oculto inicialmente
+    } else {
+        // Mostrar mensaje de error si la solicitud falla
+        document.querySelector("#listadoCliente").innerHTML = `
+            <div class="alert alert-danger">Error al cargar el cliente: ${respuesta.mensaje}</div>
+        `;
     }
+}
 
-    tabla += "</tbody></table>";
-
-    // Agregamos el contenido a la capa de listados
-    document.querySelector("#listadoCliente").innerHTML = tabla;
-    // Agregar manejador de evento para toda la tabla
-    document.querySelector("#listadoPorCliente").addEventListener("click", procesarBotonEditarCliente)
+// Función para mostrar el formulario de edición
+function mostrarFormularioEdicionCliente(idcliente, nombre, email, telefono) {
+    const formulario = `
+        <h3>Editar Cliente</h3>
+        <form id="formEditarCliente">
+            <div class="mb-3">
+                <label for="editCliente" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="editNombreCliente" value="${nombre}">
+            </div>
+            <div class="mb-3">
+                <label for="editEmail" class="form-label">Email</label>
+                <input type="text" class="form-control" id="editEmail" value="${email}">
+            </div>
+            <div class="mb-3">
+                <label for="editTelefono" class="form-label">Telefono</label>
+                <input type="number" class="form-control" id="editTelefono" value="${telefono}">
+            </div>
+            <button type="button" class="btn btn-success" onclick="guardarCambiosCliente(${idcliente})">Guardar Cambios</button>
+        </form>
+    `;
+    document.querySelector("#formularioEdicionCliente").innerHTML = formulario;    
 
 }
 
+// Función para guardar los cambios del cliente
+async function guardarCambiosCliente(idcliente) {
+    const nombre = document.querySelector("#editNombre").value.trim();
+    const email = document.querySelector("#editEmail").value.trim();
+    const telefono = parseFloat(document.querySelector("#editTelefono").value.trim());
+
+    // Validar los datos
+    const errores = validarDatosPlato(nombre, email, telefono);
+    if (errores.length > 0) {
+        alert(`Errores encontrados:\n${errores.join("\n")}`);
+        return; // Salir si hay errores
+    }
+
+    const clienteActualizado = new Cliente(idcliente, nombre, email, telefono);
+
+    const respuesta = await oRestaurante.modificarCliente(clienteActualizado);
+
+    if (!respuesta.ok) {
+        alert("Cliente actualizado correctamente.");
+        // Recargar el listado del menú
+        procesarListadoCliente();
+    } else {
+        alert(`Error al actualizar el cliente: ${respuesta.mensaje}`);
+    }
+}
+
+async function buscarClientePorNombre() {
+    let nombreCliente = frmListadoClientePorNombre.txtBusquedaCliente.value.trim(); //Trim o no?
+
+    let respuesta = await oRestaurante.buscarCliente(nombreCliente);
+
+    if (!respuesta.error) { // Si NO hay error
+        let resultadoBusqueda = document.querySelector("#resultadoBusquedaCliente");
+        resultadoBusqueda.style.display = 'none';
+        // Escribimos resultado
+        let tablaSalida = "<table class='table'>";
+        tablaSalida += "<thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Telefono</th></tr></thead>";
+        tablaSalida += "<tbody><tr>";
+        tablaSalida += "<td>" + respuesta.datos.idcliente + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.nombre + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.email + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.telefono + "</td>"
+        tablaSalida += "</tr></tbody></table>";
+
+        resultadoBusqueda.innerHTML = tablaSalida;
+        resultadoBusqueda.style.display = 'block';
+
+    } else { // Si hay error
+        alert(respuesta.mensaje);
+    }
+}
+
+// Función para validar los datos del cliente
+function validarDatosCliente(nombre, email, telefono) {
+    const errores = [];
+
+    if (!nombre) {
+        errores.push("El nombre no puede estar vacío.");
+    }
+
+    if (!email) {
+        errores.push("El email no puede estar vacío.");
+    }
+
+    if (isNaN(telefono)) {
+        errores.push("El telefono debe ser un número.");
+    }
+
+    return errores; // Retorna un array con los mensajes de error
+}
+
+// Función para eliminar un plato del menú
+async function eliminarCliente(idCliente) {
+    if (confirm("¿Estás seguro de que deseas eliminar este cliente?")) {
+        let respuesta = await oRestaurante.eliminarCliente(idCliente);
+        if (!respuesta.ok) {
+            alert("Cliente eliminado exitosamente.");
+            // Recargar la lista del menú
+            procesarListadoCliente();
+        } else {
+            alert(`Error al eliminar el cliente: ${respuesta.mensaje}`);
+        }
+    }
+}
+
+async function buscarParametrizadoCliente(){
+    let nombre = frmParametrizadoCliente.txtNombreCliente1.value.trim();
+    let email = frmParametrizadoCliente.txtEmail1.value.trim();   
+    let telefono = parseInt(frmParametrizado.txtTelefono1.value.trim());
+    
+
+    // Validar los datos
+    const errores = validarDatosCliente(nombre, email, telefono);
+    if (errores.length > 0) {
+        alert(`Errores encontrados:\n${errores.join("\n")}`);
+        return; // Salir si hay errores
+    }
+
+    let respuesta = await oRestaurante.BuscarClienteParam(nombre, email, telefono);
+
+    if (!respuesta.error) { // Si NO hay error
+        let resultadoBusqueda = document.querySelector("#resultadoBusquedaCliente2");
+        resultadoBusqueda.style.display = 'none';
+        // Escribimos resultado
+        let tablaSalida = "<table class='table'>";
+        tablaSalida += "<thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Telefono</th></tr></thead>";
+        tablaSalida += "<tbody><tr>";
+        tablaSalida += "<td>" + respuesta.datos.idcliente + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.nombre + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.email + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.telefono + "</td>"
+        tablaSalida += "</tr></tbody></table>";
+
+        resultadoBusqueda.innerHTML = tablaSalida;
+        resultadoBusqueda.style.display = 'block';
+
+    } else { // Si hay error
+        alert(respuesta.mensaje);
+    }
+}
+
+/*
 function procesarBotonEditarCliente(oEvento) {
 
     let boton = null;
@@ -271,8 +429,8 @@ async function procesarBuscarCliente() {
     } else { // Si hay error
         alert(respuesta.mensaje);
     }
-}
- //A PARTIR DE AQUI TERMINA LA PARTE DE CLIENTES
+}*/
+ //TERMINA LA PARTE DE CLIENTES
 
 // Parte de Menu
 async function procesarAltaMenu() {
@@ -291,7 +449,6 @@ async function procesarAltaMenu() {
             ocultarFormularios();
         }
     }
-
 }
 
 function validarAltaMenu() {

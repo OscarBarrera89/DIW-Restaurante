@@ -56,15 +56,14 @@ class Restaurante{
 
     }
 
-    async modificarCliente(oCliente) {
+    async listadoCliente(){
         let datos = new FormData();
 
-        // Se podría pasar campo a campo al servidor
-        // pero en esta ocasión vamos a pasar todos los datos 
-        // en un solo parámetro cuyos datos van en formato JSON
-        datos.append("cliente",JSON.stringify(oCliente));
-       
-        let respuesta = await peticionPOST("modificar_cliente.php", datos);
+        let respuesta = await peticionGET("get_cliente.php", datos);
+
+        if (respuesta.datos == null) {
+            alert("No existe ningun cliente");
+        }
 
         return respuesta;
     }
@@ -79,6 +78,19 @@ class Restaurante{
         return respuesta;
     }
 
+    async modificarCliente(oCliente) {
+        let datos = new FormData();
+
+        // Se podría pasar campo a campo al servidor
+        // pero en esta ocasión vamos a pasar todos los datos 
+        // en un solo parámetro cuyos datos van en formato JSON
+        datos.append("cliente",JSON.stringify(oCliente));
+       
+        let respuesta = await peticionPOST("modificar_cliente.php", datos);
+
+        return respuesta;
+    }
+
     async buscarCliente(nombreCliente) {
         let datos = new FormData();
 
@@ -89,17 +101,24 @@ class Restaurante{
         return respuesta;
     }
 
-    async listadoCliented(){
+    async BuscarClienteParam(nombre, email, telefono) {
         let datos = new FormData();
-
-        let respuesta = await peticionGET("get_cliente.php", datos);
-
-        if (respuesta.datos == null) {
-            alert("No existe ningun cliente");
-        }
+        console.log(nombre);
+        console.log(email);
+        console.log(telefono);
+        // Se podría pasar campo a campo al servidor
+        // pero en esta ocasión vamos a pasar todos los datos 
+        // en un solo parámetro cuyos datos van en formato JSON
+        datos.append("nombre", nombre);
+        datos.append("email", email);
+        datos.append("telefono", telefono);
+       
+        let respuesta = await peticionPOST("parametrizado_cliente.php", datos);
 
         return respuesta;
     }
+
+    
 
     //Termina parte de clientes
 
