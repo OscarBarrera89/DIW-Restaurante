@@ -242,4 +242,4 @@ class Restaurante{
 //             return "<h1>Error al recuperar los datos</h1>"
 //         }
 //     }
-// }
+ }
