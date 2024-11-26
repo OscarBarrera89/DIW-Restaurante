@@ -11,11 +11,11 @@ function registrarEventos() {
     //Parte de Cliente
     document.querySelector("#mnuAltaCliente").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuListadoCliente").addEventListener("click", mostrarFormulario);
-    // document.querySelector("#mnuListadoClientePorNombre").addEventListener("click", mostrarFormulario);
-    // document.querySelector("#mnuBuscarCliente").addEventListener("click", mostrarFormulario);
-    // frmAltaCliente.btnAceptarAltaCliente.addEventListener("click", procesarAltaCliente);
-    // frmListadoClientePorNombre.btnBuscarNombreCliente.addEventListener("click", buscarClientePorNombre);
-    // frmParametrizado.btnBuscarParametrizado.addEventListener("click", buscarClienteParametrizado);
+    document.querySelector("#mnuListadoClientePorNombre").addEventListener("click", mostrarFormulario);
+    document.querySelector("#mnuBuscarCliente").addEventListener("click", mostrarFormulario);
+    frmAltaCliente.btnAceptarAltaCliente.addEventListener("click", procesarAltaCliente);
+    frmListadoClientePorNombre.btnBuscarNombreCliente.addEventListener("click", buscarClientePorNombre);
+    frmParametrizado.btnBuscarParametrizadoCliente.addEventListener("click", buscarClienteParametrizado);
 
     // //Parte de Pedido SIN TERMINAR
     // document.querySelector("#mnuAltaPedido").addEventListener("click",mostrarFormulario);
