@@ -33,7 +33,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-            <a class="navbar-brand">Restaurante <img src="Restaurante/imagenes/AGB_Sinfondo_Sinletras.png" width="25" /></a>
+            <a class="navbar-brand">Restaurant <img src="Restaurante/imagenes/AGB_Sinfondo_Sinletras.png" width="25" /></a>
 		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		  </button>
@@ -222,144 +222,91 @@
 					<div id="listadoCliente">
 						<!-- Mostrar aquí la tabla del listado solicitado -->
 					</div>
-					<div id="formularioEdicion">
+					<div id="formularioEdicionCliente">
 						<!-- Mostrar aqui el formulario para editar los datos-->
 					</div>
 				</fieldset>
 			</form>
-			<form class="form-horizontal" name="frmBuscarComponente" id="frmBuscarComponente">
+			<!--FIN LISTADO CLIENTE	-->
+			<!--Listado Cliente por Nombre-->
+			<form name="frmListadoClientePorNombre" id="frmListaClientePorNombre" class="from-horizontal">
+				<legend>Busqueda de menu por nombre</legend>
+				<div class="form-group">
+					<label class="col-xs-4 control-label" for="txtBusquedaCliente">Nombre del cliente</label>
+					<div class="col-xs-4">
+						<input id="txtBusquedaCliente" name="txtBusquedaCliente" placeholder="Insertar Nombre"
+							class="form-control input-md" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-4 control-label" for="btnBuscarNombreCliente"></label>
+					<div class="col-xs-4">
+						<input type="button" id="btnBuscarNombreCliente" name="btnBuscarNombreCliente"
+							class="btn btn-primary" value="Buscar" />
+					</div>
+				</div>
+				<div id="resultadoBusquedaCliente">
+					<!-- Mostrar aqui el formulario para editar los datos-->
+				</div>
+			</form>
+			<!--Formulario Parametrizado Menu-->
+			<form class="form-horizontal" name="frmParametrizadoCliente" id="frmParametrizadoCliente">
 				<fieldset>
 					<!-- Form Name -->
-					<legend>Buscar un componente</legend>
+					<legend>Listado de los menus parametrizados por este formulario</legend>
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtIdComponente">Id Componente</label>
+						<label class="col-xs-4 control-label" for="txtNombrePlato1">Nombre del plato</label>
 						<div class="col-xs-4">
-							<input id="txtIdComponente" name="txtIdComponente" placeholder="Id del componente"
-								class="form-control input-md" type="text">
-						</div>
-					</div>
-	
-					<!-- Button -->
-					<div class="form-group">
-						<label class="col-xs-4 control-label" for="btnBuscarComponente"></label>
-						<div class="col-xs-4">
-							<input type="button" id="btnBuscarComponente" name="btnBuscarComponente"
-								class="btn btn-primary" value="Aceptar" />
-						</div>
-					</div>
-				</fieldset>
-			</form>			
-			<form class="form-horizontal" name="frmModificarComponente" id="frmModificarComponente">
-				<fieldset>
-					<!-- Form Name -->
-					<legend>Modificar componente</legend>
-					
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtModIdComponente">IdComponente</label>
-						<div class="col-xs-4">
-							<input disabled id="txtModIdComponente" name="txtModIdComponente" 
+							<input id="txtNombrePlato1" name="txtNombrePlato1" placeholder="Nombre"
 								class="form-control input-md" type="text">
 						</div>
 					</div>
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtModNombre">Nombre del componente</label>
+						<label class="col-xs-4 control-label" for="txtDescripcion1">Descripcion del plato</label>
 						<div class="col-xs-4">
-							<input id="txtModNombre" name="txtModNombre"
-								class="form-control input-md" type="text">
-
-						</div>
-					</div>
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtModDescripcion">Descripción</label>
-						<div class="col-xs-4">
-							<input id="txtModDescripcion" name="txtModDescripcion"
-								class="form-control input-md" type="text">
-						</div>
-					</div>
-					<!-- Number input-->
-					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtModPrecio">Precio</label>
-						<div class="col-xs-4">
-							<input id="txtModPrecio" name="txtModPrecio" 
-								class="form-control input-md" type="number">
+							<input id="txtDescripcion1" name="txtDescripcion1" placeholder="Descripcion del plato" class="form-control input-md"
+								type="text">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="lstModTipo">Tipo</label>
-						<div class="col-xs-4">
-							<select  class="form-select" name="lstModTipo" id="lstModTipo">
-
-							</select>
-						</div>
+						<label for="selectAlergenos1">Alérgenos:</label>
+						<select id="selectAlergenos1" name="selectAlergenos1" class="form-select" multiple>
+							<option value="gluten">Gluten</option>
+							<option value="crustaceos">Crustáceos</option>
+							<option value="huevos">Huevos</option>
+							<option value="pescado">Pescado</option>
+							<option value="cacahuetes">Cacahuetes</option>
+							<option value="soja">Soja</option>
+							<option value="lacteos">Leche y derivados (incluyendo lactosa)</option>
+							<option value="frutos_cascara">Frutos de cáscara (almendras, avellanas, nueces, etc.)</option>
+							<option value="apio">Apio</option>
+							<option value="mostaza">Mostaza</option>
+							<option value="sesamo">Sésamo</option>
+							<option value="sulfitos">Sulfitos</option>
+							<option value="altramuces">Altramuces</option>
+							<option value="moluscos">Moluscos</option>
+						</select>
+						<small class="form-text text-muted">Mantén presionada la tecla <strong>Ctrl</strong> (Cmd en Mac) para seleccionar múltiples alérgenos.</small>
 					</div>
 					<!-- Button -->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="btnAceptarModComponente"></label>
+						<label class="col-xs-4 control-label" for="btnBuscarParametrizado"></label>
 						<div class="col-xs-4">
-							<input type="button" id="btnAceptarModComponente" name="btnAceptarModComponente"
-								class="btn btn-primary" value="Aceptar" />
+							<input type="button" id="btnBuscarParametrizado" name="btnBuscarParametrizado"
+								class="btn btn-primary" value="Buscar" />
 						</div>
 					</div>
-
+					<div id="resultadoBusquedaPlato2">
+						<!-- Mostrar aqui el formulario para editar los datos-->
+					</div>
 				</fieldset>
 			</form>
 
-			<form class="form-horizontal" name="frmAltaComponente" id="frmAltaComponente">
-				<fieldset>
-					<!-- Form Name -->
-					<legend>Alta de componente</legend>
-					
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtAltaNombre">Nombre del componente</label>
-						<div class="col-xs-4">
-							<input id="txtAltaNombre" name="txtAltaNombre"
-								class="form-control input-md" type="text">
-
-						</div>
-					</div>
-					<!-- Text input-->
-					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtAltaDescripcion">Descripción</label>
-						<div class="col-xs-4">
-							<input id="txtAltaDescripcion" name="txtAltaDescripcion"
-								class="form-control input-md" type="text">
-						</div>
-					</div>
-					<!-- Number input-->
-					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtAltaPrecio">Precio</label>
-						<div class="col-xs-4">
-							<input id="txtAltaPrecio" name="txtAltaPrecio" 
-								class="form-control input-md" type="number">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-xs-4 control-label" for="lstAltaTipo">Tipo</label>
-						<div class="col-xs-4">
-							<select  class="form-select" name="lstAltaTipo" id="lstAltaTipo">
-
-							</select>
-						</div>
-					</div>
-					<!-- Button -->
-					<div class="form-group">
-						<label class="col-xs-4 control-label" for="btnAceptarAltaComponente"></label>
-						<div class="col-xs-4">
-							<input type="button" id="btnAceptarAltaComponente" name="btnAceptarAltaComponente"
-								class="btn btn-primary" value="Aceptar" />
-						</div>
-					</div>
-
-				</fieldset>
-			</form>
-
+			
 			<!-- Menu -->
-			 <!-- Alta menu -->
+			<!-- Alta menu -->
 			 <form class="form-horizontal" name="frmAltaMenu" id="frmAltaMenu">
 				<fieldset>
 					<!-- Form Name -->
@@ -418,6 +365,7 @@
 					</div>
 				</fieldset>
 			</form>
+			<!-- Listado Menu-->
 			<form name="frmListadoMenu" id="frmListadoMenu" class="from-horizontal">
 				<fieldset>
 					<div id="listadoMenu">
@@ -428,6 +376,7 @@
 					</div>
 				</fieldset>
 			</form>
+			<!--Listado Menu Por Nombre-->
 			<form name="frmListadoMenuPorNombre" id="frmListoMenuPorNombre" class="from-horizontal">
 				<legend>Busqueda de menu por nombre</legend>
 				<div class="form-group">
@@ -448,10 +397,12 @@
 					<!-- Mostrar aqui el formulario para editar los datos-->
 				</div>
 			</form>
+			<!--Formulario Parametrizado Menu-->
 			<form class="form-horizontal" name="frmParametrizado" id="frmParametrizado">
 				<fieldset>
 					<!-- Form Name -->
 					<legend>Listado de los menus parametrizados por este formulario</legend>
+					<h5>Rellene uno de los tres apartados para obtener datos</h5>
 					<!-- Text input-->
 					<div class="form-group">
 						<label class="col-xs-4 control-label" for="txtNombrePlato1">Nombre del plato</label>
