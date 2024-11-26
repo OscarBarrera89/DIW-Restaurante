@@ -2,51 +2,53 @@
 require_once('config.php');
 $conexion = obtenerConexion();
 
-    $nombre = $_POST["nombre"] ?? null;
-    $descripcion = $_POST["descripcion"] ?? null;
-    $precio = $_POST["precio"] ?? null;
-    $alergenos = $_POST["alergenos"] ?? null;
+$nombre = $_GET["nombre"] ?? null;
+$descripcion = $_GET["descripcion"] ?? null;
+$alergenos = $_GET["alergenos"] ?? null;
 
-    // Validar que los datos no estén vacíos
-    if (!$nombre && !$descripcion && !$precio && !$alergenos) {
-        echo json_encode(value: ["ok" => false, "mensaje" => "No se enviaron criterios para buscar."]);
-        exit;
+// Validar que los datos no estén vacíos
+if (!$nombre && !$descripcion && !$precio && !$alergenos) {
+    echo json_encode(["ok" => false, "mensaje" => "No se enviaron criterios para buscar."]);
+    exit;
+}
+$sql = "SELECT * FROM menu WHERE 1=1";
+$params = [];
+$types = "";
+
+if ($nombre) {
+    $sql .= " AND nombre = ?";
+    $params[] = $nombre;
+    $types .= "s";
+}
+if ($descripcion) {
+    $sql .= " AND descripcion = ?";
+    $params[] = $descripcion;
+    $types .= "s";
+}
+if ($alergenos) {
+    $sql .= " AND alergenos = ?";
+    $params[] = $alergenos;
+    $types .= "s";
+}
+
+$stmt = $conexion->prepare($sql);
+if ($stmt) {
+    if (!empty($params)) {
+        $stmt->bind_param($types, ...$params);
+    }
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    $filas = [];
+    while ($fila = $resultado->fetch_assoc()) {
+        $filas[] = $fila;
     }
 
-    try {
-        // Construir la consulta dinámica
-        $sql = "SELECT * FROM menu WHERE 1=1";
-        $params = [];
-
-        if ($nombre) {
-            $sql .= " AND nombre LIKE :nombre";
-            $params[":nombre"] = "%" . $nombre . "%";
-        }
-        if ($descripcion) {
-            $sql .= " AND descripcion LIKE :descripcion";
-            $params[":descripcion"] = "%" . $descripcion . "%";
-        }
-        if ($precio) {
-            $sql .= " AND precio = :precio";
-            $params[":precio"] = $precio;
-        }
-        if ($alergenos) {
-            $sql .= " AND alergenos LIKE :alergenos";
-            $params[":alergenos"] = "%" . $alergenos . "%";
-        }
-
-        // Preparar y ejecutar la consulta
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-
-        // Obtener los resultados
-        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if (count($resultados) > 0) {
-            echo json_encode(["ok" => true, "datos" => $resultados]);
-        } else {
-            echo json_encode(["ok" => false, "mensaje" => "No se encontraron resultados."]);
-        }
-    } catch (PDOException $e) {
-        echo json_encode(["ok" => false, "mensaje" => "Error al ejecutar la consulta: " . $e->getMessage()]);
+    if (count($filas) > 0) {
+        responder($filas, false, "Datos recuperados", $conexion);
+    } else {
+        responder(null, true, "No existe el plato", $conexion);
     }
+    $stmt->close();
+}
+$conexion->close();

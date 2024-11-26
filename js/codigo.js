@@ -11,11 +11,11 @@ function registrarEventos() {
     //Parte de Cliente
     document.querySelector("#mnuAltaCliente").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuListadoCliente").addEventListener("click", mostrarFormulario);
-    document.querySelector("#mnuListadoClientePorNombre").addEventListener("click", mostrarFormulario);
-    document.querySelector("#mnuBuscarCliente").addEventListener("click", mostrarFormulario);
-    frmAltaCliente.btnAceptarAltaCliente.addEventListener("click", procesarAltaCliente);
-    frmListadoClientePorNombre.btnBuscarNombreCliente.addEventListener("click", buscarClientePorNombre);
-    frmParametrizado.btnBuscarParametrizado.addEventListener("click", buscarClienteParametrizado);
+    // document.querySelector("#mnuListadoClientePorNombre").addEventListener("click", mostrarFormulario);
+    // document.querySelector("#mnuBuscarCliente").addEventListener("click", mostrarFormulario);
+    // frmAltaCliente.btnAceptarAltaCliente.addEventListener("click", procesarAltaCliente);
+    // frmListadoClientePorNombre.btnBuscarNombreCliente.addEventListener("click", buscarClientePorNombre);
+    // frmParametrizado.btnBuscarParametrizado.addEventListener("click", buscarClienteParametrizado);
 
     // //Parte de Pedido SIN TERMINAR
     // document.querySelector("#mnuAltaPedido").addEventListener("click",mostrarFormulario);
@@ -48,12 +48,12 @@ function mostrarFormulario(oEvento){
             listadoCliente.style.display = "block";
             procesarListadoPorCliente();
             break;
-        case "mnuListadoClientePorNombre":
-            frmListadoClientePorNombre.style.display = "block";
-            break;
-        case "mnuBuscarCliente":
-            frmBuscarCliente.style.display = "block";
-            break;
+        // case "mnuListadoClientePorNombre":
+        //     frmListadoClientePorNombre.style.display = "block";
+        //     break;
+        // case "mnuBuscarCliente":
+        //     frmBuscarCliente.style.display = "block";
+        //     break;
         case "mnuAltaMenu":
             frmAltaMenu.style.display = "block";
             break;
@@ -76,7 +76,7 @@ function ocultarFormularios(){
     frmAltaCliente.style.display = "none";
     frmListadoCliente.style.display = "none";
     frmListadoMenuPorNombre.style.display = "none";
-    frmParametrizadoCliente.style.display = "none";
+    //frmParametrizadoCliente.style.display = "none";
     frmAltaMenu.style.display = "none";
     frmListadoMenu.style.display = "none";
     frmListadoMenuPorNombre.style.display = "none";
@@ -632,6 +632,7 @@ async function buscarPlatoPorNombre() {
 
 // Función para validar los datos del plato
 function validarDatosPlato(nombre, descripcion, precio, alergenos) {
+
     const errores = [];
 
     if (!nombre) {
@@ -669,44 +670,65 @@ async function eliminarMenu(idPlato) {
     }
 }
 
-async function buscarParametrizado(){
+async function buscarParametrizado() {
     let nombre = frmParametrizado.txtNombrePlato1.value.trim();
-    let descripcion = frmParametrizado.txtDescripcion1.value.trim();   
-    let precio = parseFloat(frmParametrizado.txtPrecio1.value.trim());
+    let descripcion = frmParametrizado.txtDescripcion1.value.trim();
     let alergenos = frmParametrizado.selectAlergenos1.value.trim();
 
-    // Validar los datos
-    const errores = validarDatosPlato(nombre, descripcion, precio, alergenos);
+    const errores = validarDatosPlatoParam(nombre, descripcion, alergenos);
     if (errores.length > 0) {
         alert(`Errores encontrados:\n${errores.join("\n")}`);
-        return; // Salir si hay errores
+        return;
     }
 
-    let respuesta = await oRestaurante.BuscarMenuParam(nombre, descripcion, precio, alergenos);
+    let respuesta = await oRestaurante.BuscarMenuParam(nombre, descripcion, alergenos);
+    console.log(respuesta);
 
-    if (!respuesta.error) { // Si NO hay error
+    if (!respuesta.error && Array.isArray(respuesta.datos)) {
         let resultadoBusqueda = document.querySelector("#resultadoBusquedaPlato2");
         resultadoBusqueda.style.display = 'none';
-        // Escribimos resultado
+
         let tablaSalida = "<table class='table'>";
         tablaSalida += "<thead><tr><th>ID</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Alergenos</th></tr></thead>";
-        tablaSalida += "<tbody><tr>";
-        tablaSalida += "<td>" + respuesta.datos.idplato + "</td>"
-        tablaSalida += "<td>" + respuesta.datos.nombre + "</td>"
-        tablaSalida += "<td>" + respuesta.datos.descripcion + "</td>"
-        tablaSalida += "<td>" + respuesta.datos.precio + "</td>"
-        tablaSalida += "<td>" + respuesta.datos.alergenos + "</td>"
-        tablaSalida += "</tr></tbody></table>";
+        tablaSalida += "<tbody>";
+
+        respuesta.datos.forEach(plato => {
+            tablaSalida += "<tr>";
+            tablaSalida += `<td>${plato.idplato}</td>`;
+            tablaSalida += `<td>${plato.nombre}</td>`;
+            tablaSalida += `<td>${plato.descripcion}</td>`;
+            tablaSalida += `<td>${plato.precio}</td>`;
+            tablaSalida += `<td>${plato.alergenos}</td>`;
+            tablaSalida += "</tr>";
+        });
+
+        tablaSalida += "</tbody></table>";
 
         resultadoBusqueda.innerHTML = tablaSalida;
         resultadoBusqueda.style.display = 'block';
-
-    } else { // Si hay error
-        alert(respuesta.mensaje);
+    } else {
+        alert(respuesta.mensaje || "No se encontraron resultados.");
     }
 }
 
 
+async function validarDatosPlatoParam(nombre, descripcion, alergenos){
+    const errores = [];
+
+    if (!nombre) {
+        errores.push("El nombre no puede estar vacío.");
+    }
+
+    if (!descripcion) {
+        errores.push("La descripción no puede estar vacía.");
+    }
+
+    if (!alergenos) {
+        errores.push("Los alérgenos no pueden estar vacíos.");
+    }
+
+    return errores; // Retorna un array con los mensajes de error
+}
   //A PARTIR DE AQUI TERMINA LA PARTE DE MENU
 async function procesarListadoPedidos(){
     let nombreCliente = frmListadoPedidosCliente.txtNombreClienteListado.value.trim();

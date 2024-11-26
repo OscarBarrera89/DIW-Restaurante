@@ -174,26 +174,19 @@ class Restaurante{
         
         datos.append("nombre", nombre);
         
-        let respuesta = await peticionPOST("buscar_menu.php", datos);
+        let respuesta = await peticionGET("buscar_menu.php", datos);
 
         return respuesta;
     }
-    async BuscarMenuParam(nombre, descripcion, precio, alergenos) {
+    async BuscarMenuParam(nombre, descripcion, alergenos) {
         let datos = new FormData();
-        console.log(nombre);
-        console.log(descripcion);
-        console.log(precio);
-        console.log(alergenos);
-        // Se podría pasar campo a campo al servidor
-        // pero en esta ocasión vamos a pasar todos los datos 
-        // en un solo parámetro cuyos datos van en formato JSON
+
         datos.append("nombre", nombre);
         datos.append("descripcion", descripcion);
-        datos.append("precio", precio);
         datos.append("alergenos", alergenos);
        
-        let respuesta = await peticionPOST("parametrizado_menu.php", datos);
-
+        let respuesta = await peticionGET("parametrizado_menu.php", datos);
+        console.log(respuesta);
         return respuesta;
     }
     //Fin de MENU

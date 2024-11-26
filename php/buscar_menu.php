@@ -3,7 +3,7 @@ require_once('config.php');
 $conexion = obtenerConexion();
 
 // Recoger datos de entrada
-$nombre = $_POST['nombre'];
+$nombre = $_GET['nombre'];
 
 // Validar que el nombre no esté vacío
 if (empty($nombre)) {
