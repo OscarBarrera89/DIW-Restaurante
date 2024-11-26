@@ -5,7 +5,7 @@ $conexion = obtenerConexion();
 // Recoger datos
 $cliente = json_decode($_POST['cliente']);
 
-$sql = "UPDATE cliente SET nombre = '$cliente->nombre', email = $cliente->email, telefono = '$cliente->telefono' WHERE idcliente = $cliente->idcliente ";
+$sql = "UPDATE cliente SET nombre = '$cliente->nombre', email = '$cliente->email', telefono = $cliente->telefono WHERE idcliente = $cliente->idcliente ";
 
 mysqli_query($conexion, $sql);
 

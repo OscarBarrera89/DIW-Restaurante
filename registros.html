@@ -93,85 +93,7 @@
 	
 	<div class="container" id="formularios">
 		<div class="row">
-			<form name="frmAltaPedido" id="frmAltaPedido" class="d-none">
-                <!-- Incluir aquí los campos necesarios -->
-                <fieldset>
-                    <!-- Form Name -->
-                    <legend>Alta de pedido</legend>
-                    <div class="row mb-1">
-                        <label class="col-3 control-label" for="txtNombreCliente">Nombre del cliente</label>
-                        <div class="col-4">
-                            <input id="txtNombreCliente" name="txtNombreCliente" placeholder="Nombre del cliente"
-                                class="form-control input-md" type="text" step="1">
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <label class="col-3 control-label" for="lstPlatos">Platos</label>
-                        <div class="col-4">
-                            <select class="form-select" name="lstPlatos" id="lstPlatos">
-                                
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <label class="col-1 control-label" for="rbtUnidades">Unidades</label>
-                        <div class="col-11">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-1"
-                                    value="1">
-                                <label class="form-check-label" for="rbtUnidades-1">1</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-2"
-                                    value="2">
-                                <label class="form-check-label" for="rbtUnidades-2">2</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-3"
-                                    value="3">
-                                <label class="form-check-label" for="rbtUnidades-3">3</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-4"
-                                    value="4">
-                                <label class="form-check-label" for="rbtUnidades-4">4</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-5"
-                                    value="5">
-                                <label class="form-check-label" for="rbtUnidades-5">5</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-6"
-                                    value="6">
-                                <label class="form-check-label" for="rbtUnidades-6">6</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-7"
-                                    value="7">
-                                <label class="form-check-label" for="rbtUnidades-7">7</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-8"
-                                    value="8">
-                                <label class="form-check-label" for="rbtUnidades-8">8</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rbtUnidades" id="rbtUnidades-9"
-                                    value="9">
-                                <label class="form-check-label" for="rbtUnidades-9">9</label>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Button -->
-                    <div class="row mt-3">
-                        <div class="offset-3 col-4">
-                            <input type="button" id="btnAltaPedido" name="btnAltaPedido"
-                                class="btn btn-primary" value="Aceptar" />
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+			
 			<!-- CLIENTE-->	
 			<!-- ALTA CLIENTE -->
 			<form class="form-horizontal" name="frmAltaCliente" id="frmAltaCliente">
@@ -214,20 +136,52 @@
 			</form>
 			<!--FIN ALTA CLIENTE-->
 			<!--LISTADO CLIENTE-->
-			<form name="frmListadoCliente" id="frmListadoCliente" class="from-horizontal">
+			<form name="frmModificarCliente" id="frmModificarCliente" class="from-horizontal">
 				<fieldset>
-					<div id="listadoCliente">
-						<!-- Mostrar aquí la tabla del listado solicitado -->
+					<legend>Modificar Cliente</legend>
+					<!-- Text input-->
+					<input type="hidden" name="txtModificarId" id="txtModificarId">
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModificarNombre">Nombre del Cliente</label>
+						<div class="col-xs-4">
+							<input id="txtModificarNombre" name="txtModificarNombre" placeholder="Nombre del Cliente"
+								class="form-control input-md" type="text">
+						</div>
 					</div>
-					<div id="formularioEdicionCliente">
-						<!-- Mostrar aqui el formulario para editar los datos-->
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModificarEmail">eMail</label>
+						<div class="col-xs-4">
+							<input id="txtModificarEmail" name="txtMoficiarEmail" placeholder="Correo del Cliente" class="form-control input-md"
+								type="email">
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtModificarNumero">Telefono</label>
+						<div class="col-xs-4">
+							<input id="txtModificarNumero" name="txtModificarNumero" placeholder="Telefono" class="form-control input-md"
+								type="number">
+						</div>
+					</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnAceptarModificarCliente"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnAceptarModificarCliente" name="btnAceptarModificarCliente"
+								class="btn btn-primary" value="Aceptar" />
+						</div>
 					</div>
 				</fieldset>
 			</form>
+			<div id="listadoCliente">
+				
+				<!-- Mostrar aquí la tabla del listado solicitado -->
+			</div>
 			<!--FIN LISTADO CLIENTE	-->
 			<!--Listado Cliente por Nombre-->
-			<form name="frmListadoClientePorNombre" id="frmListaClientePorNombre" class="from-horizontal">
-				<legend>Busqueda de menu por nombre</legend>
+			<form name="frmListadoClientePorNombre" id="frmListadoClientePorNombre" class="from-horizontal">
+				<legend>Busqueda de Cliente por nombre</legend>
 				<div class="form-group">
 					<label class="col-xs-4 control-label" for="txtBusquedaCliente">Nombre del cliente</label>
 					<div class="col-xs-4">
@@ -261,16 +215,16 @@
 					</div>
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtEmail">Email</label>
+						<label class="col-xs-4 control-label" for="txtEmailCliente">Email</label>
 						<div class="col-xs-4">
-							<input id="txtEmail" name="txtEmail" placeholder="Correo electronico" class="form-control input-md"
+							<input id="txtEmailCliente" name="txtEmailCliente" placeholder="Correo electronico" class="form-control input-md"
 								type="text">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtTelefono">Teléfono</label>
+						<label class="col-xs-4 control-label" for="txtTelefonoCliente">Teléfono</label>
 						<div class="col-xs-4">
-							<input id="txtEmail" name="txtEmail" placeholder="Correo electronico" class="form-control input-md"
+							<input id="txtTelefonoCliente" name="txtTelefonoCliente" placeholder="Telefono" class="form-control input-md"
 								type="text">
 						</div>
 					</div>

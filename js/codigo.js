@@ -15,7 +15,8 @@ function registrarEventos() {
     document.querySelector("#mnuBuscarCliente").addEventListener("click", mostrarFormulario);
     frmAltaCliente.btnAceptarAltaCliente.addEventListener("click", procesarAltaCliente);
     frmListadoClientePorNombre.btnBuscarNombreCliente.addEventListener("click", buscarClientePorNombre);
-    frmParametrizado.btnBuscarParametrizadoCliente.addEventListener("click", buscarClienteParametrizado);
+    frmParametrizadoCliente.btnBuscarParametrizadoCliente.addEventListener("click", buscarParametrizadoCliente);
+    frmModificarCliente.btnAceptarModificarCliente.addEventListener("click", procesarModificarCliente);
 
     // //Parte de Pedido SIN TERMINAR
     // document.querySelector("#mnuAltaPedido").addEventListener("click",mostrarFormulario);
@@ -52,7 +53,7 @@ function mostrarFormulario(oEvento){
             frmListadoClientePorNombre.style.display = "block";
             break;
         case "mnuBuscarCliente":
-            frmBuscarCliente.style.display = "block";
+            frmParametrizadoCliente.style.display = "block";
             break;
         case "mnuAltaMenu":
             frmAltaMenu.style.display = "block";
@@ -74,9 +75,9 @@ function mostrarFormulario(oEvento){
 
 function ocultarFormularios(){
     frmAltaCliente.style.display = "none";
-    frmListadoCliente.style.display = "none";
-    frmListadoMenuPorNombre.style.display = "none";
+    frmListadoClientePorNombre.style.display = "none";
     frmParametrizadoCliente.style.display = "none";
+    frmModificarCliente.style.display = "none";
     frmAltaMenu.style.display = "none";
     frmListadoMenu.style.display = "none";
     frmListadoMenuPorNombre.style.display = "none";
@@ -151,10 +152,11 @@ function validarAltaCliente() {
 async function procesarListadoPorCliente() {
     // Solicitar datos del menú al backend
     let respuesta = await oRestaurante.listadoCliente();
+    alert("Ha entrado en procesar listado")
 
-    if (respuesta.ok) {
+   // if (respuesta.ok) {
         let tabla = "<h2>Listado de Clientes</h2>";
-        tabla += "<table class='table table-striped'>";
+        tabla += "<table class='table table-striped' id = 'listadoPorCliente'>";
         tabla += "<thead><tr><th>ID Plato</th><th>Nombre</th><th>Email</th><th>Telefono</th><th>Eliminar</th><th>Editar</th></tr></thead><tbody>";
 
         for (let cliente of respuesta.datos) {
@@ -163,8 +165,8 @@ async function procesarListadoPorCliente() {
             tabla += `<td>${cliente.nombre}</td>`;
             tabla += `<td>${cliente.email}</td>`;
             tabla += `<td>${cliente.telefono}</td>`;
-            tabla += `<td><button class="btn btn-danger btn-sm" onclick="eliminarCliente(${cliente.idcliente})">Eliminar</button></td>`;
-            tabla += `<td><button class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicion(${cliente.idcliente}, '${cliente.nombre}', '${cliente.email}', ${cliente.telefono})">Editar</button></td>`;
+            tabla += "<td><button class='btn btn-primary modificarCliente' data-cliente='" + JSON.stringify(cliente) + "'><i class='bi bi-pencil-square'></i></button></td>'";
+            tabla += `<td><button class="btn btn-primary btn-sm modificarCliente data-cliente='"+JSON.stringify(cliente)"+'>Editar</button></td>`;
             tabla += "</tr>";
         }
 
@@ -172,14 +174,15 @@ async function procesarListadoPorCliente() {
 
         // Insertar la tabla en el contenedor correcto
         document.querySelector("#listadoCliente").innerHTML = tabla;
+        document.querySelector("#listadoPorCliente").addEventListener('click', procesarBotonEditarCliente);
 
         // Asegúrate de que el formulario de edición está oculto inicialmente
-    } else {
-        // Mostrar mensaje de error si la solicitud falla
-        document.querySelector("#listadoCliente").innerHTML = `
-            <div class="alert alert-danger">Error al cargar el cliente: ${respuesta.mensaje}</div>
-        `;
-    }
+    // } else {
+    //     // Mostrar mensaje de error si la solicitud falla
+    //     document.querySelector("#listadoCliente").innerHTML = `
+    //         <div class="alert alert-danger">Error al cargar el cliente: ${respuesta.mensaje}</div>
+    //     `;
+    //}
 }
 
 // Función para mostrar el formulario de edición
@@ -205,6 +208,62 @@ function mostrarFormularioEdicionCliente(idcliente, nombre, email, telefono) {
     document.querySelector("#formularioEdicionCliente").innerHTML = formulario;    
 
 }
+
+function procesarBotonEditarCliente(oEvento) {
+
+    let boton = null;
+
+    // Verificamos si han hecho clic sobre el botón o el icono
+    if (oEvento.target.nodeName == "I" || oEvento.target.nodeName == "button") {
+        if (oEvento.target.nodeName == "I") {
+            // Pulsacion sobre el icono
+            boton = oEvento.target.parentElement; // El padre es el boton
+        } else {
+            boton = oEvento.target;
+        }
+
+        let cliente = JSON.parse(boton.dataset.cliente);
+
+        if (boton.classList.contains("modificarCliente")) {
+            frmModificarCliente.style.display = "block";
+
+            frmModificarCliente.txtModificarId.value = cliente.idcliente;
+            frmModificarCliente.txtModificarNombre.value = cliente.nombre;
+            frmModificarCliente.txtModificarEmail.value = cliente.email;
+            frmModificarCliente.txtModificarNumero.value = cliente.telefono;
+    
+
+        } else if (boton.classList.contains("eliminarCliente")) {
+            borrarCliente(cliente);
+        }
+    }
+}
+
+async function procesarModificarCliente() {
+
+    let idcliente = parseInt(frmModificarCliente.txtModificarId.value);
+    let nombre = frmModificarCliente.txtModificarNombre.value.trim();
+    let email = frmModificarCliente.txtModificarEmail.value.trim();
+    let telefono = parseInt(frmModificarCliente.txtModificarNumero.value);
+
+
+    // Validar datos del formulario
+    
+        let cliente = new Cliente(idcliente, nombre, email, telefono);
+
+        let respuesta = await oRestaurante.modificarCliente(cliente);
+
+        alert(respuesta.mensaje);
+
+        if (!respuesta.error) { // Si NO hay error
+            //Resetear formulario
+            frmModificarCliente.reset();
+            // Ocultar el formulario
+            frmModificarCliente.style.display = "none";
+        }
+
+}
+
 
 // Función para guardar los cambios del cliente
 async function guardarCambiosCliente(idcliente) {
@@ -292,9 +351,9 @@ async function eliminarCliente(idCliente) {
 }
 
 async function buscarParametrizadoCliente(){
-    let nombre = frmParametrizadoCliente.txtNombreCliente1.value.trim();
-    let email = frmParametrizadoCliente.txtEmail1.value.trim();   
-    let telefono = parseInt(frmParametrizado.txtTelefono1.value.trim());
+    let nombre = frmParametrizadoCliente.txtNombreCliente.value.trim();
+    let email = frmParametrizadoCliente.txtEmailCliente.value.trim();   
+    let telefono = parseInt(frmParametrizado.txtTelefonoCliente.value.trim());
     
 
     // Validar los datos
