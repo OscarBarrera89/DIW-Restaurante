@@ -190,56 +190,56 @@ class Restaurante{
         return respuesta;
     }
     //Fin de MENU
-    async altaPedido(oPedido) {
-        let datos = new FormData();
+//     async altaPedido(oPedido) {
+//         let datos = new FormData();
 
-        // datos.append("cliente", oPedido.cliente);
-        // datos.append("idplato", oPedido.idplato);
-        // datos.append("unidades", oPedido.unidades);
+//         // datos.append("cliente", oPedido.cliente);
+//         // datos.append("idplato", oPedido.idplato);
+//         // datos.append("unidades", oPedido.unidades);
 
-        datos.append("pedido", JSON.stringify(oPedido));
+//         datos.append("pedido", JSON.stringify(oPedido));
 
-        console.log("Datos:", datos);
+//         console.log("Datos:", datos);
 
-        let respuesta = await peticionPOST("alta_pedido.php", datos);
+//         let respuesta = await peticionPOST("alta_pedido.php", datos);
 
-        return respuesta;
-    }
+//         return respuesta;
+//     }
 
-    async getPlatos() {
-        let datos = new FormData();
+//     async getPlatos() {
+//         let datos = new FormData();
 
-        let respuesta = await peticionGET("get_platos.php", datos);
+//         let respuesta = await peticionGET("get_platos.php", datos);
 
-        return respuesta;
-    }
+//         return respuesta;
+//     }
 
-    async listadoPedidoCliente(nombreCliente) {
-        const datos = new FormData();
+//     async listadoPedidoCliente(nombreCliente) {
+//         const datos = new FormData();
 
-        datos.append("nombre", nombreCliente);
+//         datos.append("nombre", nombreCliente);
 
-        const respuesta = await peticionGET("listado_pedidos.php", datos);
+//         const respuesta = await peticionGET("listado_pedidos.php", datos);
 
-        if (respuesta.ok) {
-            let listado = `<h1>Pedidos de ${nombreCliente}</h1>`;
+//         if (respuesta.ok) {
+//             let listado = `<h1>Pedidos de ${nombreCliente}</h1>`;
 
-            listado += "<table class='table table-hover table-striped'>";
-            listado += "<thead><tr><th>IDPEDIDO</th><th>PLATO</th><th>UNIDADES</th>";
-            listado += "<th>PRECIO</th><th>TOTAL</th></tr></thead><tbody>";
+//             listado += "<table class='table table-hover table-striped'>";
+//             listado += "<thead><tr><th>IDPEDIDO</th><th>PLATO</th><th>UNIDADES</th>";
+//             listado += "<th>PRECIO</th><th>TOTAL</th></tr></thead><tbody>";
 
-            for (let pedido of respuesta.datos) {
-                listado += `<tr><td>${pedido.idpedido}</td>`;
-                listado += `<td>${pedido.nombre}</td>`;
-                listado += `<td>${pedido.unidades}</td>`;
-                listado += `<td>${pedido.precio}</td>`;
-                listado += `<td>${pedido.unidades * pedido.precio}</td></tr>`;
-            }
-            listado += "</tbody></table>";
+//             for (let pedido of respuesta.datos) {
+//                 listado += `<tr><td>${pedido.idpedido}</td>`;
+//                 listado += `<td>${pedido.nombre}</td>`;
+//                 listado += `<td>${pedido.unidades}</td>`;
+//                 listado += `<td>${pedido.precio}</td>`;
+//                 listado += `<td>${pedido.unidades * pedido.precio}</td></tr>`;
+//             }
+//             listado += "</tbody></table>";
 
-            return listado;
-        } else {
-            return "<h1>Error al recuperar los datos</h1>"
-        }
-    }
-}
+//             return listado;
+//         } else {
+//             return "<h1>Error al recuperar los datos</h1>"
+//         }
+//     }
+// }
