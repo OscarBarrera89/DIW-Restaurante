@@ -48,12 +48,12 @@ function mostrarFormulario(oEvento){
             listadoCliente.style.display = "block";
             procesarListadoPorCliente();
             break;
-        // case "mnuListadoClientePorNombre":
-        //     frmListadoClientePorNombre.style.display = "block";
-        //     break;
-        // case "mnuBuscarCliente":
-        //     frmBuscarCliente.style.display = "block";
-        //     break;
+        case "mnuListadoClientePorNombre":
+            frmListadoClientePorNombre.style.display = "block";
+            break;
+        case "mnuBuscarCliente":
+            frmBuscarCliente.style.display = "block";
+            break;
         case "mnuAltaMenu":
             frmAltaMenu.style.display = "block";
             break;
@@ -76,7 +76,7 @@ function ocultarFormularios(){
     frmAltaCliente.style.display = "none";
     frmListadoCliente.style.display = "none";
     frmListadoMenuPorNombre.style.display = "none";
-    //frmParametrizadoCliente.style.display = "none";
+    frmParametrizadoCliente.style.display = "none";
     frmAltaMenu.style.display = "none";
     frmListadoMenu.style.display = "none";
     frmListadoMenuPorNombre.style.display = "none";

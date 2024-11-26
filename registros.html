@@ -49,12 +49,9 @@
 						<li>
 							<hr class="dropdown-divider">
 						</li>
-
-						<li><a class="dropdown-item" href="#" id="mnuBuscarCliente">Buscar un cliente</a></li>
 						<li><a class="dropdown-item" href="#" id="mnuListadoCliente">Listado de clientes</a></li>
 						<li><a class="dropdown-item" href="#" id="mnuListadoClientePorNombre">Listado de clientes por nombre</a></li>
-                        <li><a class="dropdown-item" href="#" id="mnuModificarCliente">Modificar cliente</a></li>
-                        <li><a class="dropdown-item" href="#" id="mnuBorrarCliente">Borrar un cliente</a></li>
+						<li><a class="dropdown-item" href="#" id="mnuBuscarCliente">Buscar un cliente</a></li>
 					</ul>
 				</li>
 				<li class="nav-item dropdown">
@@ -253,52 +250,40 @@
 			<form class="form-horizontal" name="frmParametrizadoCliente" id="frmParametrizadoCliente">
 				<fieldset>
 					<!-- Form Name -->
-					<legend>Listado de los menus parametrizados por este formulario</legend>
+					<legend>Listado de los clientes parametrizados por este formulario</legend>
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtNombrePlato1">Nombre del plato</label>
+						<label class="col-xs-4 control-label" for="txtNombreCliente">Nombre del Cliente</label>
 						<div class="col-xs-4">
-							<input id="txtNombrePlato1" name="txtNombrePlato1" placeholder="Nombre"
+							<input id="txtNombreCliente" name="txtNombreCliente" placeholder="Nombre"
 								class="form-control input-md" type="text">
 						</div>
 					</div>
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="txtDescripcion1">Descripcion del plato</label>
+						<label class="col-xs-4 control-label" for="txtEmail">Email</label>
 						<div class="col-xs-4">
-							<input id="txtDescripcion1" name="txtDescripcion1" placeholder="Descripcion del plato" class="form-control input-md"
+							<input id="txtEmail" name="txtEmail" placeholder="Correo electronico" class="form-control input-md"
 								type="text">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="selectAlergenos1">Alérgenos:</label>
-						<select id="selectAlergenos1" name="selectAlergenos1" class="form-select" multiple>
-							<option value="gluten">Gluten</option>
-							<option value="crustaceos">Crustáceos</option>
-							<option value="huevos">Huevos</option>
-							<option value="pescado">Pescado</option>
-							<option value="cacahuetes">Cacahuetes</option>
-							<option value="soja">Soja</option>
-							<option value="lacteos">Leche y derivados (incluyendo lactosa)</option>
-							<option value="frutos_cascara">Frutos de cáscara (almendras, avellanas, nueces, etc.)</option>
-							<option value="apio">Apio</option>
-							<option value="mostaza">Mostaza</option>
-							<option value="sesamo">Sésamo</option>
-							<option value="sulfitos">Sulfitos</option>
-							<option value="altramuces">Altramuces</option>
-							<option value="moluscos">Moluscos</option>
-						</select>
-						<small class="form-text text-muted">Mantén presionada la tecla <strong>Ctrl</strong> (Cmd en Mac) para seleccionar múltiples alérgenos.</small>
+						<label class="col-xs-4 control-label" for="txtTelefono">Teléfono</label>
+						<div class="col-xs-4">
+							<input id="txtEmail" name="txtEmail" placeholder="Correo electronico" class="form-control input-md"
+								type="text">
+						</div>
 					</div>
+					
 					<!-- Button -->
 					<div class="form-group">
-						<label class="col-xs-4 control-label" for="btnBuscarParametrizado"></label>
+						<label class="col-xs-4 control-label" for="btnBuscarParametrizadoCliente"></label>
 						<div class="col-xs-4">
-							<input type="button" id="btnBuscarParametrizado" name="btnBuscarParametrizado"
+							<input type="button" id="btnBuscarParametrizadoCliente" name="btnBuscarParametrizadoCliente"
 								class="btn btn-primary" value="Buscar" />
 						</div>
 					</div>
-					<div id="resultadoBusquedaPlato2">
+					<div id="resultadoBusquedaCliente">
 						<!-- Mostrar aqui el formulario para editar los datos-->
 					</div>
 				</fieldset>
