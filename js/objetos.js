@@ -113,7 +113,7 @@ class Restaurante{
         datos.append("email", email);
         datos.append("telefono", telefono);
        
-        let respuesta = await peticionPOST("parametrizado_cliente.php", datos);
+        let respuesta = await peticionGET("parametrizado_cliente.php", datos);
 
         return respuesta;
     }

@@ -2,9 +2,9 @@
 require_once('config.php');
 $conexion = obtenerConexion();
 
-    $nombre = $_POST["nombre"] ?? null;
-    $email = $_POST["email"] ?? null;
-    $telefono = $_POST["telefono"] ?? null;
+    $nombre = $_GET["nombre"] ?? null;
+    $email = $_GET["email"] ?? null;
+    $telefono = $_GET["telefono"] ?? null;
 
     // Validar que los datos no estén vacíos
     if (!$nombre && !$email && !$telefono) {
@@ -12,7 +12,7 @@ $conexion = obtenerConexion();
         exit;
     }
 
-    try {
+    
         // Construir la consulta dinámica
         $sql = "SELECT * FROM cliente WHERE 1=1";
         $params = [];
@@ -30,18 +30,24 @@ $conexion = obtenerConexion();
             $params[":telefono"] = $telefono;
         }
 
-        // Preparar y ejecutar la consulta
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-
-        // Obtener los resultados
-        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if (count($resultados) > 0) {
-            echo json_encode(["ok" => true, "datos" => $resultados]);
-        } else {
-            echo json_encode(["ok" => false, "mensaje" => "No se encontraron resultados."]);
-        }
-    } catch (PDOException $e) {
-        echo json_encode(["ok" => false, "mensaje" => "Error al ejecutar la consulta: " . $e->getMessage()]);
+$stmt = $conexion->prepare($sql);
+if ($stmt) {
+    if (!empty($params)) {
+        $stmt->bind_param($types, ...$params);
     }
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    $filas = [];
+    while ($fila = $resultado->fetch_assoc()) {
+        $filas[] = $fila;
+    }
+
+    if (count($filas) > 0) {
+        responder($filas, false, "Datos recuperados", $conexion);
+    } else {
+        responder(null, true, "No existe el Cliente", $conexion);
+    }
+    $stmt->close();
+}
+$conexion->close();

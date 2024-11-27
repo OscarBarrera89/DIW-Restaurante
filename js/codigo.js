@@ -366,21 +366,22 @@ async function eliminarCliente(idCliente) {
 async function buscarParametrizadoCliente(){
     let nombre = frmParametrizadoCliente.txtNombreCliente.value.trim();
     let email = frmParametrizadoCliente.txtEmailCliente.value.trim();   
-    let telefono = parseInt(frmParametrizado.txtTelefonoCliente.value.trim());
+    let telefono = parseInt(frmParametrizadoCliente.txtTelefonoCliente.value.trim());
     
 
     // Validar los datos
     const errores = validarDatosCliente(nombre, email, telefono);
-    if (errores.length > 0) {
-        alert(`Errores encontrados:\n${errores.join("\n")}`);
-        return; // Salir si hay errores
-    }
+    // if (errores.length > 0) {
+    //     alert(`Errores encontrados:\n${errores.join("\n")}`);
+    //     return; // Salir si hay errores
+    // }
 
     let respuesta = await oRestaurante.BuscarClienteParam(nombre, email, telefono);
 
     if (!respuesta.error) { // Si NO hay error
         let resultadoBusqueda = document.querySelector("#resultadoBusquedaCliente2");
         resultadoBusqueda.style.display = 'none';
+        console.log(respuesta);
         // Escribimos resultado
         let tablaSalida = "<table class='table'>";
         tablaSalida += "<thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Telefono</th></tr></thead>";
