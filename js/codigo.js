@@ -36,13 +36,13 @@ function registrarEventos() {
 
     //Parte de Pedido
     document.querySelector("#mnuAltaPedido").addEventListener("click", mostrarFormulario);
-    document.querySelector("#mnuListadoPedidos").addEventListener("click", mostrarFormulario);
+    /*document.querySelector("#mnuListadoPedidos").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuListadoPedidosPorNombre").addEventListener("click", mostrarFormulario);
-    document.querySelector("#mnuBuscarPedido").addEventListener("click", mostrarFormulario);
-    frmAltaPedido.btnAltaPedido.addEventListener("click", procesarAltaPedido);
-    frmListadoPedidosCliente.btnListadoPedidosCliente.addEventListener("click", procesarListadoPedidos);
+    document.querySelector("#mnuBuscarPedido").addEventListener("click", mostrarFormulario);*/
+    frmAltaPedido.btnAceptarAltaPedido.addEventListener("click", procesarAltaPedido);
+    /*frmListadoPedidosCliente.btnListadoPedidosCliente.addEventListener("click", procesarListadoPedidos);
     frmListadoPedidosPorFecha.btnListadoPedidosPorFecha.addEventListener("click", procesarListadoPedidosPorNombre);
-    frmParametrizadoPedido.btnBuscarParametrizado.addEventListener("click", buscarParametrizadoPedido);
+    frmParametrizadoPedido.btnBuscarParametrizado.addEventListener("click", buscarParametrizadoPedido);*/
 }
 
 function mostrarFormulario(oEvento){
@@ -81,7 +81,7 @@ function mostrarFormulario(oEvento){
         //Pedido
         case "mnuAltaPedido":
             frmAltaPedido.style.display = "block";
-            cargarDesplegables();
+            cargarDesplegable();
             break;
         case "mnuListadoPedidos":
             listadoPedidos.style.display = "block";
@@ -110,9 +110,9 @@ function ocultarFormularios(){
     frmParametrizado.style.display = "none";
     //Pedidos
     frmAltaPedido.style.display = "none";
-    listadoPedidos.style.display = "none";
-    frmListadoPedidosPorNombre.style.display = "none";
-    frmParametrizadoPedido.style.display = "none";
+    // listadoPedidos.style.display = "none";
+    // frmListadoPedidosPorNombre.style.display = "none";
+    // frmParametrizadoPedido.style.display = "none";
 }
 
 //PARTE CLIENTE
@@ -746,13 +746,14 @@ async function validarDatosPlatoParam(nombre, descripcion, alergenos){
 
 //Parte de Pedidos
 async function procesarAltaPedido(){
-    let nombre = frmAltaPedido.txtNombreCliente.value.trim();
-    let idplato = frmAltaPedido.lstPlatos.value;
-    let unidades = frmAltaPedido.rbtUnidades.value;
+    let idcliente = frmAltaPedido.lstCliente.value.trim();
+    let fecha = frmAltaPedido.txtFecha.value.trim();
+    let camarero = frmAltaPedido.txtCamarero.value.trim();
+    let total = parseFloat(frmAltaPedido.txtTotal.value.trim());
 
-    const pedido = new Pedido(null, nombre, idplato, unidades);
+    const pedido = new Pedido(null, idcliente, fecha, camarero, total);
 
-    const respuesta = await oBar.altaPedido(pedido);
+    const respuesta = await oRestaurante.altaPedido(pedido);
 
     alert(respuesta.mensaje);
 

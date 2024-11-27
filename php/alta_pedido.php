@@ -6,7 +6,7 @@ $conexion = obtenerConexion();
 // $input = file_get_contents("php://input");
 $pedido = json_decode($_POST['pedido']);
 
-$sql = "INSERT INTO menu (idpedido, idcliente, fecha, camarero, total) VALUES (null, '$pedido->idcliente' , '$pedido->fecha', $pedido->camarero, '$pedido->total');";
+$sql = "INSERT INTO pedido (idpedido, idcliente, fecha, camarero, total) VALUES (null, $pedido->idcliente , '$pedido->fecha', '$pedido->camarero', $pedido->total);";
 
 mysqli_query($conexion, $sql);
 

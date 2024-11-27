@@ -189,6 +189,17 @@ class Restaurante{
         console.log(respuesta);
         return respuesta;
     }
+
+    async altaPedido(oPedido) {
+        let datos = new FormData();
+
+        datos.append("pedido", JSON.stringify(oPedido));
+
+        let respuesta = await peticionPOST("alta_pedido.php", datos);
+
+        return respuesta;
+
+    }
     //Fin de MENU
 //     async altaPedido(oPedido) {
 //         let datos = new FormData();
