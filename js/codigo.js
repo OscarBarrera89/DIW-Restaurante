@@ -1109,7 +1109,7 @@ async function buscarParametrizadoPedido() {
     }
 }
 
-async function validarDatosPedidoParam(idcliente, fecha, camarero){
+async function validarDatosPedidosParam(idcliente, fecha, camarero){
     const errores = [];
 
     if (isNaN(idcliente) || idcliente <= 0) {
