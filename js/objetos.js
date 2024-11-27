@@ -226,6 +226,17 @@ class Restaurante{
         return respuesta;
     }
 
+
+    async buscarPedido(camarero) {
+        let datos = new FormData();
+        
+        datos.append("camarero", camarero);
+        
+        let respuesta = await peticionGET("buscar_pedido.php", datos);
+
+        return respuesta;
+    }
+
 //     async altaPedido(oPedido) {
 //         let datos = new FormData();
 

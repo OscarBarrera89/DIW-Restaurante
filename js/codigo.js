@@ -37,11 +37,11 @@ function registrarEventos() {
     //Parte de Pedido
     document.querySelector("#mnuAltaPedido").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuListadoPedidos").addEventListener("click", mostrarFormulario);
-    /*document.querySelector("#mnuListadoPedidosPorNombre").addEventListener("click", mostrarFormulario);
-    document.querySelector("#mnuBuscarPedido").addEventListener("click", mostrarFormulario);*/
+    document.querySelector("#mnuListadoPedidosPorCamarero").addEventListener("click", mostrarFormulario);
+    /*document.querySelector("#mnuBuscarPedido").addEventListener("click", mostrarFormulario);*/
     frmAltaPedido.btnAceptarAltaPedido.addEventListener("click", procesarAltaPedido);
-    /*frmListadoPedidosPorFecha.btnListadoPedidosPorFecha.addEventListener("click", procesarListadoPedidosPorNombre);
-    frmParametrizadoPedido.btnBuscarParametrizado.addEventListener("click", buscarParametrizadoPedido);*/
+    frmListadoPedidosPorCamarero.btnListadoPedidosPorCamarero.addEventListener("click", procesarListadoPedidosPorCamarero);
+    /*frmParametrizadoPedido.btnBuscarParametrizado.addEventListener("click", buscarParametrizadoPedido);*/
 }
 
 function mostrarFormulario(oEvento){
@@ -86,8 +86,8 @@ function mostrarFormulario(oEvento){
             frmListadoPedidos.style.display = "block";
             procesarListadoPedidos();
             break;
-        case "mnuListadoPedidosPorNombre":
-            frmListadoPedidosPorNombre.style.display = "block";
+        case "mnuListadoPedidosPorCamarero":
+            frmListadoPedidosPorCamarero.style.display = "block";
             break;
         case "mnuBuscarPedido":
             frmParametrizadoPedido.style.display = "block";
@@ -806,7 +806,7 @@ async function eliminarPedido(idpedido) {
             // Recargar la lista del menú
             procesarListadoMenu();
         } else {
-            alert(`Error al eliminar el pedido: ${respuesta.mensaje}`);
+            alert(`Error al eliminar el pedidos: ${respuesta.mensaje}`);
         }
     }
 }
@@ -824,5 +824,111 @@ async function cargarDesplegable(){
         frmAltaPedido.lstCliente.innerHTML  = optionsCliente;
     } else{
         alert("Error al recuperar los clientes");
+    }
+}
+
+/*
+function mostrarFormularioEdicionPedido(idpedido, idcliente, fecha, camarero, total) {
+    const formulario = `
+        <h3>Editar Pedido</h3>
+        <form id="formEditarPedido">
+            <div class="mb-3">
+                <label for="editIdpedido" class="form-label">ID Pedido</label>
+                <input type="text" class="form-control" id="editIdpedido" value="${idpedido}">
+            </div>
+            <div class="mb-3">
+                <label for="editIdcliente" class="form-label">ID Cliente</label>
+                <input type="text" class="form-control" id="editIdcliente" value="${idcliente}">
+            </div>
+            <div class="mb-3">
+                <label for="editFecha" class="form-label">Fecha</label>
+                <input type="number" step="0.01" class="form-control" id="editFecha" value="${fecha}">
+            </div>
+            <div class="mb-3">
+                <label for="editAlergenos">Alérgenos:</label>
+						<select id="editAlergenos" name="editAlergenos" class="form-select" multiple>
+							<option value="gluten">Gluten</option>
+							<option value="crustaceos">Crustáceos</option>
+							<option value="huevos">Huevos</option>
+							<option value="pescado">Pescado</option>
+							<option value="cacahuetes">Cacahuetes</option>
+							<option value="soja">Soja</option>
+							<option value="lacteos">Leche y derivados (incluyendo lactosa)</option>
+							<option value="frutos_cascara">Frutos de cáscara (almendras, avellanas, nueces, etc.)</option>
+							<option value="apio">Apio</option>
+							<option value="mostaza">Mostaza</option>
+							<option value="sesamo">Sésamo</option>
+							<option value="sulfitos">Sulfitos</option>
+							<option value="altramuces">Altramuces</option>
+							<option value="moluscos">Moluscos</option>
+						</select>
+						<small class="form-text text-muted">Mantén presionada la tecla <strong>Ctrl</strong> (Cmd en Mac) para seleccionar múltiples alérgenos.</small>
+            </div>
+            <button type="button" class="btn btn-success" onclick="guardarCambiosPlato(${idplato})">Guardar Cambios</button>
+        </form>
+    `;
+    document.querySelector("#formularioEdicion").innerHTML = formulario;
+    document.querySelector("#formularioEdicion2").innerHTML = formulario;    
+
+}
+
+async function guardarCambiosPlato(idplato) {
+    const nombre = document.querySelector("#editNombre").value.trim();
+    const descripcion = document.querySelector("#editDescripcion").value.trim();
+    const precio = parseFloat(document.querySelector("#editPrecio").value.trim());
+    const alergenos = document.querySelector("#editAlergenos").value.trim();
+
+    // Validar los datos
+    const errores = validarDatosPlato(nombre, descripcion, precio, alergenos);
+    if (errores.length > 0) {
+        alert(`Errores encontrados:\n${errores.join("\n")}`);
+        return; // Salir si hay errores
+    }
+
+    const platoActualizado = new Menu(idplato, nombre, descripcion, precio, alergenos);
+
+    const respuesta = await oRestaurante.modificarMenu(platoActualizado);
+
+    if (!respuesta.ok) {
+        alert("Plato actualizado correctamente.");
+        // Recargar el listado del menú
+        procesarListadoMenu();
+    } else {
+        alert(`Error al actualizar el plato: ${respuesta.mensaje}`);
+    }
+}*/
+
+async function buscarPedidoPorCamarero() {
+    let nombrePedido = frmListadoPedidoPorCamarero.txtBusquedaPedido.value.trim(); //Trim o no?
+
+    let respuesta = await oRestaurante.buscarMenu(nombrePedido);
+
+    if (!respuesta.error) { // Si NO hay error
+        let resultadoBusqueda = document.querySelector("#resultadoBusquedaPedido");
+        resultadoBusqueda.style.display = 'none';
+        // Escribimos resultado
+        let tablaSalida = "<table class='table'>";
+        tablaSalida += "<thead><tr><th>ID Pedido</th><th>ID Cliente</th><th>Fecha</th><th>Camarero</th><th>Total</th><th>Eliminar</th><th>Editar</th></tr></thead>";
+        tablaSalida += "<tbody><tr>";
+        tablaSalida += "<td>" + respuesta.datos.idpedido + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.idcliente + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.fecha + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.camarero + "</td>"
+        tablaSalida += "<td>" + respuesta.datos.total + "</td>"
+        tablaSalida += "<td><button class='btn btn-danger btn-sm' onclick='eliminarMenu(" + respuesta.datos.idpedido +")'>Eliminar</button></td>";
+        tablaSalida += "<td><button class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicion(" 
+        + respuesta.datos.idpedido + ", " 
+        + "\"" + respuesta.datos.idcliente.replace(/"/g, '&quot;') + "\"" + ", " 
+        + "\"" + respuesta.datos.fecha.replace(/"/g, '&quot;') + "\"" + ", " 
+        + respuesta.datos.camarero + ", "
+        + "\"" + respuesta.datos.total.replace(/"/g, '&quot;') + "\"" 
+        + ")'>Editar</button></td>";
+        tablaSalida += "</tr></tbody></table>";
+
+        resultadoBusqueda.innerHTML = tablaSalida;
+        resultadoBusqueda.style.display = 'block';
+
+    } else { // Si hay error
+        alert(respuesta.mensaje);
     }
 }

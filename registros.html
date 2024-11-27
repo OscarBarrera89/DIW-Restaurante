@@ -452,6 +452,30 @@
 					</div>
 				</fieldset>
 			</form>
+			<!-- FORMULARIO LISTADO POR CAMARERO -->
+			<form name="frmListadoPedidoPorCamarero" id="frmListoPedidoPorCamarero" class="from-horizontal">
+				<legend>Busqueda de pedido por camarero</legend>
+				<div class="form-group">
+					<label class="col-xs-4 control-label" for="txtBusquedaCamarero">Nombre del camarero</label>
+					<div class="col-xs-4">
+						<input id="txtBusquedaCamarero" name="txtBusquedaCamarero" placeholder="Nombre del camarero"
+							class="form-control input-md" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-4 control-label" for="btnBuscarNombreCamarero"></label>
+					<div class="col-xs-4">
+						<input type="button" id="btnBuscarNombreCamarero" name="btnBuscarNombreCamarero"
+							class="btn btn-primary" value="Buscar" />
+					</div>
+				</div>
+				<div id="resultadoBusquedaCamarero">
+					<!-- Mostrar aqui el formulario para editar los datos-->
+				</div>
+				<div id="formularioEdicionCamarero">
+					<!-- Mostrar aqui el formulario para editar los datos-->
+				</div>
+			</form>
 		</div>
 	</div>
 
