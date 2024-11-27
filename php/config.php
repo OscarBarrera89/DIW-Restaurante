@@ -12,8 +12,8 @@ $basedatos = array(
     "basedatos" => "restaurante",
     "usuario" => "root",
     "password" => "test",
-    "servidor" => "db",
-    //"servidor" => "va-server.duckdns.org",
+    //"servidor" => "db",
+    "servidor" => "va-server.duckdns.org",
     "puerto" => 3306
 );
 
