@@ -1067,31 +1067,35 @@ async function buscarParametrizadoPedido() {
 
     const datosBusqueda = { idcliente, fecha, camarero };
 
-    let respuesta = await oRestaurante.buscarPedidoParametrizado(datosBusqueda);
+    try {
+        const respuesta = await oRestaurante.buscarPedidoParametrizado(datosBusqueda);
 
-    if (!respuesta.error && Array.isArray(respuesta.datos)) {
-        let resultadoBusqueda = document.querySelector("#resultadoBusquedaPedido");
-        resultadoBusqueda.style.display = "none";
+        if (!respuesta.error && Array.isArray(respuesta.datos)) {
+            let resultadoBusqueda = document.querySelector("#resultadoBusquedaPedido");
+            resultadoBusqueda.style.display = "none";
 
-        let tablaSalida = "<table class='table'>";
-        tablaSalida += "<thead><tr><th>ID Pedido</th><th>ID Cliente</th><th>Fecha</th><th>Camarero</th><th>Total</th></tr></thead>";
-        tablaSalida += "<tbody>";
+            let tablaSalida = "<table class='table'>";
+            tablaSalida += "<thead><tr><th>ID Pedido</th><th>ID Cliente</th><th>Fecha</th><th>Camarero</th><th>Total</th></tr></thead>";
+            tablaSalida += "<tbody>";
 
-        respuesta.datos.forEach(pedido => {
-            tablaSalida += "<tr>";
-            tablaSalida += `<td>${pedido.idpedido}</td>`;
-            tablaSalida += `<td>${pedido.idcliente}</td>`;
-            tablaSalida += `<td>${pedido.fecha}</td>`;
-            tablaSalida += `<td>${pedido.camarero}</td>`;
-            tablaSalida += `<td>${pedido.total}</td>`;
-            tablaSalida += "</tr>";
-        });
+            respuesta.datos.forEach(pedido => {
+                tablaSalida += "<tr>";
+                tablaSalida += `<td>${pedido.idpedido}</td>`;
+                tablaSalida += `<td>${pedido.idcliente}</td>`;
+                tablaSalida += `<td>${pedido.fecha}</td>`;
+                tablaSalida += `<td>${pedido.camarero}</td>`;
+                tablaSalida += `<td>${pedido.total}</td>`;
+                tablaSalida += "</tr>";
+            });
 
-        tablaSalida += "</tbody></table>";
+            tablaSalida += "</tbody></table>";
 
-        resultadoBusqueda.innerHTML = tablaSalida;
-        resultadoBusqueda.style.display = "block";
-    } else {
-        alert(respuesta.mensaje || "No se encontraron resultados.");
+            resultadoBusqueda.innerHTML = tablaSalida;
+            resultadoBusqueda.style.display = "block";
+        } else {
+            alert(respuesta.mensaje || "No se encontraron resultados.");
+        }
+    } catch (error) {
+        console.error("Error al buscar pedidos parametrizados:", error);
     }
 }
