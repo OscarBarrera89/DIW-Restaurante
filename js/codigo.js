@@ -40,7 +40,7 @@ function registrarEventos() {
     document.querySelector("#mnuListadoPedidosPorCamarero").addEventListener("click", mostrarFormulario);
     /*document.querySelector("#mnuBuscarPedido").addEventListener("click", mostrarFormulario);*/
     frmAltaPedido.btnAceptarAltaPedido.addEventListener("click", procesarAltaPedido);
-    frmListadoPedidosPorCamarero.btnBuscarNombreCamarero.addEventListener("click", procesarListadoPedidosPorCamarero);
+    frmListadoPedidosPorCamarero.btnBuscarNombreCamarero.addEventListener("click", buscarPedidoPorCamarero);
     /*frmParametrizadoPedido.btnBuscarParametrizado.addEventListener("click", buscarParametrizadoPedido);*/
 }
 
