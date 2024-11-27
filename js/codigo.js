@@ -918,12 +918,11 @@ async function buscarPedidoPorCamarero() {
         tablaSalida += "<td><button class='btn btn-danger btn-sm' onclick='eliminarMenu(" + respuesta.datos.idpedido +")'>Eliminar</button></td>";
         tablaSalida += "<td><button class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicion(" 
         + respuesta.datos.idpedido + ", " 
-        + "\"" + respuesta.datos.idcliente.replace(/"/g, '&quot;') + "\"" + ", " 
+        + "\"" + String(respuesta.datos.idcliente).replace(/"/g, '&quot;') + "\"" + ", "  
         + "\"" + respuesta.datos.fecha.replace(/"/g, '&quot;') + "\"" + ", " 
-        + respuesta.datos.camarero + ", "
+        + "\"" + respuesta.datos.camarero.replace(/"/g, '&quot;') + "\"" + ", " 
         + "\"" + respuesta.datos.total.replace(/"/g, '&quot;') + "\"" 
         + ")'>Editar</button></td>";
-        tablaSalida += "</tr></tbody></table>";
 
         resultadoBusqueda.innerHTML = tablaSalida;
         resultadoBusqueda.style.display = 'block';
