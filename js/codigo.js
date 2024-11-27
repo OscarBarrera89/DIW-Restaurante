@@ -33,6 +33,16 @@ function registrarEventos() {
     frmAltaMenu.btnAceptarAltaMenu.addEventListener("click", procesarAltaMenu);
     frmListadoMenuPorNombre.btnBuscarNombrePLato.addEventListener("click", buscarPlatoPorNombre);
     frmParametrizado.btnBuscarParametrizado.addEventListener("click", buscarParametrizado);
+
+    //Parte de Pedido
+    document.querySelector("#mnuAltaPedido").addEventListener("click", mostrarFormulario);
+    document.querySelector("#mnuListadoPedidos").addEventListener("click", mostrarFormulario);
+    document.querySelector("#mnuListadoPedidosPorNombre").addEventListener("click", mostrarFormulario);
+    document.querySelector("#mnuBuscarPedido").addEventListener("click", mostrarFormulario);
+    frmAltaPedido.btnAltaPedido.addEventListener("click", procesarAltaPedido);
+    frmListadoPedidosCliente.btnListadoPedidosCliente.addEventListener("click", procesarListadoPedidos);
+    frmListadoPedidosPorFecha.btnListadoPedidosPorFecha.addEventListener("click", procesarListadoPedidosPorNombre);
+    frmParametrizadoPedido.btnBuscarParametrizado.addEventListener("click", buscarParametrizadoPedido);
 }
 
 function mostrarFormulario(oEvento){
@@ -67,7 +77,22 @@ function mostrarFormulario(oEvento){
             break;
         case "mnuBuscarMenu":
             frmParametrizado.style.display = "block";
-
+            break;
+        //Pedido
+        case "mnuAltaPedido":
+            frmAltaPedido.style.display = "block";
+            cargarDesplegables();
+            break;
+        case "mnuListadoPedidos":
+            listadoPedidos.style.display = "block";
+            procesarListadoPedidos();
+            break;
+        case "mnuListadoPedidosPorNombre":
+            frmListadoPedidosPorNombre.style.display = "block";
+            break;
+        case "mnuBuscarPedido":
+            frmParametrizadoPedido.style.display = "block";
+            break;
         default:
             break;
     }
@@ -83,6 +108,11 @@ function ocultarFormularios(){
     frmListadoMenu.style.display = "none";
     frmListadoMenuPorNombre.style.display = "none";
     frmParametrizado.style.display = "none";
+    //Pedidos
+    frmAltaPedido.style.display = "none";
+    listadoPedidos.style.display = "none";
+    frmListadoPedidosPorNombre.style.display = "none";
+    frmParametrizadoPedido.style.display = "none";
 }
 
 //PARTE CLIENTE
@@ -709,16 +739,12 @@ async function validarDatosPlatoParam(nombre, descripcion, alergenos){
     return errores; // Retorna un array con los mensajes de error
 }
   //A PARTIR DE AQUI TERMINA LA PARTE DE MENU
-async function procesarListadoPedidos(){
-    let nombreCliente = frmListadoPedidosCliente.txtNombreClienteListado.value.trim();
 
-    const listado = await oBar.listadoPedidoCliente(nombreCliente);
 
-    document.querySelector("#listado").innerHTML = listado;
-    document.querySelector("#listado").classList.remove("d-none");
 
-}
 
+
+//Parte de Pedidos
 async function procesarAltaPedido(){
     let nombre = frmAltaPedido.txtNombreCliente.value.trim();
     let idplato = frmAltaPedido.lstPlatos.value;
@@ -737,21 +763,28 @@ async function procesarAltaPedido(){
 
 }
 
+async function procesarListadoPedidos(){
+    let nombreCliente = frmListadoPedidosCliente.txtNombreClienteListado.value.trim();
 
+    const listado = await oBar.listadoPedidoCliente(nombreCliente);
+
+    document.querySelector("#listado").innerHTML = listado;
+    document.querySelector("#listado").classList.remove("d-none");
+
+}
 
 
 async function cargarDesplegable(){
-    const respuesta = await oRestaurante.getPlatos();
+    const respuesta = await oRestaurante.listadoCliente();
 
     if(respuesta.ok){
-        let optionsPlatos = "";
-        for(let plato of respuesta.datos){
-            optionsPlatos += `<option value="${plato.idplato}">${plato.nombre}</option>`;
+        let optionsCliente = "";
+        for(let cliente of respuesta.datos){
+            optionsCliente += `<option value="${cliente.idcliente}">${cliente.nombre}</option>`;
         }
 
-        frmAltaPedido.lstPlatos.innerHTML  = optionsPlatos;
+        frmAltaPedido.lstCliente.innerHTML  = optionsCliente;
     } else{
-        alert("Error al recuperar los platos");
+        alert("Error al recuperar los clientes");
     }
 }
-
