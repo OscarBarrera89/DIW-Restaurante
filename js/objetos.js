@@ -204,6 +204,28 @@ class Restaurante{
 
     }
 
+    async listadoPedido(){
+        let datos = new FormData();
+
+        let respuesta = await peticionGET("get_pedido.php", datos);
+
+        if (respuesta.datos == null) {
+            alert("No existe ningun pedido");
+        }
+
+        return respuesta;
+    }
+
+    async eliminarPedido(idpedido) {
+        let datos = new FormData();
+    
+        datos.append("idpedido", idpedido);
+
+        let respuesta = await peticionPOST("borrar_pedido.php", datos);
+    
+        return respuesta;
+    }
+
 //     async altaPedido(oPedido) {
 //         let datos = new FormData();
 

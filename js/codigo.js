@@ -36,12 +36,11 @@ function registrarEventos() {
 
     //Parte de Pedido
     document.querySelector("#mnuAltaPedido").addEventListener("click", mostrarFormulario);
-    /*document.querySelector("#mnuListadoPedidos").addEventListener("click", mostrarFormulario);
-    document.querySelector("#mnuListadoPedidosPorNombre").addEventListener("click", mostrarFormulario);
+    document.querySelector("#mnuListadoPedidos").addEventListener("click", mostrarFormulario);
+    /*document.querySelector("#mnuListadoPedidosPorNombre").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuBuscarPedido").addEventListener("click", mostrarFormulario);*/
     frmAltaPedido.btnAceptarAltaPedido.addEventListener("click", procesarAltaPedido);
-    /*frmListadoPedidosCliente.btnListadoPedidosCliente.addEventListener("click", procesarListadoPedidos);
-    frmListadoPedidosPorFecha.btnListadoPedidosPorFecha.addEventListener("click", procesarListadoPedidosPorNombre);
+    /*frmListadoPedidosPorFecha.btnListadoPedidosPorFecha.addEventListener("click", procesarListadoPedidosPorNombre);
     frmParametrizadoPedido.btnBuscarParametrizado.addEventListener("click", buscarParametrizadoPedido);*/
 }
 
@@ -84,7 +83,7 @@ function mostrarFormulario(oEvento){
             cargarDesplegable();
             break;
         case "mnuListadoPedidos":
-            listadoPedidos.style.display = "block";
+            frmListadoPedidos.style.display = "block";
             procesarListadoPedidos();
             break;
         case "mnuListadoPedidosPorNombre":
@@ -110,7 +109,7 @@ function ocultarFormularios(){
     frmParametrizado.style.display = "none";
     //Pedidos
     frmAltaPedido.style.display = "none";
-    // listadoPedidos.style.display = "none";
+    frmListadoPedidos.style.display = "none";
     // frmListadoPedidosPorNombre.style.display = "none";
     // frmParametrizadoPedido.style.display = "none";
 }
@@ -764,14 +763,52 @@ async function procesarAltaPedido(){
 
 }
 
-async function procesarListadoPedidos(){
-    let nombreCliente = frmListadoPedidosCliente.txtNombreClienteListado.value.trim();
+async function procesarListadoPedidos() {
+    // Solicitar datos del pedido al backend
+    let respuesta = await oRestaurante.listadoPedido();
 
-    const listado = await oBar.listadoPedidoCliente(nombreCliente);
+    if (respuesta.ok) {
+        let tabla = "<h2>Listado de Pedidos</h2>";
+        tabla += "<table class='table table-striped'>";
+        tabla += "<thead><tr><th>ID Pedido</th><th>ID Cliente</th><th>Fecha</th><th>Camarero</th><th>Total</th><th>Eliminar</th><th>Editar</th></tr></thead><tbody>";
 
-    document.querySelector("#listado").innerHTML = listado;
-    document.querySelector("#listado").classList.remove("d-none");
+        for (let pedido of respuesta.datos) {
+            tabla += "<tr>";
+            tabla += `<td>${pedido.idpedido}</td>`;
+            tabla += `<td>${pedido.idcliente}</td>`;
+            tabla += `<td>${pedido.fecha}</td>`;
+            tabla += `<td>${pedido.camarero}</td>`;
+            tabla += `<td>${pedido.total}</td>`;
+            tabla += `<td><button class="btn btn-danger btn-sm" onclick="eliminarPedido(${pedido.idpedido})">Eliminar</button></td>`;
+            tabla += `<td><button class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicion(${pedido.idpedido}, '${pedido.idcliente}', '${pedido.fecha}', ${pedido.camarero}, '${pedido.total}')">Editar</button></td>`;
+            tabla += "</tr>";
+        }
 
+        tabla += "</tbody></table>";
+
+        // Insertar la tabla en el contenedor correcto
+        document.querySelector("#listadoPedido").innerHTML = tabla;
+
+        // Asegúrate de que el formulario de edición está oculto inicialmente
+    } else {
+        // Mostrar mensaje de error si la solicitud falla
+        document.querySelector("#listadoPedido").innerHTML = `
+            <div class="alert alert-danger">Error al cargar el pedido: ${respuesta.mensaje}</div>
+        `;
+    }
+}
+
+async function eliminarPedido(idpedido) {
+    if (confirm("¿Estás seguro de que deseas eliminar este pedido?")) {
+        let respuesta = await oRestaurante.eliminarPedido(idpedido);
+        if (!respuesta.ok) {
+            alert("Pedido eliminado exitosamente.");
+            // Recargar la lista del menú
+            procesarListadoMenu();
+        } else {
+            alert(`Error al eliminar el pedido: ${respuesta.mensaje}`);
+        }
+    }
 }
 
 
