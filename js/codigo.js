@@ -78,6 +78,7 @@ function ocultarFormularios(){
     frmListadoClientePorNombre.style.display = "none";
     frmParametrizadoCliente.style.display = "none";
     frmModificarCliente.style.display = "none";
+    listadoCliente.style.display = "none";
     frmAltaMenu.style.display = "none";
     frmListadoMenu.style.display = "none";
     frmListadoMenuPorNombre.style.display = "none";
@@ -152,7 +153,6 @@ function validarAltaCliente() {
 async function procesarListadoPorCliente() {
     // Solicitar datos del menú al backend
     let respuesta = await oRestaurante.listadoCliente();
-    alert("Ha entrado en procesar listado")
 
    // if (respuesta.ok) {
         let tabla = "<h2>Listado de Clientes</h2>";
@@ -165,8 +165,8 @@ async function procesarListadoPorCliente() {
             tabla += `<td>${cliente.nombre}</td>`;
             tabla += `<td>${cliente.email}</td>`;
             tabla += `<td>${cliente.telefono}</td>`;
+            tabla += "<td><button class='btn btn-danger ms-3 eliminarCliente' data-cliente='" + JSON.stringify(cliente) + "'><i class='bi bi-trash'></i></button></td>'";
             tabla += "<td><button class='btn btn-primary modificarCliente' data-cliente='" + JSON.stringify(cliente) + "'><i class='bi bi-pencil-square'></i></button></td>'";
-            tabla += `<td><button class="btn btn-primary btn-sm modificarCliente data-cliente='"+JSON.stringify(cliente)"+'>Editar</button></td>`;
             tabla += "</tr>";
         }
 
@@ -237,6 +237,19 @@ function procesarBotonEditarCliente(oEvento) {
             borrarCliente(cliente);
         }
     }
+}
+
+async function borrarCliente(oEvento) {
+
+    let respuesta = await oRestaurante.borrarCliente(oEvento.idcliente);
+
+    alert(respuesta.mensaje);
+
+    if (!respuesta.error) { // Si NO hay error
+        // Borrado de la tabla html
+        document.querySelector("#listadoCliente").addEventListener("load", location.reload());
+    }
+
 }
 
 async function procesarModificarCliente() {
