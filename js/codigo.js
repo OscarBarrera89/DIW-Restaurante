@@ -38,10 +38,10 @@ function registrarEventos() {
     document.querySelector("#mnuAltaPedido").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuListadoPedidos").addEventListener("click", mostrarFormulario);
     document.querySelector("#mnuListadoPedidosPorCamarero").addEventListener("click", mostrarFormulario);
-    /*document.querySelector("#mnuBuscarPedido").addEventListener("click", mostrarFormulario);*/
+    document.querySelector("#mnuBuscarPedido").addEventListener("click", mostrarFormulario);
     frmAltaPedido.btnAceptarAltaPedido.addEventListener("click", procesarAltaPedido);
     frmListadoPedidosPorCamarero.btnBuscarNombreCamarero.addEventListener("click", buscarPedidoPorCamarero);
-    /*frmParametrizadoPedido.btnBuscarParametrizado.addEventListener("click", buscarParametrizadoPedido);*/
+    frmParametrizadoPedido.btnBuscarParametrizado.addEventListener("click", buscarParametrizadoPedido);
 }
 
 function mostrarFormulario(oEvento){
