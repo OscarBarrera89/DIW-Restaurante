@@ -804,7 +804,7 @@ async function eliminarPedido(idpedido) {
         if (!respuesta.ok) {
             alert("Pedido eliminado exitosamente.");
             // Recargar la lista del menú
-            procesarListadoMenu();
+            procesarListadoPedidos();
         } else {
             alert(`Error al eliminar el pedidos: ${respuesta.mensaje}`);
         }
@@ -898,6 +898,55 @@ async function guardarCambiosPlato(idplato) {
     }
 }*/
 
+function mostrarFormularioEdicionPedido(idpedido, idcliente, fecha, camarero, total) {
+    const formulario = `
+        <h3>Editar Pedido</h3>
+        <form id="formEditarPedido">
+            <div class="mb-3">
+                <label for="editIdcliente" class="form-label">Cliente</label>
+                <input type="text" class="form-control" id="editIdcliente" value="${idcliente}">
+            </div>
+            <div class="mb-3">
+                <label for="editFecha" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="editFecha" value="${fecha}">
+            </div>
+            <div class="mb-3">
+                <label for="editCamarero" class="form-label">Camarero</label>
+                <input type="text" class="form-control" id="editCamarero" value="${camarero}">
+            </div>
+            <div class="mb-3">
+                <label for="editTotal" class="form-label">Total</label>
+                <input type="number" step="0.01" class="form-control" id="editTotal" value="${total}">
+            </div>
+            <button type="button" class="btn btn-success" onclick="guardarCambiosPedido(${idpedido})">Guardar Cambios</button>
+        </form>
+    `;
+    document.querySelector("#formularioEdicion").innerHTML = formulario;
+}
+async function guardarCambiosPedido(idpedido) {
+    const idcliente = document.querySelector("#editIdcliente").value.trim();
+    const fecha = document.querySelector("#editFecha").value.trim();
+    const camarero = document.querySelector("#editCamarero").value.trim();
+    const total = parseFloat(document.querySelector("#editTotal").value.trim());
+
+    if (!idcliente || !fecha || !camarero || isNaN(total)) {
+        alert("Todos los campos son obligatorios y el total debe ser un número válido.");
+        return;
+    }
+
+    const pedidoActualizado = new Pedido(idpedido, idcliente, fecha, camarero, total);
+    const respuesta = await oRestaurante.modificarPedido(pedidoActualizado);
+
+    if (respuesta.ok) {
+        alert("Pedido actualizado correctamente.");
+        procesarListadoPedidos();
+    } else {
+        alert(`Error al actualizar el pedido: ${respuesta.mensaje}`);
+    }
+}
+
+
+
 async function buscarPedidoPorCamarero() {
     let nombrePedido = frmListadoPedidosPorCamarero.txtBusquedaCamarero.value.trim(); //Trim o no?
 
@@ -929,5 +978,120 @@ async function buscarPedidoPorCamarero() {
 
     } else { // Si hay error
         alert(respuesta.mensaje);
+    }
+}
+
+function validarDatosPedido(idcliente, fecha, camarero, total) {
+
+    const errores = [];
+
+    if (!idcliente) {
+        errores.push("El cliente no puede estar vacío.");
+    }
+
+    if (!fecha) {
+        errores.push("La fecha no puede estar vacía.");
+    }
+
+    if (!camarero) {
+        errores.push("El cliente no puede estar vacío.");
+    }
+
+    if (isNaN(total) || total <= 0) {
+        errores.push("El total debe ser un número mayor que 0.");
+    }
+
+    return errores; // Retorna un array con los mensajes de error
+}
+
+
+
+// Función para eliminar un plato del menú
+async function eliminarPedido(idPedido) {
+    if (confirm("¿Estás seguro de que deseas eliminar este pedido?")) {
+        let respuesta = await oRestaurante.eliminarPlato(idPedido);
+        if (!respuesta.ok) {
+            alert("Pedido eliminado exitosamente.");
+            // Recargar la lista del menú
+            procesarListadoPedidos();
+        } else {
+            alert(`Error al eliminar el pedido: ${respuesta.mensaje}`);
+        }
+    }
+}
+/*
+async function buscarParametrizadoPedido() {
+    let idcliente = frmParametrizadoPedido.txtNombrePlato1.value.trim();
+    let descripcion = frmParametrizado.txtDescripcion1.value.trim();
+    let alergenos = frmParametrizado.selectAlergenos1.value.trim();
+
+    const errores = validarDatosPlatoParam(nombre, descripcion, alergenos);
+    if (errores.length > 0) {
+        alert(`Errores encontrados:\n${errores.join("\n")}`);
+        return;
+    }
+
+    let respuesta = await oRestaurante.BuscarMenuParam(nombre, descripcion, alergenos);
+    console.log(respuesta);
+
+    if (!respuesta.error && Array.isArray(respuesta.datos)) {
+        let resultadoBusqueda = document.querySelector("#resultadoBusquedaPlato2");
+        resultadoBusqueda.style.display = 'none';
+
+        let tablaSalida = "<table class='table'>";
+        tablaSalida += "<thead><tr><th>ID</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Alergenos</th></tr></thead>";
+        tablaSalida += "<tbody>";
+
+        respuesta.datos.forEach(plato => {
+            tablaSalida += "<tr>";
+            tablaSalida += `<td>${plato.idplato}</td>`;
+            tablaSalida += `<td>${plato.nombre}</td>`;
+            tablaSalida += `<td>${plato.descripcion}</td>`;
+            tablaSalida += `<td>${plato.precio}</td>`;
+            tablaSalida += `<td>${plato.alergenos}</td>`;
+            tablaSalida += "</tr>";
+        });
+
+        tablaSalida += "</tbody></table>";
+
+        resultadoBusqueda.innerHTML = tablaSalida;
+        resultadoBusqueda.style.display = 'block';
+    } else {
+        alert(respuesta.mensaje || "No se encontraron resultados.");
+    }
+}*/
+async function buscarParametrizadoPedido() {
+    const idcliente = frmParametrizadoPedido.txtIdCliente.value.trim();
+    const fecha = frmParametrizadoPedido.txtFecha.value.trim();
+    const camarero = frmParametrizadoPedido.txtCamarero.value.trim();
+
+    const datosBusqueda = { idcliente, fecha, camarero };
+
+    let respuesta = await oRestaurante.buscarPedidoParametrizado(datosBusqueda);
+
+    if (!respuesta.error && Array.isArray(respuesta.datos)) {
+        let resultadoBusqueda = document.querySelector("#resultadoBusquedaPedido");
+        resultadoBusqueda.style.display = "none";
+
+        let tablaSalida = "<table class='table'>";
+        tablaSalida += "<thead><tr><th>ID Pedido</th><th>ID Cliente</th><th>Fecha</th><th>Camarero</th><th>Total</th></tr></thead>";
+        tablaSalida += "<tbody>";
+
+        respuesta.datos.forEach(pedido => {
+            tablaSalida += "<tr>";
+            tablaSalida += `<td>${pedido.idpedido}</td>`;
+            tablaSalida += `<td>${pedido.idcliente}</td>`;
+            tablaSalida += `<td>${pedido.fecha}</td>`;
+            tablaSalida += `<td>${pedido.camarero}</td>`;
+            tablaSalida += `<td>${pedido.total}</td>`;
+            tablaSalida += "</tr>";
+        });
+
+        tablaSalida += "</tbody></table>";
+
+        resultadoBusqueda.innerHTML = tablaSalida;
+        resultadoBusqueda.style.display = "block";
+    } else {
+        alert(respuesta.mensaje || "No se encontraron resultados.");
     }
 }

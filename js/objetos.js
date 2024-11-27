@@ -249,6 +249,18 @@ class Restaurante{
         return respuesta;
     }
 
+    async BuscarPedidoParam(nombre, descripcion, alergenos) {
+        let datos = new FormData();
+
+        datos.append("nombre", nombre);
+        datos.append("descripcion", descripcion);
+        datos.append("alergenos", alergenos);
+       
+        let respuesta = await peticionGET("parametrizado_menu.php", datos);
+        console.log(respuesta);
+        return respuesta;
+    }
+
 //     async altaPedido(oPedido) {
 //         let datos = new FormData();
 

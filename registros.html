@@ -476,6 +476,61 @@
 					<!-- Mostrar aqui el formulario para editar los datos-->
 				</div>
 			</form>
+			<!--Formulario Parametrizado Pedido-->
+			<form class="form-horizontal" name="frmParametrizadoPedido" id="frmParametrizadoPedido">
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Listado de los pedidos parametrizados por este formulario</legend>
+					<h5>Rellene uno de los tres apartados para obtener datos</h5>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtNombrePlato1">Nombre del plato</label>
+						<div class="col-xs-4">
+							<input id="txtNombrePlato1" name="txtNombrePlato1" placeholder="Nombre del plato"
+								class="form-control input-md" type="text">
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="txtDescripcion1">Descripcion del plato</label>
+						<div class="col-xs-4">
+							<input id="txtDescripcion1" name="txtDescripcion1" placeholder="Descripcion del plato" class="form-control input-md"
+								type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="selectAlergenos1">Alérgenos:</label>
+						<select id="selectAlergenos1" name="selectAlergenos1" class="form-select" multiple>
+							<option value="gluten">Gluten</option>
+							<option value="crustaceos">Crustáceos</option>
+							<option value="huevos">Huevos</option>
+							<option value="pescado">Pescado</option>
+							<option value="cacahuetes">Cacahuetes</option>
+							<option value="soja">Soja</option>
+							<option value="lacteos">Leche y derivados (incluyendo lactosa)</option>
+							<option value="frutos_cascara">Frutos de cáscara (almendras, avellanas, nueces, etc.)</option>
+							<option value="apio">Apio</option>
+							<option value="mostaza">Mostaza</option>
+							<option value="sesamo">Sésamo</option>
+							<option value="sulfitos">Sulfitos</option>
+							<option value="altramuces">Altramuces</option>
+							<option value="moluscos">Moluscos</option>
+						</select>
+						<small class="form-text text-muted">Mantén presionada la tecla <strong>Ctrl</strong> (Cmd en Mac) para seleccionar múltiples alérgenos.</small>
+					</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-xs-4 control-label" for="btnBuscarParametrizado"></label>
+						<div class="col-xs-4">
+							<input type="button" id="btnBuscarParametrizado" name="btnBuscarParametrizado"
+								class="btn btn-primary" value="Buscar" />
+						</div>
+					</div>
+					<div id="resultadoBusquedaPlato2">
+						<!-- Mostrar aqui el formulario para editar los datos-->
+					</div>
+				</fieldset>
+			</form>
 		</div>
 	</div>
 
