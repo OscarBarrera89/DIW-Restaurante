@@ -541,7 +541,8 @@ function mostrarFormularioEdicion(idplato, nombre, descripcion, precio, alergeno
             <button type="button" class="btn btn-success" onclick="guardarCambiosPlato(${idplato})">Guardar Cambios</button>
         </form>
     `;
-    document.querySelector("#formularioEdicion").innerHTML = formulario;    
+    document.querySelector("#formularioEdicion").innerHTML = formulario;
+    document.querySelector("#formularioEdicion2").innerHTML = formulario;    
 
 }
 
@@ -582,13 +583,21 @@ async function buscarPlatoPorNombre() {
         resultadoBusqueda.style.display = 'none';
         // Escribimos resultado
         let tablaSalida = "<table class='table'>";
-        tablaSalida += "<thead><tr><th>ID</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Alergenos</th></tr></thead>";
+        tablaSalida += "<thead><tr><th>ID</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Alergenos</th><th>Eliminar</th><th>Editar</th></tr></thead>";
         tablaSalida += "<tbody><tr>";
         tablaSalida += "<td>" + respuesta.datos.idplato + "</td>"
         tablaSalida += "<td>" + respuesta.datos.nombre + "</td>"
         tablaSalida += "<td>" + respuesta.datos.descripcion + "</td>"
         tablaSalida += "<td>" + respuesta.datos.precio + "</td>"
         tablaSalida += "<td>" + respuesta.datos.alergenos + "</td>"
+        tablaSalida += "<td><button class='btn btn-danger btn-sm' onclick='eliminarMenu(" + respuesta.datos.idplato +")'>Eliminar</button></td>";
+        tablaSalida += "<td><button class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicion(" 
+        + respuesta.datos.idplato + ", " 
+        + "\"" + respuesta.datos.nombre.replace(/"/g, '&quot;') + "\"" + ", " 
+        + "\"" + respuesta.datos.descripcion.replace(/"/g, '&quot;') + "\"" + ", " 
+        + respuesta.datos.precio + ", "
+        + "\"" + respuesta.datos.alergenos.replace(/"/g, '&quot;') + "\"" 
+        + ")'>Editar</button></td>";
         tablaSalida += "</tr></tbody></table>";
 
         resultadoBusqueda.innerHTML = tablaSalida;
