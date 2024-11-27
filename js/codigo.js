@@ -1073,7 +1073,7 @@ async function buscarParametrizadoPedido() {
         return;
     }
 
-    let respuesta = await oRestaurante.BuscarPedidoParam(idcliente, fecha, camarero);
+    let respuesta = await oRestaurante.buscarPedidoParametrizado(idcliente, fecha, camarero);
     console.log(respuesta);
 
     try {
