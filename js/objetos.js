@@ -190,6 +190,9 @@ class Restaurante{
         return respuesta;
     }
 
+
+    //Fin de MENU
+    //PEDIDO
     async altaPedido(oPedido) {
         let datos = new FormData();
 
@@ -200,7 +203,7 @@ class Restaurante{
         return respuesta;
 
     }
-    //Fin de MENU
+
 //     async altaPedido(oPedido) {
 //         let datos = new FormData();
 
