@@ -257,7 +257,7 @@ class Restaurante{
         if (fecha) datos.append("fecha", fecha);
         if (camarero) datos.append("camarero", camarero);
     
-        const respuesta = await peticionGET("parametrizador_pedido.php", datos);
+        const respuesta = await peticionGET("parametrizado_pedido.php", datos);
     
         return respuesta;
     }
