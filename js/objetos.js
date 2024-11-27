@@ -249,15 +249,16 @@ class Restaurante{
         return respuesta;
     }
 
-    async BuscarPedidoParam(nombre, descripcion, alergenos) {
+    async buscarPedidoParametrizado(datosBusqueda) {
+        const { idcliente, fecha, camarero } = datosBusqueda;
+    
         let datos = new FormData();
-
-        datos.append("nombre", nombre);
-        datos.append("descripcion", descripcion);
-        datos.append("alergenos", alergenos);
-       
-        let respuesta = await peticionGET("parametrizado_menu.php", datos);
-        console.log(respuesta);
+        if (idcliente) datos.append("idcliente", idcliente);
+        if (fecha) datos.append("fecha", fecha);
+        if (camarero) datos.append("camarero", camarero);
+    
+        const respuesta = await peticionGET("parametrizador_pedido.php", datos);
+    
         return respuesta;
     }
 
