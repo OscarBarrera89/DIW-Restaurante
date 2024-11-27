@@ -915,8 +915,8 @@ async function buscarPedidoPorCamarero() {
         tablaSalida += "<td>" + respuesta.datos.fecha + "</td>"
         tablaSalida += "<td>" + respuesta.datos.camarero + "</td>"
         tablaSalida += "<td>" + respuesta.datos.total + "</td>"
-        tablaSalida += "<td><button class='btn btn-danger btn-sm' onclick='eliminarMenu(" + respuesta.datos.idpedido +")'>Eliminar</button></td>";
-        tablaSalida += "<td><button class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicion(" 
+        tablaSalida += "<td><button class='btn btn-danger btn-sm' onclick='eliminarPedido(" + respuesta.datos.idpedido +")'>Eliminar</button></td>";
+        tablaSalida += "<td><button class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicionCamarero(" 
         + respuesta.datos.idpedido + ", " 
         + "\"" + String(respuesta.datos.idcliente).replace(/"/g, '&quot;') + "\"" + ", "  
         + "\"" + respuesta.datos.fecha.replace(/"/g, '&quot;') + "\"" + ", " 
