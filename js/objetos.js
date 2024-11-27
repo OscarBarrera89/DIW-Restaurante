@@ -249,15 +249,15 @@ class Restaurante{
         return respuesta;
     }
 
-    async buscarPedidoParametrizado(datosBusqueda) {
-        const { idcliente, fecha, camarero } = datosBusqueda;
+    async buscarPedidoParametrizado(idcliente, fecha, camarero) {
     
         let datos = new FormData();
-        if (idcliente) datos.append("idcliente", idcliente);
-        if (fecha) datos.append("fecha", fecha);
-        if (camarero) datos.append("camarero", camarero);
+
+        datos.append("idcliente", idcliente);
+        datos.append("fecha", fecha);
+        datos.append("camarero", camarero);
     
-        const respuesta = await peticionGET("parametrizado_pedido.php", datos);
+        let respuesta = await peticionGET("parametrizado_pedido.php", datos);
     
         return respuesta;
     }
