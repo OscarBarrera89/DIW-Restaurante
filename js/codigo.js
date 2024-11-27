@@ -110,7 +110,7 @@ function ocultarFormularios(){
     //Pedidos
     frmAltaPedido.style.display = "none";
     frmListadoPedidos.style.display = "none";
-    // frmListadoPedidosPorNombre.style.display = "none";
+    frmListadoPedidosPorCamarero.style.display = "none";
     // frmParametrizadoPedido.style.display = "none";
 }
 
@@ -899,9 +899,9 @@ async function guardarCambiosPlato(idplato) {
 }*/
 
 async function buscarPedidoPorCamarero() {
-    let nombrePedido = frmListadoPedidoPorCamarero.txtBusquedaPedido.value.trim(); //Trim o no?
+    let nombrePedido = frmListadoPedidosPorCamarero.txtBusquedaPedido.value.trim(); //Trim o no?
 
-    let respuesta = await oRestaurante.buscarMenu(nombrePedido);
+    let respuesta = await oRestaurante.buscarPedido(nombrePedido);
 
     if (!respuesta.error) { // Si NO hay error
         let resultadoBusqueda = document.querySelector("#resultadoBusquedaPedido");

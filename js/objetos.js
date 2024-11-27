@@ -226,6 +226,18 @@ class Restaurante{
         return respuesta;
     }
 
+    async modificarPedido(oPedido) {
+        let datos = new FormData();
+
+        // Se podría pasar campo a campo al servidor
+        // pero en esta ocasión vamos a pasar todos los datos 
+        // en un solo parámetro cuyos datos van en formato JSON
+        datos.append("pedido",JSON.stringify(oPedido));
+       
+        let respuesta = await peticionPOST("modificar_pedido.php", datos);
+
+        return respuesta;
+    }
 
     async buscarPedido(camarero) {
         let datos = new FormData();
