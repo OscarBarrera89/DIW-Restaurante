@@ -1012,7 +1012,7 @@ async function eliminarPedido(idPedido) {
         let respuesta = await oRestaurante.eliminarPlato(idPedido);
         if (!respuesta.ok) {
             alert("Pedido eliminado exitosamente.");
-            // Recargar la lista del menú
+            // Recargar la lista del pedido
             procesarListadoPedidos();
         } else {
             alert(`Error al eliminar el pedido: ${respuesta.mensaje}`);
@@ -1061,11 +1061,20 @@ async function buscarParametrizadoPedido() {
     }
 }*/
 async function buscarParametrizadoPedido() {
-    const idcliente = frmParametrizadoPedido.txtIdCliente.value.trim();
-    const fecha = frmParametrizadoPedido.txtFecha.value.trim();
-    const camarero = frmParametrizadoPedido.txtCamarero.value.trim();
+    let idcliente = frmParametrizadoPedido.txtIdCliente.value.trim();
+    let fecha = frmParametrizadoPedido.txtFecha.value.trim();
+    let camarero = frmParametrizadoPedido.txtCamarero.value.trim();
 
     const datosBusqueda = { idcliente, fecha, camarero };
+
+    const errores = validarDatosPedidosParam(idcliente, fecha, camarero);
+    if (errores.length > 0) {
+        alert(`Errores encontrados:\n${errores.join("\n")}`);
+        return;
+    }
+
+    let respuesta = await oRestaurante.BuscarPedidoParam(idcliente, fecha, camarero);
+    console.log(respuesta);
 
     try {
         const respuesta = await oRestaurante.buscarPedidoParametrizado(datosBusqueda);
@@ -1098,4 +1107,22 @@ async function buscarParametrizadoPedido() {
     } catch (error) {
         console.error("Error al buscar pedidos parametrizados:", error);
     }
+}
+
+async function validarDatosPedidoParam(idcliente, fecha, camarero){
+    const errores = [];
+
+    if (isNaN(idcliente) || idcliente <= 0) {
+        errores.push("El id cliente no puede estar vacío.");
+    }
+
+    if (isNaN(Date.parse(fecha))) {
+        errores.push("La fecha no puede estar vacía.");
+    }
+
+    if (!camarero) {
+        errores.push("El combre del camarero no puede estar vacío.");
+    }
+
+    return errores; // Retorna un array con los mensajes de error
 }
