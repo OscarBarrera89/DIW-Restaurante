@@ -899,7 +899,7 @@ async function guardarCambiosPlato(idplato) {
 }*/
 
 async function buscarPedidoPorCamarero() {
-    let nombrePedido = frmListadoPedidosPorCamarero.txtBusquedaPedido.value.trim(); //Trim o no?
+    let nombrePedido = frmListadoPedidosPorCamarero.txtBusquedaCamarero.value.trim(); //Trim o no?
 
     let respuesta = await oRestaurante.buscarPedido(nombrePedido);
 
