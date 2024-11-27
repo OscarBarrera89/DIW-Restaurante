@@ -920,9 +920,9 @@ async function buscarPedidoPorCamarero() {
         + respuesta.datos.idpedido + ", " 
         + "\"" + String(respuesta.datos.idcliente).replace(/"/g, '&quot;') + "\"" + ", "  
         + "\"" + respuesta.datos.fecha.replace(/"/g, '&quot;') + "\"" + ", " 
-        + "\"" + respuesta.datos.camarero.replace(/"/g, '&quot;') + "\"" + ", " 
-        + "\"" + respuesta.datos.total.replace(/"/g, '&quot;') + "\"" 
-        + ")'>Editar</button></td>";
+        + "\"" + respuesta.datos.camarero.replace(/"/g, '&quot;') + "\"" + ", "
+        + "\"" + String(respuesta.datos.total).replace(/"/g, '&quot;') + "\"" 
+        + ")'>Editar</button></td>";    
 
         resultadoBusqueda.innerHTML = tablaSalida;
         resultadoBusqueda.style.display = 'block';
