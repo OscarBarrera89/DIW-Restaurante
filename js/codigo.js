@@ -1197,13 +1197,12 @@ function mostrarFormularioEdicionCamarero(idpedido, idcliente, fecha, camarero, 
     }
 }
 
-async function guardarCambiosCamarero(idpedido) {
-    const idcliente = document.querySelector("#editIdcliente").value.trim();
-    const fecha = document.querySelector("#editFecha").value.trim();
-    const camarero = document.querySelector("#editCamarero").value.trim();
-    const total = parseFloat(document.querySelector("#editTotal").value.trim());
+async function guardarCambiosCamarero(idpedido, idcliente) {
+    let fecha = document.querySelector("#editFecha").value.trim();
+    let camarero = document.querySelector("#editCamarero").value.trim();
+    let total = parseFloat(document.querySelector("#editTotal").value.trim());
 
-    if (!idcliente || !fecha || !camarero || isNaN(total)) {
+    if (!fecha || !camarero || isNaN(total)) {
         alert("Todos los campos son obligatorios y el total debe ser un número válido.");
         return;
     }
