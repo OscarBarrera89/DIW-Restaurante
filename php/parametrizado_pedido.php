@@ -47,7 +47,7 @@ if ($fecha) {
 }
 if ($camarero) {
     $sql .= " AND camarero LIKE ?";
-    $params[] = "%$camarero%";
+    $params[] = "'$camarero'";
     $types .= "s";
 }
 
