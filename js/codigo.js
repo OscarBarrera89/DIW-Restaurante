@@ -1078,7 +1078,7 @@ async function buscarParametrizadoPedido() {
 }*/
 async function buscarParametrizadoPedido() {
     let idcliente = parseInt(frmParametrizadoPedido.txtIdCliente.value.trim());
-
+    console.log(idcliente);
     let fecha = frmParametrizadoPedido.txtFecha.value.trim();
     let camarero = frmParametrizadoPedido.txtCamarero.value.trim();
 
