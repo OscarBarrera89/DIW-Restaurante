@@ -512,8 +512,8 @@ async function procesarListadoMenu() {
             tabla += `<td>${plato.descripcion}</td>`;
             tabla += `<td>${plato.precio}</td>`;
             tabla += `<td>${plato.alergenos}</td>`;
-            tabla += `<td><button class="btn btn-danger btn-sm" onclick="eliminarMenu(${plato.idplato})">Eliminar</button></td>`;
-            tabla += `<td><button class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicion(${plato.idplato}, '${plato.nombre}', '${plato.descripcion}', ${plato.precio}, '${plato.alergenos}')">Editar</button></td>`;
+            tabla += `<td><button type='button' class="btn btn-danger btn-sm" onclick="eliminarMenu(${plato.idplato})">Eliminar</button></td>`;
+            tabla += `<td><button type='button' class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicion(${plato.idplato}, '${plato.nombre}', '${plato.descripcion}', ${plato.precio}, '${plato.alergenos}')">Editar</button></td>`;
             tabla += "</tr>";
         }
 
@@ -620,8 +620,8 @@ async function buscarPlatoPorNombre() {
         tablaSalida += "<td>" + respuesta.datos.descripcion + "</td>"
         tablaSalida += "<td>" + respuesta.datos.precio + "</td>"
         tablaSalida += "<td>" + respuesta.datos.alergenos + "</td>"
-        tablaSalida += "<td><button class='btn btn-danger btn-sm' onclick='eliminarMenu(" + respuesta.datos.idplato +")'>Eliminar</button></td>";
-        tablaSalida += "<td><button class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicion(" 
+        tablaSalida += "<td><button type='button' class='btn btn-danger btn-sm' onclick='eliminarMenu(" + respuesta.datos.idplato +")'>Eliminar</button></td>";
+        tablaSalida += "<td><button type='button' class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicion(" 
         + respuesta.datos.idplato + ", " 
         + "\"" + respuesta.datos.nombre.replace(/"/g, '&quot;') + "\"" + ", " 
         + "\"" + respuesta.datos.descripcion.replace(/"/g, '&quot;') + "\"" + ", " 
@@ -779,8 +779,8 @@ async function procesarListadoPedidos() {
             tabla += `<td>${pedido.fecha}</td>`;
             tabla += `<td>${pedido.camarero}</td>`;
             tabla += `<td>${pedido.total}</td>`;
-            tabla += `<td><button class="btn btn-danger btn-sm" onclick="eliminarPedido(${pedido.idpedido})">Eliminar</button></td>`;
-            tabla += `<td><button class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicionPedido(${pedido.idpedido}, ${pedido.idcliente}, '${pedido.fecha}', '${pedido.camarero}', ${pedido.total})">Editar</button></td>`;
+            tabla += `<td><button type='button' class="btn btn-danger btn-sm" onclick="eliminarPedido(${pedido.idpedido})">Eliminar</button></td>`;
+            tabla += `<td><button type='button' class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicionPedido(${pedido.idpedido}, ${pedido.idcliente}, '${pedido.fecha}', '${pedido.camarero}', ${pedido.total})">Editar</button></td>`;
             tabla += "</tr>";
         }
 
