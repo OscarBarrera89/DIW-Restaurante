@@ -250,17 +250,19 @@ class Restaurante{
     }
 
     async buscarPedidoParametrizado(idcliente, fecha, camarero) {
-    
         let datos = new FormData();
-
-        datos.append("idcliente", idcliente);
-        datos.append("fecha", fecha);
-        datos.append("camarero", camarero);
+    
+        if (idcliente) datos.append("idcliente", idcliente);
+        if (fecha) datos.append("fecha", fecha);
+        if (camarero) datos.append("camarero", camarero);
+    
+        console.log("Datos enviados:", Object.fromEntries(datos.entries()));
     
         let respuesta = await peticionGET("parametrizado_pedido.php", datos);
     
         return respuesta;
     }
+    
 
 //     async altaPedido(oPedido) {
 //         let datos = new FormData();

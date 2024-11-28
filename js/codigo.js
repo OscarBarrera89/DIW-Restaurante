@@ -1081,6 +1081,7 @@ async function buscarParametrizadoPedido() {
     let fecha = frmParametrizadoPedido.txtFecha.value.trim();
     let camarero = frmParametrizadoPedido.txtCamarero.value.trim();
 
+    // Validar los datos
     const errores = validarDatosPedidosParam(idcliente, fecha, camarero);
     if (errores.length > 0) {
         alert(`Errores encontrados:\n${errores.join("\n")}`);
@@ -1089,16 +1090,16 @@ async function buscarParametrizadoPedido() {
 
     try {
         const respuesta = await oRestaurante.buscarPedidoParametrizado(idcliente, fecha, camarero);
-        console.log(respuesta);
-    
+        console.log("Respuesta:", respuesta);
+
         if (respuesta.ok && Array.isArray(respuesta.datos)) {
             let resultadoBusqueda = document.querySelector("#resultadoBusquedaPedido");
             resultadoBusqueda.style.display = "none";
-    
+
             let tablaSalida = "<table class='table'>";
             tablaSalida += "<thead><tr><th>ID Pedido</th><th>ID Cliente</th><th>Fecha</th><th>Camarero</th><th>Total</th></tr></thead>";
             tablaSalida += "<tbody>";
-    
+
             respuesta.datos.forEach(pedido => {
                 tablaSalida += "<tr>";
                 tablaSalida += `<td>${pedido.idpedido}</td>`;
@@ -1108,21 +1109,20 @@ async function buscarParametrizadoPedido() {
                 tablaSalida += `<td>${pedido.total}</td>`;
                 tablaSalida += "</tr>";
             });
-    
+
             tablaSalida += "</tbody></table>";
-    
+
             resultadoBusqueda.innerHTML = tablaSalida;
             resultadoBusqueda.style.display = "block";
         } else {
             alert(respuesta.mensaje || "No se encontraron resultados.");
         }
     } catch (error) {
-        
         console.error("Error al buscar pedidos parametrizados:", error.message);
         alert(`Error al buscar pedidos parametrizados: ${error.message}`);
     }
-    
 }
+
 
 function mostrarFormularioEdicionCamarero(idpedido, idcliente, fecha, camarero, total) {
     console.log("Edición de camarero");

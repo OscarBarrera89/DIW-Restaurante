@@ -20,8 +20,7 @@ $camarero = $_GET["camarero"] ?? null;
 
 // Validar que al menos un criterio de búsqueda sea enviado
 if (!$idcliente && !$fecha && !$camarero) {
-    echo json_encode(["ok" => false, "mensaje" => "No se enviaron criterios para buscar."]);
-    exit;
+    responder(null, false, "No se enviaron criterios para buscar.", $conexion);
 }
 
 // Construir la consulta dinámica
@@ -32,19 +31,16 @@ $types = "";
 if ($idcliente) {
     $sql .= " AND idcliente = ?";
     $params[] = $idcliente;
-    $types .= "i"; // 'i' para integer
+    $types .= "i";
 }
 if ($fecha) {
-    // Asegúrate de que la fecha esté en el formato correcto
-    $fecha = date('Y-m-d', strtotime($fecha));
     $sql .= " AND fecha = ?";
     $params[] = $fecha;
-    $types .= "s"; // 's' para string, ya que date() devuelve un string en formato correcto
+    $types .= "s";
 }
-
 if ($camarero) {
     $sql .= " AND camarero LIKE ?";
-    $params[] = "%$camarero%"; // Búsqueda parcial
+    $params[] = "%$camarero%";
     $types .= "s";
 }
 
@@ -68,7 +64,7 @@ while ($fila = $resultado->fetch_assoc()) {
 if (count($filas) > 0) {
     responder($filas, true, "Datos recuperados", $conexion);
 } else {
-    responder(null, false, "No se encontraron pedidos con los criterios dados", $conexion);
+    responder(null, false, "No se encontraron pedidos con los criterios dados.", $conexion);
 }
 
 $stmt->close();
