@@ -252,9 +252,9 @@ class Restaurante{
     async buscarPedidoParametrizado(idcliente, fecha, camarero) {
         let datos = new FormData();
     
-        if (idcliente) datos.append("idcliente", idcliente);
-        if (fecha) datos.append("fecha", fecha);
-        if (camarero) datos.append("camarero", camarero);
+        datos.append("idcliente", idcliente);
+        datos.append("fecha", fecha);
+        datos.append("camarero", camarero);
     
         console.log("Datos enviados:", Object.fromEntries(datos.entries()));
     
