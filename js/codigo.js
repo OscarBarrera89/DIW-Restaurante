@@ -921,7 +921,7 @@ function mostrarFormularioEdicionPedido(idpedido, idcliente, fecha, camarero, to
             <button type="button" class="btn btn-success" onclick="guardarCambiosPedido(${idpedido})">Guardar Cambios</button>
         </form>
     `;
-    document.querySelector("#formularioEdicion").innerHTML = formulario;
+    document.querySelector("#formularioEdicionPedido").innerHTML = formulario;
 }
 async function guardarCambiosPedido(idpedido) {
     const idcliente = document.querySelector("#editIdcliente").value.trim();
@@ -1130,7 +1130,7 @@ function mostrarFormularioEdicionCamarero(idpedido, idcliente, fecha, camarero, 
         </form>
     `;
 
-    document.querySelector("#formularioEdicionPedido").innerHTML = formulario;
+    document.querySelector("#formularioEdicionCamarero").innerHTML = formulario;
 }
 
 
