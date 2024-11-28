@@ -54,11 +54,15 @@ while ($fila = $resultado->fetch_assoc()) {
     $filas[] = $fila;
 }
 
+echo "Filas encontradas: ";
+print_r($filas); // Línea de depuración
+
 if (count($filas) > 0) {
     responder($filas, true, "Datos recuperados", $conexion);
 } else {
     responder(null, false, "No se encontraron pedidos con los criterios dados", $conexion);
 }
+
 
 $stmt->close();
 $conexion->close();
