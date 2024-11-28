@@ -1107,6 +1107,33 @@ async function buscarParametrizadoPedido() {
     
 }
 
+function mostrarFormularioEdicionCamarero(idpedido, idcliente, fecha, camarero, total) {
+    console.log("Edición de camarero");
+    console.log({ idpedido, idcliente, fecha, camarero, total });
+
+    const formulario = `
+        <h3>Editar Pedido (Por Camarero)</h3>
+        <form id="formEditarPedidoCamarero">
+            <div class="mb-3">
+                <label for="editCamarero" class="form-label">Camarero</label>
+                <input type="text" class="form-control" id="editCamarero" value="${camarero}">
+            </div>
+            <div class="mb-3">
+                <label for="editFecha" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="editFecha" value="${fecha}">
+            </div>
+            <div class="mb-3">
+                <label for="editTotal" class="form-label">Total</label>
+                <input type="number" step="0.01" class="form-control" id="editTotal" value="${total}">
+            </div>
+            <button type="button" class="btn btn-success" onclick="guardarCambiosCamarero(${idpedido}, ${idcliente})">Guardar Cambios</button>
+        </form>
+    `;
+
+    document.querySelector("#formularioEdicionPedido").innerHTML = formulario;
+}
+
+
 function validarDatosPedidosParam(idcliente, fecha, camarero) {
     const errores = [];
 
