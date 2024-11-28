@@ -255,6 +255,9 @@ class Restaurante{
         datos.append("idcliente", idcliente);
         datos.append("fecha", fecha);
         datos.append("camarero", camarero);
+        console.log(idcliente);
+        console.log(fecha);
+        console.log(camarero);
     
         console.log("Datos enviados:", Object.fromEntries(datos.entries()));
     
