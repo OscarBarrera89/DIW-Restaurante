@@ -112,8 +112,6 @@ function ocultarFormularios(){
     frmListadoPedidos.style.display = "none";
     frmListadoPedidosPorCamarero.style.display = "none";
     frmParametrizadoPedido.style.display = "none";
-    formularioEdicionPedido.style.display = "none";
-    formularioEdicionCamarero.style.display = "none";
 }
 
 //PARTE CLIENTE
