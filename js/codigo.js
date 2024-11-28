@@ -922,6 +922,7 @@ function mostrarFormularioEdicionPedido(idpedido, idcliente, fecha, camarero, to
         </form>
     `;
     document.querySelector("#formularioEdicionPedido").innerHTML = formulario;
+    document.querySelector("#formularioEdicionCamarero").innerHTML = formulario;
 }
 async function guardarCambiosPedido(idpedido) {
     const idcliente = document.querySelector("#editIdcliente").value.trim();
