@@ -2,6 +2,17 @@
 require_once('config.php');
 $conexion = obtenerConexion();
 
+function responder($datos, $ok, $mensaje, $conexion) {
+    $respuesta = [
+        'ok' => $ok,
+        'mensaje' => $mensaje,
+        'datos' => $datos
+    ];
+    echo json_encode($respuesta);
+    $conexion->close();
+    exit;
+}
+
 // Recoger datos
 $idcliente = $_GET["idcliente"] ?? null;
 $fecha = $_GET["fecha"] ?? null;
@@ -54,15 +65,11 @@ while ($fila = $resultado->fetch_assoc()) {
     $filas[] = $fila;
 }
 
-echo "Filas encontradas: ";
-print_r($filas); // Línea de depuración
-
 if (count($filas) > 0) {
     responder($filas, true, "Datos recuperados", $conexion);
 } else {
     responder(null, false, "No se encontraron pedidos con los criterios dados", $conexion);
 }
-
 
 $stmt->close();
 $conexion->close();
