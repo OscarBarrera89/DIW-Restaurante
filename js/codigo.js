@@ -1073,15 +1073,15 @@ async function buscarParametrizadoPedido() {
 
     try {
         const respuesta = await oRestaurante.buscarPedidoParametrizado(idcliente, fecha, camarero);
-
+    
         if (respuesta.ok && Array.isArray(respuesta.datos)) {
             let resultadoBusqueda = document.querySelector("#resultadoBusquedaPedido");
             resultadoBusqueda.style.display = "none";
-
+    
             let tablaSalida = "<table class='table'>";
             tablaSalida += "<thead><tr><th>ID Pedido</th><th>ID Cliente</th><th>Fecha</th><th>Camarero</th><th>Total</th></tr></thead>";
             tablaSalida += "<tbody>";
-
+    
             respuesta.datos.forEach(pedido => {
                 tablaSalida += "<tr>";
                 tablaSalida += `<td>${pedido.idpedido}</td>`;
@@ -1091,17 +1091,19 @@ async function buscarParametrizadoPedido() {
                 tablaSalida += `<td>${pedido.total}</td>`;
                 tablaSalida += "</tr>";
             });
-
+    
             tablaSalida += "</tbody></table>";
-
+    
             resultadoBusqueda.innerHTML = tablaSalida;
             resultadoBusqueda.style.display = "block";
         } else {
             alert(respuesta.mensaje || "No se encontraron resultados.");
         }
     } catch (error) {
-        console.error("Error al buscar pedidos parametrizados:", error);
+        console.error("Error al buscar pedidos parametrizados:", error.message);
+        alert(`Error al buscar pedidos parametrizados: ${error.message}`);
     }
+    
 }
 
 function validarDatosPedidosParam(idcliente, fecha, camarero) {
