@@ -953,6 +953,8 @@ async function buscarPedidoPorCamarero() {
 
     let respuesta = await oRestaurante.buscarPedido(nombrePedido);
 
+    console.log(respuesta.datos);
+
     if (!respuesta.error) { // Si NO hay error
         let resultadoBusqueda = document.querySelector("#resultadoBusquedaCamarero");
         resultadoBusqueda.style.display = 'none';
