@@ -1116,6 +1116,7 @@ async function buscarParametrizadoPedido() {
             alert(respuesta.mensaje || "No se encontraron resultados.");
         }
     } catch (error) {
+        console.log(respuesta);
         console.error("Error al buscar pedidos parametrizados:", error.message);
         alert(`Error al buscar pedidos parametrizados: ${error.message}`);
     }
