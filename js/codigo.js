@@ -945,10 +945,6 @@ function mostrarFormularioEdicionPedido(idpedido, idcliente, fecha, camarero, to
         <h3>Editar Pedido</h3>
         <form id="formEditarPedido">
             <div class="mb-3">
-                <label for="editIdcliente" class="form-label">Cliente</label>
-                <input type="text" class="form-control" id="editIdcliente" value="${idcliente}">
-            </div>
-            <div class="mb-3">
                 <label for="editFecha" class="form-label">Fecha</label>
                 <input type="date" class="form-control" id="editFecha" value="${fecha}">
             </div>
@@ -960,14 +956,13 @@ function mostrarFormularioEdicionPedido(idpedido, idcliente, fecha, camarero, to
                 <label for="editTotal" class="form-label">Total</label>
                 <input type="number" step="0.01" class="form-control" id="editTotal" value="${total}">
             </div>
-            <button type="button" class="btn btn-success" onclick="guardarCambiosPedido(${idpedido})">Guardar Cambios</button>
+            <button type="button" class="btn btn-success" onclick="guardarCambiosPedido(${idpedido},${idcliente})">Guardar Cambios</button>
         </form>
     `;
     document.querySelector("#formularioEdicionPedido").innerHTML = formulario;
 //    document.querySelector("#formularioEdicionCamarero").innerHTML = formulario;
 }
-async function guardarCambiosPedido(idpedido) {
-    const idcliente = document.querySelector("#editIdcliente").value.trim();
+async function guardarCambiosPedido(idpedido, idcliente) {
     const fecha = document.querySelector("#editFecha").value.trim();
     const camarero = document.querySelector("#editCamarero").value.trim();
     const total = parseFloat(document.querySelector("#editTotal").value.trim());
