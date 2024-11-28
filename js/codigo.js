@@ -780,7 +780,7 @@ async function procesarListadoPedidos() {
             tabla += `<td>${pedido.camarero}</td>`;
             tabla += `<td>${pedido.total}</td>`;
             tabla += `<td><button class="btn btn-danger btn-sm" onclick="eliminarPedido(${pedido.idpedido})">Eliminar</button></td>`;
-            tabla += `<td><button class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicionPedido(${pedido.idpedido}, '${pedido.idcliente}', '${pedido.fecha}', ${pedido.camarero}, '${pedido.total}')">Editar</button></td>`;
+            tabla += `<td><button class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicionPedido(${pedido.idpedido}, ${pedido.idcliente}, '${pedido.fecha}', '${pedido.camarero}', ${pedido.total})">Editar</button></td>`;
             tabla += "</tr>";
         }
 
