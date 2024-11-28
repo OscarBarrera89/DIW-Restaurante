@@ -1073,9 +1073,6 @@ async function buscarParametrizadoPedido() {
         return;
     }
 
-    let respuesta = await oRestaurante.buscarPedidoParametrizado(idcliente, fecha, camarero);
-    console.log(respuesta);
-
     try {
         const respuesta = await oRestaurante.buscarPedidoParametrizado(datosBusqueda);
 
@@ -1109,11 +1106,11 @@ async function buscarParametrizadoPedido() {
     }
 }
 
-async function validarDatosPedidosParam(idcliente, fecha, camarero){
+function validarDatosPedidosParam(idcliente, fecha, camarero) {
     const errores = [];
 
     if (isNaN(idcliente) || idcliente <= 0) {
-        errores.push("El id cliente no puede estar vacío.");
+        errores.push("El ID cliente no puede estar vacío.");
     }
 
     if (isNaN(Date.parse(fecha))) {
@@ -1121,7 +1118,7 @@ async function validarDatosPedidosParam(idcliente, fecha, camarero){
     }
 
     if (!camarero) {
-        errores.push("El combre del camarero no puede estar vacío.");
+        errores.push("El nombre del camarero no puede estar vacío.");
     }
 
     return errores; // Retorna un array con los mensajes de error
