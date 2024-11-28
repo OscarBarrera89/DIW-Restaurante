@@ -24,10 +24,13 @@ if ($idcliente) {
     $types .= "i"; // 'i' para integer
 }
 if ($fecha) {
+    // Asegúrate de que la fecha esté en el formato correcto
+    $fecha = date('Y-m-d', strtotime($fecha));
     $sql .= " AND fecha = ?";
     $params[] = $fecha;
-//    $types .= "s"; // 's' para string
+    $types .= "s"; // 's' para string, ya que date() devuelve un string en formato correcto
 }
+
 if ($camarero) {
     $sql .= " AND camarero LIKE ?";
     $params[] = "%$camarero%"; // Búsqueda parcial
