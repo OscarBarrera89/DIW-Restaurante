@@ -1145,8 +1145,37 @@ function mostrarFormularioEdicionCamarero(idpedido, idcliente, fecha, camarero, 
         </form>
     `;
 
-    document.querySelector("#formularioEdicionCamarero").innerHTML = formulario;
+    const contenedor = document.querySelector("#formularioEdicionCamarero");
+    if (contenedor) {
+        contenedor.innerHTML = formulario;
+        contenedor.style.display = "block"; // Mostrar el formulario
+    } else {
+        console.error("No se encontró el contenedor para la edición de camareros.");
+    }
 }
+
+async function guardarCambiosCamarero(idpedido) {
+    const idcliente = document.querySelector("#editIdcliente").value.trim();
+    const fecha = document.querySelector("#editFecha").value.trim();
+    const camarero = document.querySelector("#editCamarero").value.trim();
+    const total = parseFloat(document.querySelector("#editTotal").value.trim());
+
+    if (!idcliente || !fecha || !camarero || isNaN(total)) {
+        alert("Todos los campos son obligatorios y el total debe ser un número válido.");
+        return;
+    }
+
+    const pedidoActualizado = new Pedido(idpedido, idcliente, fecha, camarero, total);
+    const respuesta = await oRestaurante.modificarPedido(pedidoActualizado);
+
+    if (respuesta.ok) {
+        alert("Pedido actualizado correctamente.");
+        procesarListadoPedidos();
+    } else {
+        alert(`Error al actualizar el pedido: ${respuesta.mensaje}`);
+    }
+}
+
 
 
 function validarDatosPedidosParam(idcliente, fecha, camarero) {
