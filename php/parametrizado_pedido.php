@@ -9,8 +9,7 @@ $camarero = $_GET["camarero"] ?? null;
 
 // Validar que al menos un criterio de búsqueda sea enviado
 if (!$idcliente && !$fecha && !$camarero) {
-    echo json_encode(["ok" => false, "mensaje" => "No se enviaron criterios para buscar."]);
-    exit;
+    responder(null, false, "No se enviaron criterios para buscar.", $conexion);
 }
 
 // Construir la consulta dinámica
@@ -39,8 +38,7 @@ if ($camarero) {
 
 $stmt = $conexion->prepare($sql);
 if (!$stmt) {
-    responder(null, true, "Error al preparar la consulta: " . $conexion->error, $conexion);
-    exit;
+    responder(null, false, "Error al preparar la consulta: " . $conexion->error, $conexion);
 }
 
 if (!empty($params)) {
@@ -55,33 +53,11 @@ while ($fila = $resultado->fetch_assoc()) {
     $filas[] = $fila;
 }
 
-
-$stmt = $conexion->prepare($sql);
-if ($stmt) {
-    if (!empty($params)) {
-        $stmt->bind_param($types, ...$params);
-    }
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-
-    $filas = [];
-    while ($fila = $resultado->fetch_assoc()) {
-        $filas[] = $fila;
-    }
-
-    if (count($filas) > 0) {
-        responder($filas, false, "Datos recuperados", $conexion);
-    } else {
-        responder(null, true, "No existe el pedido", $conexion);
-    }
-    $stmt->close();
-}
-$conexion->close();
-/*if (count($filas) > 0) {
-    responder($filas, false, "Datos recuperados correctamente", $conexion);
+if (count($filas) > 0) {
+    responder($filas, true, "Datos recuperados", $conexion);
 } else {
-    responder(null, true, "No se encontraron pedidos con los criterios dados", $conexion);
+    responder(null, false, "No se encontraron pedidos con los criterios dados", $conexion);
 }
 
 $stmt->close();
-$conexion->close();*/
+$conexion->close();
