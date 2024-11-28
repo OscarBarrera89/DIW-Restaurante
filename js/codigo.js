@@ -821,7 +821,7 @@ async function procesarListadoPedidos() {
             tabla += `<td>${pedido.fecha}</td>`;
             tabla += `<td>${pedido.camarero}</td>`;
             tabla += `<td>${pedido.total}</td>`;
-            tabla += `<td><button class="btn btn-danger btn-sm" onclick="eliminarPedido(${pedido.idpedido})">Eliminar</button></td>`;
+            tabla += `<td><button type='button' class="btn btn-danger btn-sm" onclick="eliminarPedido(${pedido.idpedido})">Eliminar</button></td>`;
             tabla += `<td><button type='button' class="btn btn-primary btn-sm" onclick="mostrarFormularioEdicionPedido(${pedido.idpedido}, ${pedido.idcliente}, '${pedido.fecha}', '${pedido.camarero}', ${pedido.total})">Editar</button></td>`;
             tabla += "</tr>";
         }
@@ -1058,7 +1058,7 @@ function validarDatosPedido(idcliente, fecha, camarero, total) {
 
 
 // Función para eliminar un plato del menú
-async function eliminarPedido(idPedido) {
+/*async function eliminarPedido(idPedido) {
     if (confirm("¿Estás seguro de que deseas eliminar este pedido?")) {
         let respuesta = await oRestaurante.eliminarPlato(idPedido);
         if (!respuesta.ok) {
@@ -1069,7 +1069,7 @@ async function eliminarPedido(idPedido) {
             alert(`Error al eliminar el pedido: ${respuesta.mensaje}`);
         }
     }
-}
+}*/
 /*
 async function buscarParametrizadoPedido() {
     let idcliente = frmParametrizadoPedido.txtNombrePlato1.value.trim();
