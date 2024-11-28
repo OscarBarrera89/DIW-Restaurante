@@ -572,6 +572,48 @@ function mostrarFormularioEdicion(idplato, nombre, descripcion, precio, alergeno
         </form>
     `;
     document.querySelector("#formularioEdicion").innerHTML = formulario;
+
+}
+
+function mostrarFormularioEdicion2(idplato, nombre, descripcion, precio, alergenos) {
+    const formulario = `
+        <h3>Editar Plato</h3>
+        <form id="formEditarPlato">
+            <div class="mb-3">
+                <label for="editNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="editNombre" value="${nombre}">
+            </div>
+            <div class="mb-3">
+                <label for="editDescripcion" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="editDescripcion" value="${descripcion}">
+            </div>
+            <div class="mb-3">
+                <label for="editPrecio" class="form-label">Precio</label>
+                <input type="number" step="0.01" class="form-control" id="editPrecio" value="${precio}">
+            </div>
+            <div class="mb-3">
+                <label for="editAlergenos">Alérgenos:</label>
+						<select id="editAlergenos" name="editAlergenos" class="form-select" multiple>
+							<option value="gluten">Gluten</option>
+							<option value="crustaceos">Crustáceos</option>
+							<option value="huevos">Huevos</option>
+							<option value="pescado">Pescado</option>
+							<option value="cacahuetes">Cacahuetes</option>
+							<option value="soja">Soja</option>
+							<option value="lacteos">Leche y derivados (incluyendo lactosa)</option>
+							<option value="frutos_cascara">Frutos de cáscara (almendras, avellanas, nueces, etc.)</option>
+							<option value="apio">Apio</option>
+							<option value="mostaza">Mostaza</option>
+							<option value="sesamo">Sésamo</option>
+							<option value="sulfitos">Sulfitos</option>
+							<option value="altramuces">Altramuces</option>
+							<option value="moluscos">Moluscos</option>
+						</select>
+						<small class="form-text text-muted">Mantén presionada la tecla <strong>Ctrl</strong> (Cmd en Mac) para seleccionar múltiples alérgenos.</small>
+            </div>
+            <button type="button" class="btn btn-success" onclick="guardarCambiosPlato(${idplato})">Guardar Cambios</button>
+        </form>
+    `;
     document.querySelector("#formularioEdicion2").innerHTML = formulario;    
 
 }
@@ -621,7 +663,7 @@ async function buscarPlatoPorNombre() {
         tablaSalida += "<td>" + respuesta.datos.precio + "</td>"
         tablaSalida += "<td>" + respuesta.datos.alergenos + "</td>"
         tablaSalida += "<td><button type='button' class='btn btn-danger btn-sm' onclick='eliminarMenu(" + respuesta.datos.idplato +")'>Eliminar</button></td>";
-        tablaSalida += "<td><button type='button' class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicion(" 
+        tablaSalida += "<td><button type='button' class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicion2(" 
         + respuesta.datos.idplato + ", " 
         + "\"" + respuesta.datos.nombre.replace(/"/g, '&quot;') + "\"" + ", " 
         + "\"" + respuesta.datos.descripcion.replace(/"/g, '&quot;') + "\"" + ", " 
