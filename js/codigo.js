@@ -971,8 +971,8 @@ async function buscarPedidoPorCamarero() {
             tablaSalida += `<td>${pedido.fecha}</td>`;
             tablaSalida += `<td>${pedido.camarero}</td>`;
             tablaSalida += `<td>${pedido.total}</td>`;
-            tablaSalida += `<td><button class='btn btn-danger btn-sm' onclick='eliminarPedido(${pedido.idpedido})'>Eliminar</button></td>`;
-            tablaSalida += `<td><button class='btn btn-primary btn-sm' onclick="mostrarFormularioEdicionCamarero(
+            tablaSalida += `<td><button type='button' class='btn btn-danger btn-sm' onclick='eliminarPedido(${pedido.idpedido})'>Eliminar</button></td>`;
+            tablaSalida += `<td><button type='button' class='btn btn-primary btn-sm' onclick="mostrarFormularioEdicionCamarero(
                 ${pedido.idpedido}, 
                 '${pedido.idcliente}', 
                 '${pedido.fecha}', 
