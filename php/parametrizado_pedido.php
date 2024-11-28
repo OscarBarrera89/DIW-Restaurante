@@ -55,11 +55,33 @@ while ($fila = $resultado->fetch_assoc()) {
     $filas[] = $fila;
 }
 
-if (count($filas) > 0) {
+
+$stmt = $conexion->prepare($sql);
+if ($stmt) {
+    if (!empty($params)) {
+        $stmt->bind_param($types, ...$params);
+    }
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    $filas = [];
+    while ($fila = $resultado->fetch_assoc()) {
+        $filas[] = $fila;
+    }
+
+    if (count($filas) > 0) {
+        responder($filas, false, "Datos recuperados", $conexion);
+    } else {
+        responder(null, true, "No existe el pedido", $conexion);
+    }
+    $stmt->close();
+}
+$conexion->close();
+/*if (count($filas) > 0) {
     responder($filas, false, "Datos recuperados correctamente", $conexion);
 } else {
     responder(null, true, "No se encontraron pedidos con los criterios dados", $conexion);
 }
 
 $stmt->close();
-$conexion->close();
+$conexion->close();*/
