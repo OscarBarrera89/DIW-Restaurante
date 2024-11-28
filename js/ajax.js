@@ -2,7 +2,7 @@
 
 //const rutaBackend = "http://localhost/actividades/Restaurante/php/";
 //const rutaBackend = "http://localhost/DIW-Restaurante/php/";
-const rutaBackend = "http://va-server.duckdns.org/php/";
+const rutaBackend = "http://va-server.duckdns.org/Proyecto%20DIW/php/";
 
 
 /**
