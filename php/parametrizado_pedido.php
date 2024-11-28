@@ -26,7 +26,7 @@ if ($idcliente) {
 if ($fecha) {
     $sql .= " AND fecha = ?";
     $params[] = $fecha;
-    $types .= "s"; // 's' para string
+//    $types .= "s"; // 's' para string
 }
 if ($camarero) {
     $sql .= " AND camarero LIKE ?";
