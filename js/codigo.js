@@ -957,35 +957,45 @@ async function buscarPedidoPorCamarero() {
 
     console.log(respuesta.datos);
 
-    if (!respuesta.error) { // Si NO hay error
+    if (!respuesta.error && Array.isArray(respuesta.datos)) { // Si NO hay error y hay resultados
         let resultadoBusqueda = document.querySelector("#resultadoBusquedaCamarero");
         resultadoBusqueda.style.display = 'none';
+
         // Escribimos resultado
         let tablaSalida = "<table class='table'>";
         tablaSalida += "<thead><tr><th>ID Pedido</th><th>ID Cliente</th><th>Fecha</th><th>Camarero</th><th>Total</th><th>Eliminar</th><th>Editar</th></tr></thead>";
-        tablaSalida += "<tbody><tr>";
-        tablaSalida += "<td>" + respuesta.datos.idpedido + "</td>"
-        tablaSalida += "<td>" + respuesta.datos.idcliente + "</td>"
-        tablaSalida += "<td>" + respuesta.datos.fecha + "</td>"
-        tablaSalida += "<td>" + respuesta.datos.camarero + "</td>"
-        tablaSalida += "<td>" + respuesta.datos.total + "</td>"
-        tablaSalida += "<td><button class='btn btn-danger btn-sm' onclick='eliminarPedido(" + respuesta.datos.idpedido +")'>Eliminar</button></td>";
-        tablaSalida += `<td><button class='btn btn-primary btn-sm' onclick="mostrarFormularioEdicionCamarero(
-            ${respuesta.datos.idpedido}, 
-            '${respuesta.datos.idcliente}', 
-            '${respuesta.datos.fecha}', 
-            '${respuesta.datos.camarero.replace(/'/g, "\\'")}', 
-            '${respuesta.datos.total}'
-        )">Editar</button></td>`;
-        
+        tablaSalida += "<tbody>";
+
+        respuesta.datos.forEach(pedido => {
+            tablaSalida += "<tr>";
+            tablaSalida += `<td>${pedido.idpedido}</td>`;
+            tablaSalida += `<td>${pedido.idcliente}</td>`;
+            tablaSalida += `<td>${pedido.fecha}</td>`;
+            tablaSalida += `<td>${pedido.camarero}</td>`;
+            tablaSalida += `<td>${pedido.total}</td>`;
+            tablaSalida += `<td><button class='btn btn-danger btn-sm' onclick='eliminarPedido(${pedido.idpedido})'>Eliminar</button></td>`;
+            tablaSalida += `<td><button class='btn btn-primary btn-sm' onclick="mostrarFormularioEdicionCamarero(
+                ${pedido.idpedido}, 
+                '${pedido.idcliente}', 
+                '${pedido.fecha}', 
+                '${pedido.camarero.replace(/'/g, "\\'")}', 
+                '${pedido.total}'
+            )">Editar</button></td>`;
+            tablaSalida += "</tr>";
+        });
+
+        tablaSalida += "</tbody></table>";
 
         resultadoBusqueda.innerHTML = tablaSalida;
         resultadoBusqueda.style.display = 'block';
 
-    } else { // Si hay error
+    } else if (respuesta.error) { // Si hay error
         alert(respuesta.mensaje);
+    } else {
+        alert("No se encontraron resultados.");
     }
 }
+
 
 function validarDatosPedido(idcliente, fecha, camarero, total) {
 
