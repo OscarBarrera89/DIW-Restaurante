@@ -1090,7 +1090,7 @@ async function buscarParametrizadoPedido() {
     }
 
     try {
-        const respuesta = await oRestaurante.buscarPedidoParametrizado(idcliente, fecha, camarero);
+        let respuesta = await oRestaurante.buscarPedidoParametrizado(idcliente, fecha, camarero);
         console.log("Respuesta:", respuesta);
 
         if (respuesta.ok && Array.isArray(respuesta.datos)) {
