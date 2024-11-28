@@ -965,13 +965,14 @@ async function buscarPedidoPorCamarero() {
         tablaSalida += "<td>" + respuesta.datos.camarero + "</td>"
         tablaSalida += "<td>" + respuesta.datos.total + "</td>"
         tablaSalida += "<td><button class='btn btn-danger btn-sm' onclick='eliminarPedido(" + respuesta.datos.idpedido +")'>Eliminar</button></td>";
-        tablaSalida += "<td><button class='btn btn-primary btn-sm' onclick='mostrarFormularioEdicionCamarero(" 
-        + respuesta.datos.idpedido + ", " 
-        + "\"" + String(respuesta.datos.idcliente).replace(/"/g, '&quot;') + "\"" + ", "  
-        + "\"" + respuesta.datos.fecha.replace(/"/g, '&quot;') + "\"" + ", " 
-        + "\"" + respuesta.datos.camarero.replace(/"/g, '&quot;') + "\"" + ", "
-        + "\"" + String(respuesta.datos.total).replace(/"/g, '&quot;') + "\"" 
-        + ")'>Editar</button></td>";    
+        tablaSalida += `<td><button class='btn btn-primary btn-sm' onclick="mostrarFormularioEdicion(
+            ${respuesta.datos.idpedido}, 
+            '${respuesta.datos.idcliente}', 
+            '${respuesta.datos.fecha}', 
+            '${respuesta.datos.camarero.replace(/'/g, "\\'")}', 
+            '${respuesta.datos.total}'
+        )">Editar</button></td>`;
+        
 
         resultadoBusqueda.innerHTML = tablaSalida;
         resultadoBusqueda.style.display = 'block';
