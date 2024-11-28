@@ -2,27 +2,10 @@
 require_once('config.php');
 $conexion = obtenerConexion();
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-function responder($datos, $ok, $mensaje, $conexion) {
-    $respuesta = [
-        'ok' => $ok,
-        'mensaje' => $mensaje,
-        'datos' => $datos
-    ];
-    echo json_encode($respuesta);
-    $conexion->close();
-    exit;
-}
-
 // Recoger datos
 $idcliente = $_GET["idcliente"] ?? null;
 $fecha = $_GET["fecha"] ?? null;
 $camarero = $_GET["camarero"] ?? null;
-
-// Depuración
-error_log("Parámetros recibidos: idcliente = $idcliente, fecha = $fecha, camarero = $camarero");
 
 // Validar que al menos un criterio de búsqueda sea enviado
 if (!$idcliente && !$fecha && !$camarero) {
@@ -47,12 +30,9 @@ if ($fecha) {
 }
 if ($camarero) {
     $sql .= " AND camarero LIKE ?";
-    $params[] = "'$camarero'";
+    $params[] = $camarero;
     $types .= "s";
 }
-
-// Depuración
-error_log("Consulta generada: $sql");
 
 // Preparar y ejecutar la consulta
 $stmt = $conexion->prepare($sql);
